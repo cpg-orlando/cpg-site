@@ -225,7 +225,7 @@ def form_note():
 SERVICES = [
     ("domingo.jpg", "center", "Domingo", "Sunday", "11:00", "AM", "Servicio Dominical", "Sunday Service",
      "Adoración, la Palabra y comunión para toda la familia.", "Worship, the Word, and fellowship for the whole family."),
-    ("palabra.jpg", "45% 30%", "Miércoles", "Wednesday", "7:00", "PM", "Estudio Bíblico", "Bible Study",
+    ("estudio-biblico.jpg", "center 35%", "Miércoles", "Wednesday", "7:00", "PM", "Estudio Bíblico", "Bible Study",
      "Una noche para profundizar juntos en las Escrituras.", "A night to dig deeper into Scripture together."),
     ("oracion.jpg", "center", "Viernes", "Friday", "7:00", "PM", "Culto de Oración", "Prayer Service",
      "Nos reunimos para buscar a Dios en oración unida.", "We gather to seek God together in prayer."),
@@ -271,7 +271,7 @@ def live_band():
       {social_btns()}
     </div>
     <div class="shot">
-      <img src="images/predicacion-logo.jpg" alt="" loading="lazy" style="object-position: 45% center">
+      <img src="images/consola.jpg" alt="" loading="lazy" style="object-position: center 55%">
       <a class="play" href="{YOUTUBE}" target="_blank" rel="noopener" aria-label="YouTube"><span>{ICON_PLAY}</span></a>
     </div>
   </div>
@@ -329,7 +329,7 @@ page("index.html", "Casa Portadores de Gloria", f"""
       <p class="lead">{t("Somos una familia de fe en Orlando, donde la Palabra se predica en español con traducción al inglés. Ya sea tu primera vez en una iglesia o estés buscando un hogar espiritual, aquí eres bienvenido.",
                         "We're a family of faith in Orlando, where the Word is preached in Spanish with English translation. Whether it's your first time in church or you're looking for a spiritual home, you're welcome here.")}</p>
       <div class="pastors">
-        <img src="images/pastor.jpg" alt="Pastor Esdras Toirac" loading="lazy">
+        <img src="images/pastor-pulpito.jpg" alt="Pastor Esdras Toirac" loading="lazy" style="object-position: 55% 22%">
         <div><span class="names">Esdras &amp; Magnolia Toirac</span><span class="role">{t("Pastores", "Senior Pastors")} · <a href="pastores.html">{t("Conócelos", "Meet them")}</a></span></div>
       </div>
     </div>
@@ -402,10 +402,10 @@ page("nosotros.html", "Quiénes Somos · CPG", f"""
 
 # ---------------------------------------------------------------- 3. Pastors
 page("pastores.html", "Nuestros Pastores · CPG", f"""
-{banner("palabra.jpg", t("Nosotros", "About"), t("Nuestros pastores", "Our pastors"), pos="45% 30%")}
+{banner("predicacion.jpg", t("Nosotros", "About"), t("Nuestros pastores", "Our pastors"), pos="center 40%")}
 <section>
   <div class="wrap pastor-card">
-    <img src="images/pastor.jpg" alt="Pastor Esdras Toirac predicando" loading="lazy">
+    <img src="images/pastor-pulpito.jpg" alt="Pastor Esdras Toirac predicando" loading="lazy">
     <div class="stack">
       <p class="eyebrow">{t("Pastores principales", "Senior Pastors")}</p>
       <h2>Esdras &amp; Magnolia Toirac</h2>
@@ -422,7 +422,7 @@ page("pastores.html", "Nuestros Pastores · CPG", f"""
 
 # ---------------------------------------------------------------- 4. Services
 page("servicios.html", "Servicios · CPG", f"""
-{banner("domingo.jpg", t("Reuniones", "Gatherings"), t("Servicios semanales", "Weekly services"), t("Tres noches, una familia. Te esperamos.", "Three gatherings, one family. We'll save you a seat."))}
+{banner("mano-alzada.jpg", t("Reuniones", "Gatherings"), t("Servicios semanales", "Weekly services"), t("Tres noches, una familia. Te esperamos.", "Three gatherings, one family. We'll save you a seat."))}
 <section>
   <div class="wrap">
     {service_cards()}
@@ -467,7 +467,7 @@ page("eventos.html", "Eventos · CPG", f"""
 
 # ---------------------------------------------------------------- 6. Ministries
 MINS = [
-    ("ninos.jpg", "40% center", "Niños", "Kids", "Para los más pequeños", "For the little ones",
+    ("ninos-oracion.jpg", "center 45%", "Niños", "Kids", "Para los más pequeños", "For the little ones",
      "Un lugar seguro y alegre donde los niños aprenden la Palabra de Dios y crecen en su fe.",
      "A safe, joyful place where kids learn God's Word and grow in their faith.", None),
     ("estudio.jpg", "center 60%", "Jóvenes y Jóvenes Adultos", "Youth &amp; Young Adults", "CPG Youth", "CPG Youth",
@@ -542,7 +542,7 @@ page("ofrendar.html", "Ofrendar · CPG", f"""
 
 # ---------------------------------------------------------------- 8. Highlights
 HLS = [
-    ("alabanza.jpg", "center", "Noches de Adoración", "Worship Nights",
+    ("cantante-azul.jpg", "center 25%", "Noches de Adoración", "Worship Nights",
      "Noches dedicadas a la presencia de Dios a través de la alabanza.", "Nights devoted to God's presence through worship."),
     (None, None, "Servicio de Misiones", "Missions Service",
      "Celebramos y apoyamos la obra de Dios más allá de nuestras paredes.", "We celebrate and support God's work beyond our walls."),
@@ -552,7 +552,7 @@ HLS = [
      "Momentos para honrar y celebrar a nuestra familia de fe.", "Moments to honor and celebrate our church family."),
     ("oracion.jpg", "center", "Noches de Oración", "Prayer Nights",
      "La iglesia unida buscando a Dios.", "The church united in seeking God."),
-    ("guitarra.jpg", "center 40%", "Glory Night", "Glory Night",
+    ("joven-cantando.jpg", "center 35%", "Glory Night", "Glory Night",
      "Una noche mensual de CPG Youth para adorar y escuchar la Palabra.", "A monthly CPG Youth night of worship and the Word."),
 ]
 
@@ -582,10 +582,10 @@ page("destacados.html", "Momentos Destacados · CPG", f"""
       <img src="images/risas.jpg" alt="Hermanos riendo juntos" loading="lazy" style="object-position: 65% center">
       <img src="images/adoracion-pareja.jpg" alt="Hermanos adorando" loading="lazy" style="object-position: 70% center">
       <img src="images/bateria.jpg" alt="Baterista adorando" loading="lazy" style="object-position: center 40%">
-      <img src="images/bienvenida.jpg" alt="Saludos después del servicio" loading="lazy" style="object-position: 60% center">
+      <img src="images/biblia-familia.jpg" alt="Leyendo la Biblia juntos en el servicio" loading="lazy" style="object-position: center 60%">
       <img src="images/comunion.jpg" alt="Dos hermanos riendo" loading="lazy" style="object-position: 55% center">
-      <img src="images/oracion-manos.jpg" alt="Orando tomados de las manos" loading="lazy">
-      <img src="images/predicacion.jpg" alt="Predicación" loading="lazy">
+      <img src="images/cantante-morado.jpg" alt="Adoración en el servicio" loading="lazy" style="object-position: center 25%">
+      <img src="images/guitarra.jpg" alt="Líder de alabanza con su guitarra" loading="lazy" style="object-position: center 40%">
     </div>
   </div>
 </section>
@@ -593,7 +593,7 @@ page("destacados.html", "Momentos Destacados · CPG", f"""
 
 # ---------------------------------------------------------------- 9. Beliefs
 page("creencias.html", "Lo Que Creemos · CPG", f"""
-{banner("predicacion.jpg", t("Nosotros", "About"), t("Lo que creemos", "Our beliefs"))}
+{banner("cruz.jpg", t("Nosotros", "About"), t("Lo que creemos", "Our beliefs"), pos="center 20%")}
 <section>
   <div class="wrap">
     <div class="soon-block">
@@ -675,7 +675,7 @@ page("visitanos.html", "Planea Tu Visita · CPG", f"""
 
 # ---------------------------------------------------------------- 12. Membership
 page("membresia.html", "Hazte Miembro · CPG", f"""
-{banner("risas.jpg", t("Conéctate", "Connect"), t("Hazte miembro", "Become a member"), t("Ser miembro es decir: esta es mi casa y esta es mi familia.", "Membership means saying: this is my house, and this is my family."), pos="65% center")}
+{banner("familia-abrazo.jpg", t("Conéctate", "Connect"), t("Hazte miembro", "Become a member"), t("Ser miembro es decir: esta es mi casa y esta es mi familia.", "Membership means saying: this is my house, and this is my family."), pos="center 36%")}
 <section>
   <div class="wrap split" style="align-items:start">
     <div class="stack">
