@@ -355,6 +355,20 @@ footer .legal { font-size: .85rem; }
   .js .rv { transform: none; }
 }
 
+/* values (beliefs) */
+.values { display: grid; grid-template-columns: repeat(2, 1fr); gap: 14px; }
+.value { background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius); padding: clamp(22px, 3.5vw, 34px); display: grid; gap: 12px; align-content: start; min-width: 0; transition: border-color .25s ease, transform .25s ease; }
+.value:hover { border-color: var(--blue); transform: translateY(-3px); }
+.value:first-child { grid-column: 1 / -1; background: var(--blue); border-color: var(--blue); color: #fff; }
+.value:first-child h3 { font-size: clamp(2rem, 5vw, 3.4rem); letter-spacing: -0.035em; }
+.value:first-child p { color: #ffffffe0; font-size: 1.2rem; }
+.value:first-child .ref { background: #ffffff26; color: #fff; }
+.value h3 { font-size: 1.6rem; }
+.value p { color: var(--muted); font-size: 1.05rem; }
+.refs { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 4px; }
+.ref { font-size: .82rem; font-weight: 600; padding: 6px 12px; border-radius: 999px; background: var(--blue-soft); color: var(--blue); }
+@media (max-width: 760px) { .values { grid-template-columns: 1fr; } }
+
 </style>
 </head>
 <body>
@@ -392,19 +406,63 @@ footer .legal { font-size: .85rem; }
       <img src="images/cruz.jpg" alt="" style="object-position: center 20%">
       <div class="hero-copy">
         <p class="eyebrow"><span class="es">Nosotros</span><span class="en">About</span></p>
-        <h1><span class="es">Lo que creemos</span><span class="en">Our beliefs</span></h1>
-        
+        <h1><span class="es">Lo que creemos</span><span class="en">What we believe</span></h1>
+        <p class="sub"><span class="es">Los valores que guían nuestra casa.</span><span class="en">The values that guide our house.</span></p>
       </div>
     </div>
   </div>
 </section>
 <section>
   <div class="wrap">
-    <div class="soon-block">
-      <span class="soon"><span class="es">Próximamente</span><span class="en">Coming soon</span></span>
-      <h2><span class="es">Nuestra declaración de fe</span><span class="en">Our statement of faith</span></h2>
-      <p class="lead"><span class="es">Estamos preparando la lista de lo que creemos. Mientras tanto, nos encantaría conversar contigo en persona.</span><span class="en">We're preparing our list of beliefs. In the meantime, we'd love to talk with you in person.</span></p>
-      <a class="btn btn-ink" href="visitanos.html"><span class="es">Visítanos</span><span class="en">Visit us</span></a>
+    <div class="section-head"><p class="eyebrow"><span class="es">Nuestros valores</span><span class="en">Our values</span></p><h2><span class="es">Sobre este fundamento edificamos</span><span class="en">The foundation we build on</span></h2></div>
+    <div class="values">
+      <article class="value">
+        <h3><span class="es">Salvación en Cristo</span><span class="en">Salvation in Christ</span></h3>
+        <p><span class="es">Solamente en Cristo hay salvación.</span><span class="en">Salvation is found in Christ alone.</span></p>
+        <div class="refs"><span class="ref"><span class="es">Hechos 4:11-12</span><span class="en">Acts 4:11-12</span></span></div>
+      </article>
+      <article class="value">
+        <h3><span class="es">Cada persona importa</span><span class="en">Every person matters</span></h3>
+        <p><span class="es">En CPG cada persona es importante para Dios y, por consiguiente, para la familia de Cristo que es la iglesia.</span><span class="en">At CPG every person is important to God, and therefore to the family of Christ, which is the church.</span></p>
+        <div class="refs"><span class="ref"><span class="es">1 Corintios 3:16</span><span class="en">1 Corinthians 3:16</span></span><span class="ref"><span class="es">Romanos 12:4-5</span><span class="en">Romans 12:4-5</span></span><span class="ref"><span class="es">Hebreos 10:24-25</span><span class="en">Hebrews 10:24-25</span></span></div>
+      </article>
+      <article class="value">
+        <h3><span class="es">Un solo cuerpo</span><span class="en">One body</span></h3>
+        <p><span class="es">Somos un equipo, un cuerpo trabajando unidos bajo una misma visión y propósito.</span><span class="en">We are a team, one body working together under one vision and purpose.</span></p>
+        <div class="refs"><span class="ref"><span class="es">Salmo 133:1</span><span class="en">Psalm 133:1</span></span><span class="ref"><span class="es">Eclesiastés 4:9-12</span><span class="en">Ecclesiastes 4:9-12</span></span></div>
+      </article>
+      <article class="value">
+        <h3><span class="es">Creatividad con propósito</span><span class="en">Creativity with purpose</span></h3>
+        <p><span class="es">Sin alterar el fundamento de nuestra fe, creemos en presentar a Cristo de diferentes maneras, usando las artes creativas para impactar y transformar vidas.</span><span class="en">Without changing the foundation of our faith, we believe in presenting Christ in different ways, using the creative arts to impact and transform lives.</span></p>
+        <div class="refs"><span class="ref"><span class="es">Hechos 17:22-24</span><span class="en">Acts 17:22-24</span></span></div>
+      </article>
+      <article class="value">
+        <h3><span class="es">Cada miembro es ministro</span><span class="en">Every member is a minister</span></h3>
+        <p><span class="es">En esta casa cada miembro es un ministro que tiene dones y talentos para ser desarrollados para el beneficio de la obra de Dios en la iglesia.</span><span class="en">In this house every member is a minister, with gifts and talents to be developed for the benefit of God's work in the church.</span></p>
+        <div class="refs"><span class="ref"><span class="es">Efesios 2:10</span><span class="en">Ephesians 2:10</span></span></div>
+      </article>
+      <article class="value">
+        <h3><span class="es">Crecer y rendir cuentas</span><span class="en">Growth and accountability</span></h3>
+        <p><span class="es">Cada miembro debe comprometerse a su crecimiento espiritual y rendir cuentas honestamente.</span><span class="en">Every member should commit to their spiritual growth and be honestly accountable.</span></p>
+        <div class="refs"><span class="ref"><span class="es">Hechos 2:44-47</span><span class="en">Acts 2:44-47</span></span></div>
+      </article>
+      <article class="value">
+        <h3><span class="es">Un estilo de vida</span><span class="en">A way of life</span></h3>
+        <p><span class="es">Estamos persuadidos de que la vida cristiana es un estilo de vida y, como tal, debe reflejarse en todo lo que hacemos y decimos.</span><span class="en">We are convinced that the Christian life is a way of life, and as such it should be reflected in everything we do and say.</span></p>
+        <div class="refs"><span class="ref"><span class="es">Colosenses 3:17</span><span class="en">Colossians 3:17</span></span><span class="ref"><span class="es">Efesios 4:29</span><span class="en">Ephesians 4:29</span></span></div>
+      </article>
+    </div>
+  </div>
+</section>
+<section class="band">
+  <div class="wrap">
+    <div class="soon-block" style="background:var(--surface)">
+      <h2 style="font-size:clamp(1.8rem,4vw,2.6rem)"><span class="es">¿Tienes preguntas sobre la fe?</span><span class="en">Questions about faith?</span></h2>
+      <p class="lead"><span class="es">Nos encantaría conversar contigo. Visítanos un domingo o escríbenos.</span><span class="en">We'd love to talk with you. Visit us on a Sunday or reach out.</span></p>
+      <div class="cta-row">
+        <a class="btn btn-primary" href="visitanos.html"><span class="es">Planea tu visita</span><span class="en">Plan a visit</span> <span class="arr">→</span></a>
+        <a class="btn btn-outline" href="membresia.html"><span class="es">Hazte miembro</span><span class="en">Become a member</span></a>
+      </div>
     </div>
   </div>
 </section>

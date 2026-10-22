@@ -341,3 +341,17 @@ footer .legal { font-size: .85rem; }
   *, *::before, *::after { animation: none !important; transition: none !important; }
   .js .rv { transform: none; }
 }
+
+/* values (beliefs) */
+.values { display: grid; grid-template-columns: repeat(2, 1fr); gap: 14px; }
+.value { background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius); padding: clamp(22px, 3.5vw, 34px); display: grid; gap: 12px; align-content: start; min-width: 0; transition: border-color .25s ease, transform .25s ease; }
+.value:hover { border-color: var(--blue); transform: translateY(-3px); }
+.value:first-child { grid-column: 1 / -1; background: var(--blue); border-color: var(--blue); color: #fff; }
+.value:first-child h3 { font-size: clamp(2rem, 5vw, 3.4rem); letter-spacing: -0.035em; }
+.value:first-child p { color: #ffffffe0; font-size: 1.2rem; }
+.value:first-child .ref { background: #ffffff26; color: #fff; }
+.value h3 { font-size: 1.6rem; }
+.value p { color: var(--muted); font-size: 1.05rem; }
+.refs { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 4px; }
+.ref { font-size: .82rem; font-weight: 600; padding: 6px 12px; border-radius: 999px; background: var(--blue-soft); color: var(--blue); }
+@media (max-width: 760px) { .values { grid-template-columns: 1fr; } }

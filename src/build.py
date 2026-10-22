@@ -690,16 +690,68 @@ page("destacados.html", "Momentos Destacados · CPG", f"""
 """)
 
 # ---------------------------------------------------------------- 9. Beliefs
+VALUES = [
+    ("Salvación en Cristo", "Salvation in Christ",
+     "Solamente en Cristo hay salvación.",
+     "Salvation is found in Christ alone.",
+     ["Hechos 4:11-12"], ["Acts 4:11-12"]),
+    ("Cada persona importa", "Every person matters",
+     "En CPG cada persona es importante para Dios y, por consiguiente, para la familia de Cristo que es la iglesia.",
+     "At CPG every person is important to God, and therefore to the family of Christ, which is the church.",
+     ["1 Corintios 3:16", "Romanos 12:4-5", "Hebreos 10:24-25"], ["1 Corinthians 3:16", "Romans 12:4-5", "Hebrews 10:24-25"]),
+    ("Un solo cuerpo", "One body",
+     "Somos un equipo, un cuerpo trabajando unidos bajo una misma visión y propósito.",
+     "We are a team, one body working together under one vision and purpose.",
+     ["Salmo 133:1", "Eclesiastés 4:9-12"], ["Psalm 133:1", "Ecclesiastes 4:9-12"]),
+    ("Creatividad con propósito", "Creativity with purpose",
+     "Sin alterar el fundamento de nuestra fe, creemos en presentar a Cristo de diferentes maneras, usando las artes creativas para impactar y transformar vidas.",
+     "Without changing the foundation of our faith, we believe in presenting Christ in different ways, using the creative arts to impact and transform lives.",
+     ["Hechos 17:22-24"], ["Acts 17:22-24"]),
+    ("Cada miembro es ministro", "Every member is a minister",
+     "En esta casa cada miembro es un ministro que tiene dones y talentos para ser desarrollados para el beneficio de la obra de Dios en la iglesia.",
+     "In this house every member is a minister, with gifts and talents to be developed for the benefit of God's work in the church.",
+     ["Efesios 2:10"], ["Ephesians 2:10"]),
+    ("Crecer y rendir cuentas", "Growth and accountability",
+     "Cada miembro debe comprometerse a su crecimiento espiritual y rendir cuentas honestamente.",
+     "Every member should commit to their spiritual growth and be honestly accountable.",
+     ["Hechos 2:44-47"], ["Acts 2:44-47"]),
+    ("Un estilo de vida", "A way of life",
+     "Estamos persuadidos de que la vida cristiana es un estilo de vida y, como tal, debe reflejarse en todo lo que hacemos y decimos.",
+     "We are convinced that the Christian life is a way of life, and as such it should be reflected in everything we do and say.",
+     ["Colosenses 3:17", "Efesios 4:29"], ["Colossians 3:17", "Ephesians 4:29"]),
+]
+
+
+def value_cards():
+    out = ""
+    for tes, ten, des, den, res, ren in VALUES:
+        refs = "".join(f'<span class="ref">{t(a, b)}</span>' for a, b in zip(res, ren))
+        out += f"""
+      <article class="value">
+        <h3>{t(tes, ten)}</h3>
+        <p>{t(des, den)}</p>
+        <div class="refs">{refs}</div>
+      </article>"""
+    return f'<div class="values">{out}\n    </div>'
+
+
 page("creencias.html", "Lo Que Creemos · CPG", f"""
-{banner("cruz.jpg", t("Nosotros", "About"), t("Lo que creemos", "Our beliefs"), pos="center 20%")}
+{banner("cruz.jpg", t("Nosotros", "About"), t("Lo que creemos", "What we believe"), t("Los valores que guían nuestra casa.", "The values that guide our house."), pos="center 20%")}
 <section>
   <div class="wrap">
-    <div class="soon-block">
-      <span class="soon">{t("Próximamente", "Coming soon")}</span>
-      <h2>{t("Nuestra declaración de fe", "Our statement of faith")}</h2>
-      <p class="lead">{t("Estamos preparando la lista de lo que creemos. Mientras tanto, nos encantaría conversar contigo en persona.",
-                        "We're preparing our list of beliefs. In the meantime, we'd love to talk with you in person.")}</p>
-      <a class="btn btn-ink" href="visitanos.html">{t("Visítanos", "Visit us")}</a>
+    {head(t("Nuestros valores", "Our values"), t("Sobre este fundamento edificamos", "The foundation we build on"))}
+    {value_cards()}
+  </div>
+</section>
+<section class="band">
+  <div class="wrap">
+    <div class="soon-block" style="background:var(--surface)">
+      <h2 style="font-size:clamp(1.8rem,4vw,2.6rem)">{t("¿Tienes preguntas sobre la fe?", "Questions about faith?")}</h2>
+      <p class="lead">{t("Nos encantaría conversar contigo. Visítanos un domingo o escríbenos.", "We'd love to talk with you. Visit us on a Sunday or reach out.")}</p>
+      <div class="cta-row">
+        <a class="btn btn-primary" href="visitanos.html">{t("Planea tu visita", "Plan a visit")} <span class="arr">→</span></a>
+        <a class="btn btn-outline" href="membresia.html">{t("Hazte miembro", "Become a member")}</a>
+      </div>
     </div>
   </div>
 </section>
