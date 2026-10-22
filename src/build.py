@@ -6,6 +6,8 @@ Text is bilingual: t("español", "English") renders both; the page shows one.
 """
 import os
 import pathlib
+import re
+import urllib.parse
 
 ROOT = pathlib.Path(__file__).resolve().parent.parent
 CSS = (ROOT / "src/style.css").read_text()
@@ -292,6 +294,51 @@ SCRIPT = """
 """
 
 
+# ---------------------------------------------------------------- Photos
+# Every photo spot on a page is numbered in order (1, 2, 3...). Unassigned spots show a
+# numbered placeholder. Assign a photo with: PHOTOS["index.html"][1] = ("file.jpg", "center 40%")
+PAGE_LABELS = {
+    "index.html": "Inicio", "nosotros.html": "Nosotros", "pastores.html": "Pastores",
+    "servicios.html": "Servicios", "eventos.html": "Eventos", "ministerios.html": "Ministerios",
+    "ofrendar.html": "Ofrendar", "destacados.html": "Destacados", "creencias.html": "Creencias",
+    "oracion.html": "Oración", "visitanos.html": "Visítanos", "membresia.html": "Membresía",
+}
+PHOTOS = {f: {} for f in PAGE_LABELS}
+SLOTS = {}
+
+
+def placeholder(label, n):
+    svg = (
+        '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 300" preserveAspectRatio="xMidYMid slice">'
+        '<rect width="400" height="300" fill="#e6e9f0"/>'
+        '<g fill="none" stroke="#9aa3b5" stroke-width="3" stroke-linejoin="round">'
+        '<rect x="176" y="104" width="48" height="36" rx="6"/><circle cx="200" cy="122" r="9"/></g>'
+        f'<text x="200" y="176" text-anchor="middle" font-family="Arial, sans-serif" font-size="26" font-weight="700" fill="#5a6170">{label} · {n}</text>'
+        '</svg>'
+    )
+    return "data:image/svg+xml," + urllib.parse.quote(svg)
+
+
+def slotify(fname, html):
+    n = 0
+    label = PAGE_LABELS.get(fname, fname)
+
+    def sub(m):
+        nonlocal n
+        tag = m.group(0)
+        if 'src="images/' not in tag or "logo.png" in tag:
+            return tag
+        n += 1
+        tag = re.sub(r'\sstyle="[^"]*"', "", tag)
+        chosen = PHOTOS.get(fname, {}).get(n)
+        if chosen:
+            file, pos = chosen
+            return re.sub(r'src="images/[^"]+"', f'src="images/{file}" style="object-position: {pos}"', tag)
+        return re.sub(r'src="images/[^"]+"', f'src="{placeholder(label, n)}" data-slot="{label} {n}"', tag)
+
+    return re.sub(r"<img\b[^>]*>", sub, html), n
+
+
 def page(fname, title, body):
     html = f"""<!doctype html>
 <html lang="es"{(" data-palette=\"" + PALETTE + "\"") if PALETTE else ""}>
@@ -320,6 +367,8 @@ def page(fname, title, body):
 </body>
 </html>
 """
+    html, count = slotify(fname, html)
+    SLOTS[fname] = count
     (ROOT / fname).write_text(html)
 
 
@@ -896,4 +945,4 @@ page("membresia.html", "Hazte Miembro · CPG", f"""
 </section>
 """)
 
-print("built")
+print("built", SLOTS)
