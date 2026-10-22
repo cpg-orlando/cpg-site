@@ -7,7 +7,7 @@ Text is bilingual: t("español", "English") renders both; the page shows one.
 import pathlib
 
 ROOT = pathlib.Path(__file__).resolve().parent.parent
-CSS = (ROOT / "src/base.css").read_text() + (ROOT / "src/extra.css").read_text()
+CSS = (ROOT / "src/style.css").read_text()
 # Social links: replace "#" with the church's real pages.
 YOUTUBE = "#"
 FACEBOOK = "#"
@@ -80,7 +80,7 @@ def header(current):
     </button>
   </div>
 </header>
-<div class="menu lights" id="menu" hidden>
+<div class="menu" id="menu" hidden>
   <div class="wrap">
     <div class="menu-top">
       <img class="logo" src="images/logo.png" alt="Casa Portadores de Gloria" width="600" height="511">
@@ -94,8 +94,9 @@ def header(current):
 
 
 FOOTER = f"""
-<footer class="lights">
+<footer>
   <div class="wrap">
+    <p class="big">{t("Hay un lugar <em>para ti.</em>", "There's a place <em>for you.</em>")}</p>
     <div class="cols">
       <div>
         <img class="logo logo-lg" src="images/logo.png" alt="Casa Portadores de Gloria" width="600" height="511" loading="lazy">
@@ -164,6 +165,89 @@ SCRIPT = """
       if (note) note.hidden = false;
     });
   });
+  root.classList.add('js');
+
+  // Header shadow after scrolling
+  var hdr = document.querySelector('.site-header');
+  function onScroll() { if (hdr) hdr.classList.toggle('scrolled', window.scrollY > 8); }
+  window.addEventListener('scroll', onScroll, { passive: true }); onScroll();
+
+  // Gentle rise-in for blocks as they scroll into view (content is visible either way)
+  var targets = document.querySelectorAll('main section .wrap > *:not(.hero-frame), .quick > a, .services > div, .events > div, .min-list > article, .hl-grid > article, .gallery > img, .expect > div');
+  if ('IntersectionObserver' in window) {
+    var io = new IntersectionObserver(function (entries) {
+      entries.forEach(function (e) { if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); } });
+    }, { rootMargin: '0px 0px -8% 0px' });
+    targets.forEach(function (el, i) {
+      var r = el.getBoundingClientRect();
+      if (r.top < window.innerHeight) return; // already on screen: leave as is
+      el.classList.add('rv'); el.style.transitionDelay = (i % 4) * 70 + 'ms'; io.observe(el);
+    });
+  }
+
+  // Next-service countdown (times are Orlando / Eastern time)
+  var card = document.getElementById('next-card');
+  if (card) {
+    var SVCS = [
+      { dow: 0, h: 11, m: 0, es: 'Servicio Dominical', en: 'Sunday Service', wes: 'Domingo · 11:00 AM', wen: 'Sunday · 11:00 AM' },
+      { dow: 3, h: 19, m: 0, es: 'Estudio Bíblico', en: 'Bible Study', wes: 'Miércoles · 7:00 PM', wen: 'Wednesday · 7:00 PM' },
+      { dow: 5, h: 19, m: 0, es: 'Culto de Oración', en: 'Prayer Service', wes: 'Viernes · 7:00 PM', wen: 'Friday · 7:00 PM' }
+    ];
+    var DAYS = { Sun: 0, Mon: 1, Tue: 2, Wed: 3, Thu: 4, Fri: 5, Sat: 6 };
+    function nyNow() {
+      var parts = {};
+      new Intl.DateTimeFormat('en-US', { timeZone: 'America/New_York', weekday: 'short', hour: 'numeric', minute: 'numeric', hourCycle: 'h23' })
+        .formatToParts(new Date()).forEach(function (p) { parts[p.type] = p.value; });
+      return { dow: DAYS[parts.weekday], min: (+parts.hour % 24) * 60 + (+parts.minute) };
+    }
+    function tick() {
+      var now = nyNow(), nowWeek = now.dow * 1440 + now.min, best = null, live = null;
+      SVCS.forEach(function (s) {
+        var start = s.dow * 1440 + s.h * 60 + s.m;
+        var since = (nowWeek - start + 10080) % 10080;
+        if (since < 120) live = s;                       // within two hours of starting
+        var until = (start - nowWeek + 10080) % 10080;
+        if (!best || until < best.until) best = { s: s, until: until };
+      });
+      var s = live || best.s, mins = live ? 0 : best.until;
+      card.classList.toggle('is-live', !!live);
+      document.getElementById('next-name').innerHTML = '<span class="es">' + s.es + '</span><span class="en">' + s.en + '</span>';
+      document.getElementById('next-when').innerHTML = '<span class="es">' + s.wes + '</span><span class="en">' + s.wen + '</span>';
+      card.querySelector('[data-live-es]').textContent = live ? 'En vivo ahora' : 'Próximo servicio';
+      card.querySelector('[data-live-en]').textContent = live ? 'Happening now' : 'Next service';
+      document.getElementById('cd-d').textContent = Math.floor(mins / 1440);
+      document.getElementById('cd-h').textContent = Math.floor((mins % 1440) / 60);
+      document.getElementById('cd-m').textContent = mins % 60;
+    }
+    tick(); setInterval(tick, 30000);
+  }
+
+  // Tap-to-enlarge gallery
+  var gal = Array.prototype.slice.call(document.querySelectorAll('.gallery img'));
+  if (gal.length) {
+    var lb = document.createElement('div'), idx = 0;
+    lb.className = 'lightbox'; lb.hidden = true; lb.setAttribute('role', 'dialog'); lb.setAttribute('aria-modal', 'true');
+    lb.innerHTML = '<img alt=""><button type="button" class="lb-btn lb-close" aria-label="Cerrar">✕</button>' +
+      '<button type="button" class="lb-btn lb-prev" aria-label="Anterior">←</button><button type="button" class="lb-btn lb-next" aria-label="Siguiente">→</button>';
+    document.body.appendChild(lb);
+    var big = lb.querySelector('img');
+    function show(i) { idx = (i + gal.length) % gal.length; big.src = gal[idx].src; big.alt = gal[idx].alt; }
+    function close() { lb.hidden = true; document.body.style.overflow = ''; }
+    gal.forEach(function (img, i) {
+      img.tabIndex = 0;
+      function open() { show(i); lb.hidden = false; document.body.style.overflow = 'hidden'; lb.querySelector('.lb-close').focus(); }
+      img.addEventListener('click', open);
+      img.addEventListener('keydown', function (e) { if (e.key === 'Enter') open(); });
+    });
+    lb.querySelector('.lb-close').addEventListener('click', close);
+    lb.querySelector('.lb-prev').addEventListener('click', function () { show(idx - 1); });
+    lb.querySelector('.lb-next').addEventListener('click', function () { show(idx + 1); });
+    lb.addEventListener('click', function (e) { if (e.target === lb) close(); });
+    document.addEventListener('keydown', function (e) {
+      if (lb.hidden) return;
+      if (e.key === 'Escape') close(); if (e.key === 'ArrowLeft') show(idx - 1); if (e.key === 'ArrowRight') show(idx + 1);
+    });
+  }
 })();
 </script>
 """
@@ -181,7 +265,7 @@ def page(fname, title, body):
 <link rel="icon" href="images/logo.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Young+Serif&family=Figtree:wght@400;500;600;700&family=Dancing+Script:wght@600&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500..800&family=Instrument+Sans:wght@400..700&display=swap">
 <style>
 {CSS}
 </style>
@@ -203,12 +287,15 @@ def banner(img, eyebrow, title, sub="", pos="center"):
     subp = f'<p class="sub">{sub}</p>' if sub else ""
     return f"""
 <section class="page-hero">
-  <img src="images/{img}" alt="" style="object-position: {pos}">
-  <div class="wrap">
-    <div class="bar" aria-hidden="true"><i></i><i></i><i></i></div>
-    <p class="eyebrow">{eyebrow}</p>
-    <h1>{title}</h1>
-    {subp}
+  <div class="wrap hero-wrap">
+    <div class="hero-frame">
+      <img src="images/{img}" alt="" style="object-position: {pos}">
+      <div class="hero-copy">
+        <p class="eyebrow">{eyebrow}</p>
+        <h1>{title}</h1>
+        {subp}
+      </div>
+    </div>
   </div>
 </section>"""
 
@@ -296,30 +383,41 @@ def event_list(limit=None):
 # ---------------------------------------------------------------- 1. Welcome
 page("index.html", "Casa Portadores de Gloria", f"""
 <section class="hero" id="inicio">
-  <img src="images/oracion-grupo.jpg" alt="Hermanos abrazados orando juntos en Casa Portadores de Gloria" fetchpriority="high">
-  <div class="wrap">
-    <div class="bar" aria-hidden="true"><i></i><i></i><i></i></div>
-    <p class="eyebrow">Orlando, Florida</p>
-    <h1>{t('Bienvenidos a <span class="script">casa</span>', 'Welcome <span class="script">home</span>')}</h1>
-    <p>{t("Una iglesia bilingüe donde las familias adoran, crecen en la Palabra y llevan la gloria de Dios a Orlando. Hay un lugar para ti.",
-          "A bilingual church where families worship, grow in the Word, and carry God's glory to Orlando. There's a place for you here.")}</p>
-    <div class="actions">
-      <a class="btn btn-gold" href="visitanos.html">{t("Planea tu visita", "Plan your visit")}</a>
-      <a class="btn btn-ghost" href="servicios.html">{t("Ver horarios", "Service times")}</a>
-    </div>
-  </div>
-  <div class="wrap">
-    <div class="week" aria-label="Semana de servicios">
-      <div class="day on">{t("Dom", "Sun")}<strong>11 AM</strong><small>{t("Servicio", "Service")}</small></div>
-      <div class="day">{t("Lun", "Mon")}</div>
-      <div class="day">{t("Mar", "Tue")}</div>
-      <div class="day on">{t("Mié", "Wed")}<strong>7 PM</strong><small>{t("Estudio", "Bible study")}</small></div>
-      <div class="day">{t("Jue", "Thu")}</div>
-      <div class="day on">{t("Vie", "Fri")}<strong>7 PM</strong><small>{t("Oración", "Prayer")}</small></div>
-      <div class="day">{t("Sáb", "Sat")}</div>
+  <div class="wrap hero-wrap">
+    <div class="hero-frame">
+      <img src="images/oracion-grupo.jpg" alt="Hermanos abrazados orando juntos en Casa Portadores de Gloria" fetchpriority="high" style="object-position: 50% 45%">
+      <div class="hero-inner">
+        <div class="hero-copy">
+          <p class="eyebrow">Casa Portadores de Gloria · Orlando</p>
+          <h1>{t('Bienvenidos<br>a <em>casa.</em>', 'Welcome<br><em>home.</em>')}</h1>
+          <p>{t("Una iglesia bilingüe donde las familias adoran, crecen en la Palabra y llevan la gloria de Dios a Orlando.",
+                "A bilingual church where families worship, grow in the Word, and carry God's glory to Orlando.")}</p>
+          <div class="actions">
+            <a class="btn btn-primary" href="visitanos.html">{t("Planea tu visita", "Plan your visit")} <span class="arr">→</span></a>
+            <a class="btn btn-ghost" href="servicios.html">{t("Horarios", "Service times")}</a>
+          </div>
+        </div>
+        <div class="next-card" id="next-card" aria-live="polite">
+          <span class="lbl"><span class="dot"></span><span class="es" data-live-es>Próximo servicio</span><span class="en" data-live-en>Next service</span></span>
+          <span class="name" id="next-name">{t("Servicio Dominical", "Sunday Service")}</span>
+          <span class="when" id="next-when">{t("Domingo · 11:00 AM", "Sunday · 11:00 AM")}</span>
+          <div class="count">
+            <div><b id="cd-d">–</b><small>{t("días", "days")}</small></div>
+            <div><b id="cd-h">–</b><small>{t("horas", "hours")}</small></div>
+            <div><b id="cd-m">–</b><small>{t("min", "min")}</small></div>
+          </div>
+          <a class="btn btn-primary" href="visitanos.html">{t("Te esperamos", "Save my seat")} <span class="arr">→</span></a>
+        </div>
+      </div>
     </div>
   </div>
 </section>
+
+<div class="marquee" aria-hidden="true">
+  <div class="marquee-track">
+    {"".join(f'<span>{w}</span>' for w in ["Adoración", "Palabra", "Familia", "Oración", "Gloria", "Comunidad"] * 4)}
+  </div>
+</div>
 
 <section>
   <div class="wrap split">
@@ -360,11 +458,11 @@ page("index.html", "Casa Portadores de Gloria", f"""
 
 {live_band()}
 
-<section class="events-band lights">
+<section class="events-band">
   <div class="wrap">
     {head(t("Próximamente", "Coming up"), t("Lo que viene", "What's next"))}
     {event_list(2)}
-    <div class="cta-row" style="margin-top:24px"><a class="btn btn-ghost" href="eventos.html">{t("Ver todos los eventos", "See all events")}</a></div>
+    <div class="cta-row" style="margin-top:24px"><a class="btn btn-outline" href="eventos.html">{t("Ver todos los eventos", "See all events")}</a></div>
   </div>
 </section>
 """)
@@ -393,7 +491,7 @@ page("nosotros.html", "Quiénes Somos · CPG", f"""
       <p class="lead">{t("Hay estacionamiento disponible en el lugar.", "Parking is available on site.")}</p>
       <div class="cta-row">
         <a class="btn btn-ink" href="{MAPS}" target="_blank" rel="noopener">{t("Abrir en Google Maps", "Open in Google Maps")}</a>
-        <a class="btn" style="border-color:var(--line)" href="visitanos.html">{t("Planea tu visita", "Plan a visit")}</a>
+        <a class="btn btn-outline" href="visitanos.html">{t("Planea tu visita", "Plan a visit")}</a>
       </div>
     </div>
   </div>
@@ -449,7 +547,7 @@ page("servicios.html", "Servicios · CPG", f"""
 # ---------------------------------------------------------------- 5. Events
 page("eventos.html", "Eventos · CPG", f"""
 {banner("alabanza.jpg", t("Reuniones", "Gatherings"), t("Eventos", "Events"), t("Lo que viene en la vida de la iglesia.", "What's coming up in the life of the church."))}
-<section class="events-band lights">
+<section class="events-band">
   <div class="wrap">
     {event_list()}
   </div>
