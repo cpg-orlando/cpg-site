@@ -292,6 +292,9 @@ PAGE_LABELS = {
 PHOTOS = {f: {} for f in PAGE_LABELS}
 PHOTOS["index.html"][1] = ("congregacion-adorando.jpg", "60% 35%")
 PHOTOS["index.html"][3] = ("cruz-verde.jpg", "center 35%")
+PHOTOS["index.html"][2] = ("pastores-avatar.jpg", "center")
+PHOTOS["pastores.html"][2] = ("pastores-pareja.jpg", "center 30%")
+PHOTOS["pastores.html"][3] = ("familia-toirac.jpg", "center 35%")
 SLOTS = {}
 
 
@@ -588,9 +591,17 @@ page("pastores.html", "Nuestros Pastores · CPG", f"""
                         "Pastors Esdras and Magnolia Toirac lead the Casa Portadores de Gloria family with a love for God, His Word, and the people of Orlando.")}</p>
       <div class="soon-block" style="padding:20px 22px">
         <span class="soon">{t("Próximamente", "Coming soon")}</span>
-        <p style="color:var(--muted)">{t("Su historia, su llamado y una foto de los dos juntos.", "Their story, their calling, and a photo of the two of them together.")}</p>
+        <p style="color:var(--muted)">{t("Su historia y su llamado.", "Their story and their calling.")}</p>
       </div>
     </div>
+  </div>
+</section>
+<section class="band" style="padding-top:0">
+  <div class="wrap">
+    {head(t("Su familia", "Their family"), t("La familia <em>Toirac</em>", "The <em>Toirac</em> family"))}
+    <figure class="family">
+      <img src="images/familia-toirac.jpg" alt="Los pastores Esdras y Magnolia Toirac con sus hijos" loading="lazy">
+    </figure>
   </div>
 </section>
 """)
