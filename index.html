@@ -84,7 +84,7 @@ body::before { content: ""; position: fixed; inset: 0 0 auto; height: env(safe-a
 
 /* hero */
 .hero { position: relative; color: var(--on-dark); background: #1a1129; padding: 0; overflow: hidden; }
-.hero img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: center 40%; }
+.hero img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: 50% 55%; }
 .hero::after { content: ""; position: absolute; inset: 0; background: linear-gradient(180deg, #1a112966 0%, #1a1129cc 62%, #1a1129 100%); }
 .hero .wrap { position: relative; z-index: 1; padding-block: clamp(120px, 22vw, 230px) clamp(48px, 7vw, 80px); display: grid; gap: 22px; }
 .hero h1 { font-size: clamp(2.6rem, 8vw, 5.4rem); max-width: 14ch; }
@@ -210,7 +210,7 @@ footer .brand b { color: var(--on-dark); }
 
 <main>
 <section class="hero" id="inicio">
-  <img src="images/alabanza.jpg" alt="Equipo de alabanza dirigiendo la adoración en Casa Portadores de Gloria" fetchpriority="high">
+  <img src="images/oracion.jpg" alt="La congregación de Casa Portadores de Gloria orando junta frente al altar" fetchpriority="high">
   <div class="wrap">
     <p class="eyebrow">Orlando, Florida</p>
     <h1>
@@ -325,7 +325,7 @@ footer .brand b { color: var(--on-dark); }
         </div>
       </article>
       <article class="ministry">
-        <img src="images/oracion.jpg" alt="La congregación orando junta frente al altar" loading="lazy">
+        <img src="images/adoracion-pareja.jpg" alt="Hermanos orando con las manos abiertas" loading="lazy" style="object-position: 70% center">
         <div class="body">
           <h3><span class="es">Oración e Intercesión</span><span class="en">Prayer &amp; Intercession</span></h3>
           <p><span class="es">Cada viernes nos unimos para orar por nuestras familias, la iglesia y Orlando.</span><span class="en">Every Friday we come together to pray for our families, the church, and Orlando.</span></p>
@@ -343,7 +343,7 @@ footer .brand b { color: var(--on-dark); }
       <h2><span class="es">Más que un servicio, una familia</span><span class="en">More than a service, a family</span></h2>
     </div>
     <div class="gallery">
-      <img class="g1" src="images/adoracion-pareja.jpg" alt="Hermanos adorando con las manos abiertas" loading="lazy">
+      <img class="g1" src="images/alabanza.jpg" alt="Equipo de alabanza dirigiendo la adoración" loading="lazy">
       <img class="g2" src="images/bienvenida.jpg" alt="Saludos y abrazos al final del servicio" loading="lazy" style="object-position: 60% center">
       <img class="g3" src="images/comunion.jpg" alt="Dos hermanos riendo juntos después del servicio" loading="lazy" style="object-position: 55% center">
       <img class="g4" src="images/adoracion.jpg" alt="Congregación adorando con la mano levantada" loading="lazy" style="object-position: center 40%">
