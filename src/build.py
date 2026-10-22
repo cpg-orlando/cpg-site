@@ -4,6 +4,7 @@ Run:  python3 src/build.py
 Each page is written to the repo root as a standalone .html file.
 Text is bilingual: t("español", "English") renders both; the page shows one.
 """
+import os
 import pathlib
 
 ROOT = pathlib.Path(__file__).resolve().parent.parent
@@ -25,6 +26,44 @@ def social_btns():
 def social_icons():
     return (f'<div class="social-icons"><a href="{YOUTUBE}" target="_blank" rel="noopener" aria-label="YouTube">{ICON_YT}</a>'
             f'<a href="{FACEBOOK}" target="_blank" rel="noopener" aria-label="Facebook">{ICON_FB}</a></div>')
+
+
+# Site color palette ("" = royal blue). Options: violeta, dorado, naranja, esmeralda, turquesa, vino
+PALETTE = ""
+# PREVIEW=1 adds a temporary palette picker for choosing colors (not for the live site)
+PREVIEW = os.environ.get("PREVIEW") == "1"
+
+PALETTES = [("", "#2346ff", "Azul"), ("violeta", "#7b3ff2", "Violeta"), ("dorado", "#b07d1c", "Dorado"),
+            ("naranja", "#e8611a", "Naranja"), ("esmeralda", "#0b8f63", "Esmeralda"),
+            ("turquesa", "#0b8aa0", "Turquesa"), ("vino", "#b3264a", "Vino")]
+
+
+def picker():
+    if not PREVIEW:
+        return ""
+    sw = "".join(f'<button type="button" data-pal="{k}" style="background:{c}" title="{n}" aria-label="{n}"></button>' for k, c, n in PALETTES)
+    return f"""
+<div class="pal-picker" role="group" aria-label="Colores (vista previa)"><span>Colores</span>{sw}</div>
+<style>
+.pal-picker {{ position: fixed; z-index: 25; left: max(12px, env(safe-area-inset-left, 0px)); bottom: calc(env(safe-area-inset-bottom, 0px) + 12px);
+  display: flex; align-items: center; gap: 6px; padding: 8px 10px; border-radius: 999px; background: #ffffff; box-shadow: 0 10px 30px #0004; border: 1px solid #e4e7ef; }}
+.pal-picker span {{ font: 600 .72rem/1 var(--font-body); letter-spacing: .08em; text-transform: uppercase; color: #5a6170; margin-right: 4px; }}
+.pal-picker button {{ width: 24px; height: 24px; border-radius: 50%; border: 2px solid #fff; box-shadow: 0 0 0 1px #0002; cursor: pointer; padding: 0; }}
+.pal-picker button[aria-pressed="true"] {{ box-shadow: 0 0 0 2px #0b0d12; }}
+</style>
+<script>
+(function () {{
+  var root = document.documentElement, btns = document.querySelectorAll('[data-pal]');
+  function set(p) {{
+    if (p) root.setAttribute('data-palette', p); else root.removeAttribute('data-palette');
+    btns.forEach(function (b) {{ b.setAttribute('aria-pressed', String(b.getAttribute('data-pal') === p)); }});
+    try {{ localStorage.setItem('cpg-palette', p); }} catch (e) {{}}
+  }}
+  var saved = ''; try {{ saved = localStorage.getItem('cpg-palette') || ''; }} catch (e) {{}}
+  set(saved);
+  btns.forEach(function (b) {{ b.addEventListener('click', function () {{ set(b.getAttribute('data-pal')); }}); }});
+}})();
+</script>"""
 
 
 MAPS = "https://www.google.com/maps/search/?api=1&query=5200+Old+Cheney+Highway+Orlando+FL+32807"
@@ -255,7 +294,7 @@ SCRIPT = """
 
 def page(fname, title, body):
     html = f"""<!doctype html>
-<html lang="es">
+<html lang="es"{(" data-palette=\"" + PALETTE + "\"") if PALETTE else ""}>
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
@@ -277,6 +316,7 @@ def page(fname, title, body):
 </main>
 {FOOTER}
 {SCRIPT}
+{picker()}
 </body>
 </html>
 """
