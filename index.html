@@ -69,7 +69,9 @@ section { padding-block: clamp(56px, 9vw, 104px); }
 body::before { content: ""; position: fixed; inset: 0 0 auto; height: env(safe-area-inset-top, 0px); z-index: 10; background: var(--violet-deep); }
 .site-header { position: sticky; top: env(safe-area-inset-top, 0px); z-index: 9; background: color-mix(in srgb, var(--violet-deep) 92%, transparent); backdrop-filter: blur(10px); color: var(--on-dark); }
 .site-header .wrap { display: flex; align-items: center; gap: 16px; padding-block: 12px; }
-.brand { display: flex; align-items: baseline; gap: 6px; text-decoration: none; margin-right: auto; white-space: nowrap; }
+.brand { display: flex; align-items: center; text-decoration: none; margin-right: auto; }
+.logo { height: 46px; width: auto; }
+.logo-lg { height: 84px; }
 .brand b { font-family: var(--font-display); font-weight: 400; font-size: 1.25rem; letter-spacing: .02em; }
 .brand i { font-family: var(--font-script); font-style: normal; font-size: 1.3rem; color: #f1e4bf; }
 .nav { display: flex; gap: 20px; font-size: .95rem; font-weight: 500; }
@@ -122,20 +124,31 @@ body::before { content: ""; position: fixed; inset: 0 0 auto; height: env(safe-a
 .about figure { margin: 0; }
 .about figure img { border-radius: 14px; aspect-ratio: 4 / 3; object-fit: cover; width: 100%; }
 .about-text { display: grid; gap: 18px; }
-.pastors { display: grid; gap: 4px; padding: 20px 22px; border-left: 3px solid var(--gold); background: var(--paper); border-radius: 0 12px 12px 0; }
-.pastors .names { font-family: var(--font-display); font-size: 1.4rem; }
-.pastors .role { color: var(--muted); font-size: .95rem; }
+.pastors { display: grid; grid-template-columns: 76px 1fr; align-items: center; gap: 18px; padding: 16px 20px; border-left: 3px solid var(--gold); background: var(--paper); border-radius: 0 12px 12px 0; }
+.pastors img { width: 76px; height: 76px; border-radius: 50%; object-fit: cover; object-position: 50% 30%; }
+.pastors .names { display: block; font-family: var(--font-display); font-size: 1.4rem; }
+.pastors .role { display: block; color: var(--muted); font-size: .95rem; }
 @media (max-width: 820px) { .about-grid { grid-template-columns: 1fr; } }
 
 /* ministries */
-.ministries { display: grid; grid-template-columns: repeat(3, 1fr); gap: 22px; }
+.ministries { display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px; }
 .ministry { display: grid; grid-template-rows: auto 1fr; background: var(--surface); border-radius: 14px; overflow: hidden; border: 1px solid var(--line); min-width: 0; }
 .ministry img { aspect-ratio: 4 / 3; object-fit: cover; width: 100%; }
 .ministry .body { padding: 22px; display: grid; gap: 10px; align-content: start; }
 .ministry p { color: var(--muted); }
 .ministry a.more { font-weight: 600; color: var(--violet); text-decoration: none; }
 .ministry a.more:hover { text-decoration: underline; }
-@media (max-width: 860px) { .ministries { grid-template-columns: 1fr; max-width: 560px; } }
+@media (max-width: 1000px) { .ministries { grid-template-columns: repeat(2, 1fr); } }
+@media (max-width: 600px) { .ministries { grid-template-columns: 1fr; } }
+
+/* gallery */
+.gallery { display: grid; grid-template-columns: repeat(4, 1fr); grid-template-rows: 220px 220px; gap: 12px; }
+.gallery img { width: 100%; height: 100%; object-fit: cover; border-radius: 12px; }
+.g1 { grid-column: span 2; grid-row: span 2; }
+@media (max-width: 760px) {
+  .gallery { grid-template-columns: 1fr 1fr; grid-template-rows: none; grid-auto-rows: 160px; }
+  .g1 { grid-column: span 2; grid-row: span 2; }
+}
 
 /* events */
 .events-band { background: var(--violet-deep); color: var(--on-dark); }
@@ -179,7 +192,7 @@ footer .brand b { color: var(--on-dark); }
 
 <header class="site-header">
   <div class="wrap">
-    <a class="brand" href="#inicio" aria-label="Casa Portadores de Gloria"><b>Casa Portadores de</b><i>Gloria</i></a>
+    <a class="brand" href="#inicio"><img class="logo" src="images/logo.png" alt="Casa Portadores de Gloria" width="600" height="511"></a>
     <nav class="nav" aria-label="Principal">
       <a href="#horarios"><span class="es">Horarios</span><span class="en">Times</span></a>
       <a href="#nosotros"><span class="es">Nosotros</span><span class="en">About</span></a>
@@ -261,7 +274,7 @@ footer .brand b { color: var(--on-dark); }
 
 <section class="about" id="nosotros">
   <div class="wrap about-grid">
-    <figure><img src="images/predicacion.jpg" alt="Predicación de la Palabra en Casa Portadores de Gloria" loading="lazy"></figure>
+    <figure><img src="images/predicacion-logo.jpg" alt="El pastor predicando en Casa Portadores de Gloria" loading="lazy" style="object-position: 45% center"></figure>
     <div class="about-text">
       <p class="eyebrow"><span class="es">Quiénes somos</span><span class="en">Who we are</span></p>
       <h2><span class="es">Una casa para llevar su gloria</span><span class="en">A house that carries His glory</span></h2>
@@ -270,8 +283,11 @@ footer .brand b { color: var(--on-dark); }
         <span class="en">Casa Portadores de Gloria is a family of faith in Orlando. We believe every person was created to know Jesus and reflect His glory at home, at work, and in their city. Our services are in Spanish, with English woven through everything we do.</span>
       </p>
       <div class="pastors">
-        <span class="names">Esdras &amp; Magnolia Toirac</span>
-        <span class="role"><span class="es">Pastores</span><span class="en">Senior Pastors</span></span>
+        <img src="images/pastor.jpg" alt="Pastor Esdras Toirac predicando" loading="lazy">
+        <div>
+          <span class="names">Esdras &amp; Magnolia Toirac</span>
+          <span class="role"><span class="es">Pastores</span><span class="en">Senior Pastors</span></span>
+        </div>
       </div>
     </div>
   </div>
@@ -288,12 +304,20 @@ footer .brand b { color: var(--on-dark); }
         <img src="images/estudio.jpg" alt="Jóvenes tomando notas durante el estudio bíblico" loading="lazy" style="object-position: center 60%">
         <div class="body">
           <h3><span class="es">Jóvenes y Jóvenes Adultos</span><span class="en">Youth &amp; Young Adults</span></h3>
-          <p><span class="es">CPG Youth: estudio bíblico los miércoles, Glory Night el último miércoles de cada mes y mucha comunión.</span><span class="en">CPG Youth: Wednesday Bible study, Glory Night on the last Wednesday of every month, and plenty of fellowship.</span></p>
+          <p><span class="es">Estudio bíblico los miércoles, Glory Night el último miércoles de cada mes y mucha comunión.</span><span class="en">Wednesday Bible study, Glory Night on the last Wednesday of every month, and plenty of fellowship.</span></p>
           <a class="more" href="https://cpgyouth.vercel.app" target="_blank" rel="noopener"><span class="es">Visitar CPG Youth →</span><span class="en">Visit CPG Youth →</span></a>
         </div>
       </article>
       <article class="ministry">
-        <img src="images/adoracion.jpg" alt="Congregación adorando con las manos levantadas" loading="lazy" style="object-position: center 35%">
+        <img src="images/ninos.jpg" alt="Niños con sus Biblias en la clase dominical" loading="lazy" style="object-position: 40% center">
+        <div class="body">
+          <h3><span class="es">Niños</span><span class="en">Kids</span></h3>
+          <p><span class="es">Un lugar seguro y alegre donde los niños aprenden la Palabra y crecen en su fe.</span><span class="en">A safe, joyful place where kids learn God's Word and grow in their faith.</span></p>
+          <a class="more" href="#contacto"><span class="es">Más información →</span><span class="en">Learn more →</span></a>
+        </div>
+      </article>
+      <article class="ministry">
+        <img src="images/bateria.jpg" alt="Baterista adorando durante el servicio" loading="lazy" style="object-position: center 40%">
         <div class="body">
           <h3><span class="es">Alabanza y Adoración</span><span class="en">Worship</span></h3>
           <p><span class="es">Músicos y cantantes que guían a la iglesia a la presencia de Dios cada semana.</span><span class="en">Musicians and singers who lead the church into God's presence every week.</span></p>
@@ -301,13 +325,29 @@ footer .brand b { color: var(--on-dark); }
         </div>
       </article>
       <article class="ministry">
-        <img src="images/predicacion.jpg" alt="Pastor enseñando desde el púlpito" loading="lazy">
+        <img src="images/oracion.jpg" alt="La congregación orando junta frente al altar" loading="lazy">
         <div class="body">
           <h3><span class="es">Oración e Intercesión</span><span class="en">Prayer &amp; Intercession</span></h3>
           <p><span class="es">Cada viernes nos unimos para orar por nuestras familias, la iglesia y Orlando.</span><span class="en">Every Friday we come together to pray for our families, the church, and Orlando.</span></p>
           <a class="more" href="#contacto"><span class="es">Enviar petición →</span><span class="en">Send a request →</span></a>
         </div>
       </article>
+    </div>
+  </div>
+</section>
+
+<section class="gallery-band" id="galeria">
+  <div class="wrap">
+    <div class="section-head">
+      <p class="eyebrow"><span class="es">La vida en CPG</span><span class="en">Life at CPG</span></p>
+      <h2><span class="es">Más que un servicio, una familia</span><span class="en">More than a service, a family</span></h2>
+    </div>
+    <div class="gallery">
+      <img class="g1" src="images/adoracion-pareja.jpg" alt="Hermanos adorando con las manos abiertas" loading="lazy">
+      <img class="g2" src="images/bienvenida.jpg" alt="Saludos y abrazos al final del servicio" loading="lazy" style="object-position: 60% center">
+      <img class="g3" src="images/comunion.jpg" alt="Dos hermanos riendo juntos después del servicio" loading="lazy" style="object-position: 55% center">
+      <img class="g4" src="images/adoracion.jpg" alt="Congregación adorando con la mano levantada" loading="lazy" style="object-position: center 40%">
+      <img class="g5" src="images/predicacion.jpg" alt="Predicación de la Palabra" loading="lazy">
     </div>
   </div>
 </section>
@@ -401,7 +441,7 @@ footer .brand b { color: var(--on-dark); }
 
 <footer>
   <div class="wrap">
-    <a class="brand" href="#inicio"><b>Casa Portadores de</b><i style="color:#f1e4bf">Gloria</i></a>
+    <a class="brand" href="#inicio"><img class="logo logo-lg" src="images/logo.png" alt="Casa Portadores de Gloria" width="600" height="511" loading="lazy"></a>
     <span>5200 Old Cheney Highway, Orlando, FL 32807</span>
     <span>© 2026 Casa Portadores de Gloria</span>
   </div>
