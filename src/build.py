@@ -1,0 +1,651 @@
+"""Builds the static pages of the CPG site from shared parts.
+
+Run:  python3 src/build.py
+Each page is written to the repo root as a standalone .html file.
+Text is bilingual: t("español", "English") renders both; the page shows one.
+"""
+import pathlib
+
+ROOT = pathlib.Path(__file__).resolve().parent.parent
+CSS = (ROOT / "src/base.css").read_text() + (ROOT / "src/extra.css").read_text()
+MAPS = "https://www.google.com/maps/search/?api=1&query=5200+Old+Cheney+Highway+Orlando+FL+32807"
+
+
+def t(es, en):
+    return f'<span class="es">{es}</span><span class="en">{en}</span>'
+
+
+# (file, es, en)
+MENU = [
+    ("Inicio", "Home", [("index.html", "Bienvenidos", "Welcome")]),
+    ("Nosotros", "About", [
+        ("nosotros.html", "Quiénes somos", "Who we are"),
+        ("pastores.html", "Nuestros pastores", "Our pastors"),
+        ("creencias.html", "Lo que creemos", "Our beliefs"),
+    ]),
+    ("Reuniones", "Gatherings", [
+        ("servicios.html", "Servicios semanales", "Weekly services"),
+        ("eventos.html", "Eventos", "Events"),
+        ("destacados.html", "Momentos destacados", "Highlights"),
+        ("ministerios.html", "Ministerios", "Ministries"),
+    ]),
+    ("Conéctate", "Connect", [
+        ("visitanos.html", "Planea tu visita", "Plan a visit"),
+        ("oracion.html", "Peticiones de oración", "Prayer requests"),
+        ("membresia.html", "Hazte miembro", "Become a member"),
+        ("ofrendar.html", "Ofrendar", "Give"),
+    ]),
+]
+
+
+def header(current):
+    groups = ""
+    for ges, gen, items in MENU:
+        cur = ' aria-current="page"'
+        links = "".join(
+            f'<a href="{f}"{cur if f == current else ""}>{t(es, en)}</a>'
+            for f, es, en in items
+        )
+        groups += f'<div class="menu-group"><h2>{t(ges, gen)}</h2>{links}</div>'
+    return f"""
+<header class="site-header">
+  <div class="wrap">
+    <a class="brand" href="index.html"><img class="logo" src="images/logo.png" alt="Casa Portadores de Gloria" width="600" height="511"></a>
+    <a class="give-pill" href="ofrendar.html">{t("Ofrendar", "Give")}</a>
+    <div class="lang" role="group" aria-label="Idioma / Language">
+      <button type="button" id="lang-es" data-set-lang="es" aria-pressed="true">ES</button>
+      <button type="button" id="lang-en" data-set-lang="en" aria-pressed="false">EN</button>
+    </div>
+    <button type="button" class="menu-btn" id="menu-open" aria-controls="menu" aria-expanded="false">
+      <span class="bars" aria-hidden="true"><i></i><i></i><i></i></span><span class="label">{t("Menú", "Menu")}</span>
+    </button>
+  </div>
+</header>
+<div class="menu" id="menu" hidden>
+  <div class="wrap">
+    <div class="menu-top">
+      <img class="logo" src="images/logo.png" alt="Casa Portadores de Gloria" width="600" height="511">
+      <button type="button" class="menu-close" id="menu-close">{t("Cerrar", "Close")}</button>
+    </div>
+    <nav class="menu-groups" aria-label="Principal">{groups}</nav>
+  </div>
+</div>
+"""
+
+
+FOOTER = f"""
+<footer>
+  <div class="wrap">
+    <div class="cols">
+      <div>
+        <img class="logo logo-lg" src="images/logo.png" alt="Casa Portadores de Gloria" width="600" height="511" loading="lazy">
+        <span>5200 Old Cheney Highway<br>Orlando, FL 32807</span>
+        <a href="{MAPS}" target="_blank" rel="noopener">{t("Cómo llegar →", "Get directions →")}</a>
+      </div>
+      <div>
+        <h2>{t("Horarios", "Service times")}</h2>
+        <span>{t("Domingo", "Sunday")} · 11:00 AM</span>
+        <span>{t("Miércoles", "Wednesday")} · 7:00 PM</span>
+        <span>{t("Viernes", "Friday")} · 7:00 PM</span>
+      </div>
+      <div>
+        <h2>{t("Conéctate", "Connect")}</h2>
+        <a href="visitanos.html">{t("Planea tu visita", "Plan a visit")}</a>
+        <a href="oracion.html">{t("Peticiones de oración", "Prayer requests")}</a>
+        <a href="membresia.html">{t("Hazte miembro", "Become a member")}</a>
+        <a href="ofrendar.html">{t("Ofrendar", "Give")}</a>
+      </div>
+    </div>
+    <p class="legal">© 2026 Casa Portadores de Gloria</p>
+  </div>
+</footer>
+"""
+
+SCRIPT = """
+<script>
+(function () {
+  var root = document.documentElement;
+  function setLang(lang) {
+    root.setAttribute('data-lang', lang);
+    root.setAttribute('lang', lang);
+    document.querySelectorAll('[data-set-lang]').forEach(function (b) {
+      b.setAttribute('aria-pressed', String(b.getAttribute('data-set-lang') === lang));
+    });
+    try { localStorage.setItem('cpg-lang', lang); } catch (e) {}
+  }
+  var saved = null;
+  try { saved = localStorage.getItem('cpg-lang'); } catch (e) {}
+  setLang(saved === 'en' ? 'en' : 'es');
+  document.querySelectorAll('[data-set-lang]').forEach(function (b) {
+    b.addEventListener('click', function () { setLang(b.getAttribute('data-set-lang')); });
+  });
+
+  var menu = document.getElementById('menu'), openBtn = document.getElementById('menu-open'), closeBtn = document.getElementById('menu-close');
+  function setMenu(open) {
+    menu.hidden = !open;
+    openBtn.setAttribute('aria-expanded', String(open));
+    document.body.style.overflow = open ? 'hidden' : '';
+    (open ? closeBtn : openBtn).focus();
+  }
+  openBtn.addEventListener('click', function () { setMenu(true); });
+  closeBtn.addEventListener('click', function () { setMenu(false); });
+  document.addEventListener('keydown', function (e) { if (e.key === 'Escape' && !menu.hidden) setMenu(false); });
+
+  // Forms are not connected to a service yet: show a clear note instead of pretending to send.
+  document.querySelectorAll('form[data-preview]').forEach(function (f) {
+    f.addEventListener('submit', function (e) {
+      e.preventDefault();
+      var note = f.querySelector('.form-note');
+      if (note) note.hidden = false;
+    });
+  });
+})();
+</script>
+"""
+
+
+def page(fname, title, body):
+    html = f"""<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>{title}</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<meta name="description" content="Casa Portadores de Gloria — iglesia cristiana bilingüe en Orlando, Florida.">
+<link rel="icon" href="images/logo.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Young+Serif&family=Figtree:wght@400;500;600;700&family=Dancing+Script:wght@600&display=swap">
+<style>
+{CSS}
+</style>
+</head>
+<body>
+{header(fname)}
+<main>
+{body}
+</main>
+{FOOTER}
+{SCRIPT}
+</body>
+</html>
+"""
+    (ROOT / fname).write_text(html)
+
+
+def banner(img, eyebrow, title, sub="", pos="center"):
+    subp = f'<p class="sub">{sub}</p>' if sub else ""
+    return f"""
+<section class="page-hero">
+  <img src="images/{img}" alt="" style="object-position: {pos}">
+  <div class="wrap">
+    <p class="eyebrow">{eyebrow}</p>
+    <h1>{title}</h1>
+    {subp}
+  </div>
+</section>"""
+
+
+def head(eyebrow, title, lead=""):
+    leadp = f'<p class="lead">{lead}</p>' if lead else ""
+    return f'<div class="section-head"><p class="eyebrow">{eyebrow}</p><h2>{title}</h2>{leadp}</div>'
+
+
+def form_note():
+    return f'<p class="form-note" hidden>{t("Vista previa: este formulario todavía no está conectado, así que no se envió nada. Muy pronto estará activo.", "Preview: this form isn&#39;t connected yet, so nothing was sent. It will be active soon.")}</p>'
+
+
+SERVICES = [
+    ("domingo.jpg", "center", "Domingo", "Sunday", "11:00", "AM", "Servicio Dominical", "Sunday Service",
+     "Adoración, la Palabra y comunión para toda la familia.", "Worship, the Word, and fellowship for the whole family."),
+    ("palabra.jpg", "45% 30%", "Miércoles", "Wednesday", "7:00", "PM", "Estudio Bíblico", "Bible Study",
+     "Una noche para profundizar juntos en las Escrituras.", "A night to dig deeper into Scripture together."),
+    ("oracion.jpg", "center", "Viernes", "Friday", "7:00", "PM", "Culto de Oración", "Prayer Service",
+     "Nos reunimos para buscar a Dios en oración unida.", "We gather to seek God together in prayer."),
+]
+
+
+def service_cards():
+    out = ""
+    for img, pos, des, den, time, ap, nes, nen, des2, den2 in SERVICES:
+        out += f"""
+      <div class="service">
+        <img class="service-img" src="images/{img}" alt="" loading="lazy" style="object-position: {pos}">
+        <p class="eyebrow">{t(des, den)}</p>
+        <div class="when">{time}<span>{ap}</span></div>
+        <h3>{t(nes, nen)}</h3>
+        <p>{t(des2, den2)}</p>
+      </div>"""
+    return f'<div class="services">{out}\n    </div>'
+
+
+EVENTS = [
+    ("Oct", "28", "CPG Youth", "CPG Youth", "Glory Night",
+     "Miércoles, 7:00 PM. Una noche de adoración y Palabra para jóvenes y jóvenes adultos.",
+     "Wednesday, 7:00 PM. A night of worship and the Word for youth and young adults."),
+    ("Oct", "29", "Para todos", "Everyone", "CPG Sports Day",
+     "Jueves, 6:30 PM en Brush Arbor Christian School. Baloncesto, voleibol y comunión. ¡Todos son bienvenidos!",
+     "Thursday, 6:30 PM at Brush Arbor Christian School. Basketball, volleyball, and fellowship. Everyone is welcome!"),
+    ("Nov", "14", "CPG Youth", "CPG Youth", "Abide Conference",
+     "Sábado, 12:00–7:00 PM. 26134 Leeward St., Eustis, FL.",
+     "Saturday, 12:00–7:00 PM. 26134 Leeward St., Eustis, FL."),
+]
+
+
+def event_list(limit=None):
+    out = ""
+    for m, d, tes, ten, name, des, den in EVENTS[:limit]:
+        out += f"""
+      <div class="event">
+        <div class="date"><span class="m">{m}</span><span class="d">{d}</span></div>
+        <div>
+          <span class="tag">{t(tes, ten)}</span>
+          <h3>{name}</h3>
+          <p>{t(des, den)}</p>
+        </div>
+      </div>"""
+    return f'<div class="events">{out}\n    </div>'
+
+
+# ---------------------------------------------------------------- 1. Welcome
+page("index.html", "Casa Portadores de Gloria", f"""
+<section class="hero" id="inicio">
+  <img src="images/oracion-grupo.jpg" alt="Hermanos abrazados orando juntos en Casa Portadores de Gloria" fetchpriority="high">
+  <div class="wrap">
+    <p class="eyebrow">Orlando, Florida</p>
+    <h1>{t('Bienvenidos a <span class="script">casa</span>', 'Welcome <span class="script">home</span>')}</h1>
+    <p>{t("Una iglesia bilingüe donde las familias adoran, crecen en la Palabra y llevan la gloria de Dios a Orlando. Hay un lugar para ti.",
+          "A bilingual church where families worship, grow in the Word, and carry God's glory to Orlando. There's a place for you here.")}</p>
+    <div class="actions">
+      <a class="btn btn-gold" href="visitanos.html">{t("Planea tu visita", "Plan your visit")}</a>
+      <a class="btn btn-ghost" href="servicios.html">{t("Ver horarios", "Service times")}</a>
+    </div>
+  </div>
+  <div class="wrap">
+    <div class="week" aria-label="Semana de servicios">
+      <div class="day on">{t("Dom", "Sun")}<strong>11 AM</strong><small>{t("Servicio", "Service")}</small></div>
+      <div class="day">{t("Lun", "Mon")}</div>
+      <div class="day">{t("Mar", "Tue")}</div>
+      <div class="day on">{t("Mié", "Wed")}<strong>7 PM</strong><small>{t("Estudio", "Bible study")}</small></div>
+      <div class="day">{t("Jue", "Thu")}</div>
+      <div class="day on">{t("Vie", "Fri")}<strong>7 PM</strong><small>{t("Oración", "Prayer")}</small></div>
+      <div class="day">{t("Sáb", "Sat")}</div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap split">
+    <div class="stack">
+      <p class="eyebrow">{t("Te damos la bienvenida", "We're glad you're here")}</p>
+      <h2>{t("Una casa para llevar su gloria", "A house that carries His glory")}</h2>
+      <p class="lead">{t("Somos una familia de fe en Orlando, con servicios en español y el inglés presente en todo lo que hacemos. Ya sea tu primera vez en una iglesia o estés buscando un hogar espiritual, aquí eres bienvenido.",
+                        "We're a family of faith in Orlando, with services in Spanish and English woven through everything we do. Whether it's your first time in church or you're looking for a spiritual home, you're welcome here.")}</p>
+      <div class="pastors">
+        <img src="images/pastor.jpg" alt="Pastor Esdras Toirac" loading="lazy">
+        <div><span class="names">Esdras &amp; Magnolia Toirac</span><span class="role">{t("Pastores", "Senior Pastors")} · <a href="pastores.html">{t("Conócelos", "Meet them")}</a></span></div>
+      </div>
+    </div>
+    <img class="photo" src="images/predicacion-logo.jpg" alt="Predicación en Casa Portadores de Gloria" loading="lazy" style="object-position: 45% center">
+  </div>
+</section>
+
+<section class="band">
+  <div class="wrap">
+    {head(t("Empieza aquí", "Start here"), t("¿Cómo te podemos ayudar?", "How can we help?"))}
+    <div class="quick">
+      <a href="visitanos.html"><b>{t("Planea tu visita", "Plan a visit")}</b><span class="d">{t("Qué esperar y cómo llegar.", "What to expect and how to get here.")}</span><span class="go">→</span></a>
+      <a href="ministerios.html"><b>{t("Ministerios", "Ministries")}</b><span class="d">{t("Niños, jóvenes, hombres, mujeres y ancianos.", "Kids, youth, men, women, and elders.")}</span><span class="go">→</span></a>
+      <a href="oracion.html"><b>{t("Pide oración", "Ask for prayer")}</b><span class="d">{t("Nuestro equipo orará por ti.", "Our team will pray for you.")}</span><span class="go">→</span></a>
+      <a href="ofrendar.html"><b>{t("Ofrendar", "Give")}</b><span class="d">{t("Diezmos y ofrendas.", "Tithes and offerings.")}</span><span class="go">→</span></a>
+    </div>
+  </div>
+</section>
+
+<section class="events-band">
+  <div class="wrap">
+    {head(t("Próximamente", "Coming up"), t("Lo que viene", "What's next"))}
+    {event_list(2)}
+    <div class="cta-row" style="margin-top:24px"><a class="btn btn-ghost" href="eventos.html">{t("Ver todos los eventos", "See all events")}</a></div>
+  </div>
+</section>
+""")
+
+# ---------------------------------------------------------------- 2. Who we are
+page("nosotros.html", "Quiénes Somos · CPG", f"""
+{banner("predicacion-logo.jpg", t("Nosotros", "About"), t("Quiénes somos", "Who we are"), pos="45% center")}
+<section>
+  <div class="wrap split">
+    <div class="stack">
+      {head(t("Nuestra iglesia", "Our church"), t("Una familia que lleva su gloria", "A family that carries His glory"))}
+      <p class="lead">{t("Casa Portadores de Gloria es una iglesia cristiana en Orlando. Creemos que cada persona fue creada para conocer a Jesús y reflejar su gloria en su hogar, su trabajo y su ciudad.",
+                        "Casa Portadores de Gloria is a Christian church in Orlando. We believe every person was created to know Jesus and reflect His glory at home, at work, and in their city.")}</p>
+      <p class="lead">{t("Somos una comunidad bilingüe: nuestros servicios son en español y el inglés está presente en todo lo que hacemos, para que toda la familia, de todas las generaciones, se sienta en casa.",
+                        "We're a bilingual community: our services are in Spanish, with English woven through everything we do, so the whole family, across generations, feels at home.")}</p>
+    </div>
+    <img class="photo" src="images/bienvenida.jpg" alt="Saludos al final del servicio" loading="lazy" style="object-position: 60% center">
+  </div>
+</section>
+<section class="band" id="ubicacion">
+  <div class="wrap split">
+    <img class="photo" src="images/edificio.jpg" alt="Pasillo exterior de la iglesia" loading="lazy">
+    <div class="stack">
+      {head(t("Ubicación", "Location"), t("Dónde estamos", "Where we are"))}
+      <address class="lead" style="font-style:normal"><strong style="color:var(--ink)">5200 Old Cheney Highway</strong><br>Orlando, FL 32807</address>
+      <p class="lead">{t("Hay estacionamiento disponible en el lugar.", "Parking is available on site.")}</p>
+      <div class="cta-row">
+        <a class="btn btn-ink" href="{MAPS}" target="_blank" rel="noopener">{t("Abrir en Google Maps", "Open in Google Maps")}</a>
+        <a class="btn" style="border-color:var(--line)" href="visitanos.html">{t("Planea tu visita", "Plan a visit")}</a>
+      </div>
+    </div>
+  </div>
+</section>
+""")
+
+# ---------------------------------------------------------------- 3. Pastors
+page("pastores.html", "Nuestros Pastores · CPG", f"""
+{banner("palabra.jpg", t("Nosotros", "About"), t("Nuestros pastores", "Our pastors"), pos="45% 30%")}
+<section>
+  <div class="wrap pastor-card">
+    <img src="images/pastor.jpg" alt="Pastor Esdras Toirac predicando" loading="lazy">
+    <div class="stack">
+      <p class="eyebrow">{t("Pastores principales", "Senior Pastors")}</p>
+      <h2>Esdras &amp; Magnolia Toirac</h2>
+      <p class="lead">{t("Los pastores Esdras y Magnolia Toirac guían a la familia de Casa Portadores de Gloria con amor por Dios, por su Palabra y por la gente de Orlando.",
+                        "Pastors Esdras and Magnolia Toirac lead the Casa Portadores de Gloria family with a love for God, His Word, and the people of Orlando.")}</p>
+      <div class="soon-block" style="padding:20px 22px">
+        <span class="soon">{t("Próximamente", "Coming soon")}</span>
+        <p style="color:var(--muted)">{t("Su historia, su llamado y una foto de los dos juntos.", "Their story, their calling, and a photo of the two of them together.")}</p>
+      </div>
+    </div>
+  </div>
+</section>
+""")
+
+# ---------------------------------------------------------------- 4. Services
+page("servicios.html", "Servicios · CPG", f"""
+{banner("domingo.jpg", t("Reuniones", "Gatherings"), t("Servicios semanales", "Weekly services"), t("Tres noches, una familia. Te esperamos.", "Three gatherings, one family. We'll save you a seat."))}
+<section>
+  <div class="wrap">
+    {service_cards()}
+    <div class="visit">
+      <address>5200 Old Cheney Highway<span>Orlando, FL 32807</span></address>
+      <a class="btn btn-ink" href="{MAPS}" target="_blank" rel="noopener">{t("Cómo llegar", "Get directions")}</a>
+    </div>
+  </div>
+</section>
+<section class="band">
+  <div class="wrap">
+    {head(t("Tu primera vez", "Your first time"), t("Qué esperar", "What to expect"))}
+    <div class="expect">
+      <div><h3>{t("Adoración", "Worship")}</h3><p>{t("Música en vivo con nuestro equipo de alabanza.", "Live music with our worship team.")}</p></div>
+      <div><h3>{t("La Palabra", "The Word")}</h3><p>{t("Una enseñanza bíblica clara y práctica.", "Clear, practical Bible teaching.")}</p></div>
+      <div><h3>{t("Bilingüe", "Bilingual")}</h3><p>{t("En español, con el inglés presente.", "In Spanish, with English throughout.")}</p></div>
+      <div><h3>{t("Para la familia", "For families")}</h3><p>{t("Hay un lugar para los niños.", "There's a place for the kids.")}</p></div>
+    </div>
+  </div>
+</section>
+""")
+
+# ---------------------------------------------------------------- 5. Events
+page("eventos.html", "Eventos · CPG", f"""
+{banner("alabanza.jpg", t("Reuniones", "Gatherings"), t("Eventos", "Events"), t("Lo que viene en la vida de la iglesia.", "What's coming up in the life of the church."))}
+<section class="events-band">
+  <div class="wrap">
+    {event_list()}
+  </div>
+</section>
+<section>
+  <div class="wrap">
+    <div class="soon-block">
+      <h3>{t("¿Quieres enterarte primero?", "Want to hear first?")}</h3>
+      <p style="color:var(--muted)">{t("Síguenos en Instagram para los anuncios de cada semana.", "Follow us on Instagram for weekly announcements.")}</p>
+      <a class="btn btn-ink" href="https://instagram.com/cpgyouth" target="_blank" rel="noopener">@cpgyouth</a>
+    </div>
+  </div>
+</section>
+""")
+
+# ---------------------------------------------------------------- 6. Ministries
+MINS = [
+    ("ninos.jpg", "40% center", "Niños", "Kids", "Para los más pequeños", "For the little ones",
+     "Un lugar seguro y alegre donde los niños aprenden la Palabra de Dios y crecen en su fe.",
+     "A safe, joyful place where kids learn God's Word and grow in their faith.", None),
+    ("estudio.jpg", "center 60%", "Jóvenes y Jóvenes Adultos", "Youth &amp; Young Adults", "CPG Youth", "CPG Youth",
+     "Estudio bíblico los miércoles, Glory Night el último miércoles de cada mes, deportes y mucha comunión.",
+     "Wednesday Bible study, Glory Night on the last Wednesday of every month, sports, and plenty of fellowship.",
+     ("https://cpgyouth.vercel.app", "Visitar CPG Youth →", "Visit CPG Youth →")),
+    ("edificio.jpg", "center", "Hombres", "Men", "Hermandad", "Brotherhood",
+     "Hombres que se apoyan, oran juntos y crecen como líderes en su hogar y en la iglesia.",
+     "Men who support each other, pray together, and grow as leaders at home and in the church.", None),
+    ("oracion.jpg", "center", "Mujeres", "Women", "Hermandad", "Sisterhood",
+     "Mujeres que se animan en la fe, oran unas por otras y sirven con amor.",
+     "Women who encourage each other in faith, pray for one another, and serve with love.", None),
+    ("comunion.jpg", "55% center", "Ancianos", "Elders", "Sabiduría y experiencia", "Wisdom and experience",
+     "Hombres y mujeres de fe probada que bendicen a la iglesia con su sabiduría, oración y ejemplo.",
+     "Men and women of proven faith who bless the church with their wisdom, prayer, and example.", None),
+]
+
+
+def min_rows():
+    out = ""
+    for img, pos, nes, nen, wes, wen, des, den, link in MINS:
+        more = (f'<a class="more" href="{link[0]}" target="_blank" rel="noopener">{t(link[1], link[2])}</a>' if link
+                else f'<a class="more" href="visitanos.html">{t("Quiero participar →", "I want to join →")}</a>')
+        out += f"""
+      <article class="min-row">
+        <img src="images/{img}" alt="" loading="lazy" style="object-position: {pos}">
+        <div class="body">
+          <span class="who">{t(wes, wen)}</span>
+          <h3>{t(nes, nen)}</h3>
+          <p>{t(des, den)}</p>
+          {more}
+        </div>
+      </article>"""
+    return f'<div class="min-list">{out}\n    </div>'
+
+
+page("ministerios.html", "Ministerios · CPG", f"""
+{banner("ninos.jpg", t("Reuniones", "Gatherings"), t("Ministerios", "Ministries"), t("Hay un lugar para cada etapa de la vida.", "There's a place for every season of life."), pos="40% 30%")}
+<section>
+  <div class="wrap">
+    {min_rows()}
+  </div>
+</section>
+""")
+
+# ---------------------------------------------------------------- 7. Giving
+page("ofrendar.html", "Ofrendar · CPG", f"""
+{banner("adoracion.jpg", t("Conéctate", "Connect"), t("Diezmos y ofrendas", "Tithes and offerings"), t("Tu generosidad sostiene la obra de Dios en esta casa y en nuestra ciudad.", "Your generosity supports God's work in this house and in our city."), pos="center 35%")}
+<section>
+  <div class="wrap give-grid">
+    <div class="stack">
+      <blockquote class="verse" style="margin:0">
+        {t("“Traed todos los diezmos al alfolí…”", "“Bring the whole tithe into the storehouse…”")}
+        <cite>{t("Malaquías 3:10", "Malachi 3:10")}</cite>
+      </blockquote>
+      <p class="lead">{t("Diezmar es un acto de adoración y confianza en Dios. Gracias por sembrar en esta casa.", "Tithing is an act of worship and trust in God. Thank you for sowing into this house.")}</p>
+    </div>
+    <div class="ways">
+      <div class="way">
+        <h3>{t("En persona", "In person")}</h3>
+        <p>{t("Durante cualquiera de nuestros servicios.", "During any of our services.")}</p>
+      </div>
+      <div class="way">
+        <span class="soon">{t("Próximamente", "Coming soon")}</span>
+        <h3>{t("En línea", "Online")}</h3>
+        <p>{t("Pronto podrás diezmar y ofrendar de forma segura desde aquí.", "Soon you'll be able to tithe and give securely right here.")}</p>
+      </div>
+    </div>
+  </div>
+</section>
+""")
+
+# ---------------------------------------------------------------- 8. Highlights
+HLS = [
+    ("alabanza.jpg", "center", "Noches de Adoración", "Worship Nights",
+     "Noches dedicadas a la presencia de Dios a través de la alabanza.", "Nights devoted to God's presence through worship."),
+    (None, None, "Servicio de Misiones", "Missions Service",
+     "Celebramos y apoyamos la obra de Dios más allá de nuestras paredes.", "We celebrate and support God's work beyond our walls."),
+    (None, None, "Bautismos", "Baptisms",
+     "Celebramos juntos cada paso público de fe.", "We celebrate every public step of faith together."),
+    ("reconocimiento.jpg", "center 40%", "Celebraciones", "Celebrations",
+     "Momentos para honrar y celebrar a nuestra familia de fe.", "Moments to honor and celebrate our church family."),
+    ("oracion.jpg", "center", "Noches de Oración", "Prayer Nights",
+     "La iglesia unida buscando a Dios.", "The church united in seeking God."),
+    ("guitarra.jpg", "center 40%", "Glory Night", "Glory Night",
+     "Una noche mensual de CPG Youth para adorar y escuchar la Palabra.", "A monthly CPG Youth night of worship and the Word."),
+]
+
+
+def hl_cards():
+    out = ""
+    for img, pos, nes, nen, des, den in HLS:
+        media = (f'<img src="images/{img}" alt="" loading="lazy" style="object-position: {pos}">' if img
+                 else f'<div class="ph">{t("Fotos próximamente", "Photos coming soon")}</div>')
+        out += f'<article class="hl">{media}<div class="body"><h3>{t(nes, nen)}</h3><p>{t(des, den)}</p></div></article>'
+    return f'<div class="hl-grid">{out}</div>'
+
+
+page("destacados.html", "Momentos Destacados · CPG", f"""
+{banner("reconocimiento.jpg", t("Reuniones", "Gatherings"), t("Momentos destacados", "Highlights"), t("Lo que Dios está haciendo en nuestra casa.", "What God is doing in our house."), pos="center 35%")}
+<section>
+  <div class="wrap">
+    {hl_cards()}
+  </div>
+</section>
+<section class="band">
+  <div class="wrap">
+    {head(t("Galería", "Gallery"), t("La vida en CPG", "Life at CPG"))}
+    <div class="gallery">
+      <img class="g1" src="images/domingo.jpg" alt="Equipo de alabanza" loading="lazy">
+      <img src="images/abrazo.jpg" alt="Un abrazo de bienvenida" loading="lazy" style="object-position: 65% 30%">
+      <img src="images/risas.jpg" alt="Hermanos riendo juntos" loading="lazy" style="object-position: 65% center">
+      <img src="images/adoracion-pareja.jpg" alt="Hermanos adorando" loading="lazy" style="object-position: 70% center">
+      <img src="images/bateria.jpg" alt="Baterista adorando" loading="lazy" style="object-position: center 40%">
+      <img src="images/bienvenida.jpg" alt="Saludos después del servicio" loading="lazy" style="object-position: 60% center">
+      <img src="images/comunion.jpg" alt="Dos hermanos riendo" loading="lazy" style="object-position: 55% center">
+      <img src="images/oracion-manos.jpg" alt="Orando tomados de las manos" loading="lazy">
+      <img src="images/predicacion.jpg" alt="Predicación" loading="lazy">
+    </div>
+  </div>
+</section>
+""")
+
+# ---------------------------------------------------------------- 9. Beliefs
+page("creencias.html", "Lo Que Creemos · CPG", f"""
+{banner("predicacion.jpg", t("Nosotros", "About"), t("Lo que creemos", "Our beliefs"))}
+<section>
+  <div class="wrap">
+    <div class="soon-block">
+      <span class="soon">{t("Próximamente", "Coming soon")}</span>
+      <h2>{t("Nuestra declaración de fe", "Our statement of faith")}</h2>
+      <p class="lead">{t("Estamos preparando la lista de lo que creemos. Mientras tanto, nos encantaría conversar contigo en persona.",
+                        "We're preparing our list of beliefs. In the meantime, we'd love to talk with you in person.")}</p>
+      <a class="btn btn-ink" href="visitanos.html">{t("Visítanos", "Visit us")}</a>
+    </div>
+  </div>
+</section>
+""")
+
+# ---------------------------------------------------------------- 10. Prayer
+page("oracion.html", "Peticiones de Oración · CPG", f"""
+{banner("oracion-manos.jpg", t("Conéctate", "Connect"), t("Peticiones de oración", "Prayer requests"), t("No tienes que cargarlo solo. Nuestro equipo de oración estará orando por ti.", "You don't have to carry it alone. Our prayer team will be praying for you."), pos="40% center")}
+<section>
+  <div class="wrap split" style="align-items:start">
+    <div class="stack">
+      {head(t("Oramos contigo", "We pray with you"), t("¿Cómo podemos orar por ti?", "How can we pray for you?"))}
+      <p class="lead">{t("Comparte tu petición. Puedes dejarla anónima si lo prefieres. También puedes acompañarnos cada viernes a las 7:00 PM en nuestro Culto de Oración.",
+                        "Share your request. You can leave it anonymous if you prefer. You're also welcome to join us every Friday at 7:00 PM for our Prayer Service.")}</p>
+    </div>
+    <form class="form" data-preview>
+      <div class="row">
+        <div class="field"><label for="pr-name">{t("Nombre (opcional)", "Name (optional)")}</label><input id="pr-name" name="name" autocomplete="name"></div>
+        <div class="field"><label for="pr-contact">{t("Teléfono o correo (opcional)", "Phone or email (optional)")}</label><input id="pr-contact" name="contact"></div>
+      </div>
+      <div class="field"><label for="pr-request">{t("Tu petición", "Your request")}</label><textarea id="pr-request" name="request" required></textarea></div>
+      <label class="check"><input type="checkbox" id="pr-private" name="private"> {t("Mantener esta petición privada (solo los pastores)", "Keep this request private (pastors only)")}</label>
+      <button type="submit">{t("Enviar petición", "Send request")}</button>
+      {form_note()}
+    </form>
+  </div>
+</section>
+""")
+
+# ---------------------------------------------------------------- 11. Visit
+page("visitanos.html", "Planea Tu Visita · CPG", f"""
+{banner("abrazo.jpg", t("Conéctate", "Connect"), t("Planea tu visita", "Plan your visit"), t("Queremos conocerte. Así es un domingo en Casa Portadores de Gloria.", "We'd love to meet you. Here's what a Sunday at Casa Portadores de Gloria looks like."), pos="65% 30%")}
+<section>
+  <div class="wrap">
+    {head(t("Tu primera visita", "Your first visit"), t("Qué esperar", "What to expect"))}
+    <div class="expect">
+      <div><h3>{t("Cuándo", "When")}</h3><p>{t("Domingos a las 11:00 AM. Llega unos minutos antes.", "Sundays at 11:00 AM. Come a few minutes early.")}</p></div>
+      <div><h3>{t("Dónde", "Where")}</h3><p>5200 Old Cheney Highway, Orlando, FL 32807</p></div>
+      <div><h3>{t("Idioma", "Language")}</h3><p>{t("En español, con el inglés presente.", "In Spanish, with English throughout.")}</p></div>
+      <div><h3>{t("Niños", "Kids")}</h3><p>{t("Hay un lugar para los niños.", "There's a place for the kids.")}</p></div>
+    </div>
+  </div>
+</section>
+<section class="band">
+  <div class="wrap split" style="align-items:start">
+    <div class="stack">
+      {head(t("Avísanos", "Let us know"), t("¿Vienes pronto?", "Coming soon?"), t("Déjanos tus datos y alguien de nuestro equipo te recibirá.", "Leave your info and someone from our team will welcome you."))}
+      <a class="btn btn-ink" style="justify-self:start" href="{MAPS}" target="_blank" rel="noopener">{t("Cómo llegar", "Get directions")}</a>
+    </div>
+    <form class="form" data-preview>
+      <div class="row">
+        <div class="field"><label for="v-name">{t("Nombre", "Name")}</label><input id="v-name" name="name" autocomplete="name" required></div>
+        <div class="field"><label for="v-contact">{t("Teléfono o correo", "Phone or email")}</label><input id="v-contact" name="contact" required></div>
+      </div>
+      <div class="row">
+        <div class="field"><label for="v-when">{t("¿Qué servicio?", "Which service?")}</label>
+          <select id="v-when" name="service">
+            <option>{t("Domingo 11:00 AM", "Sunday 11:00 AM")}</option>
+            <option>{t("Miércoles 7:00 PM", "Wednesday 7:00 PM")}</option>
+            <option>{t("Viernes 7:00 PM", "Friday 7:00 PM")}</option>
+          </select></div>
+        <div class="field"><label for="v-people">{t("¿Cuántas personas?", "How many people?")}</label><input id="v-people" name="people" type="number" min="1" value="1"></div>
+      </div>
+      <div class="field"><label for="v-notes">{t("¿Algo que debamos saber?", "Anything we should know?")}</label><textarea id="v-notes" name="notes" style="min-height:90px"></textarea></div>
+      <button type="submit">{t("Enviar", "Send")}</button>
+      {form_note()}
+    </form>
+  </div>
+</section>
+""")
+
+# ---------------------------------------------------------------- 12. Membership
+page("membresia.html", "Hazte Miembro · CPG", f"""
+{banner("risas.jpg", t("Conéctate", "Connect"), t("Hazte miembro", "Become a member"), t("Ser miembro es decir: esta es mi casa y esta es mi familia.", "Membership means saying: this is my house, and this is my family."), pos="65% center")}
+<section>
+  <div class="wrap split" style="align-items:start">
+    <div class="stack">
+      {head(t("Membresía", "Membership"), t("Echa raíces en esta casa", "Put down roots in this house"))}
+      <p class="lead">{t("Si Casa Portadores de Gloria se ha vuelto tu hogar, nos encantaría caminar contigo en el siguiente paso. Déjanos tus datos y los pastores te contactarán con los detalles.",
+                        "If Casa Portadores de Gloria has become your home, we'd love to walk with you in the next step. Leave your info and the pastors will contact you with the details.")}</p>
+      <div class="soon-block" style="padding:20px 22px">
+        <span class="soon">{t("Próximamente", "Coming soon")}</span>
+        <p style="color:var(--muted)">{t("Los pasos y las fechas de la clase de membresía.", "Membership steps and class dates.")}</p>
+      </div>
+    </div>
+    <form class="form" data-preview>
+      <div class="row">
+        <div class="field"><label for="m-name">{t("Nombre completo", "Full name")}</label><input id="m-name" name="name" autocomplete="name" required></div>
+        <div class="field"><label for="m-phone">{t("Teléfono", "Phone")}</label><input id="m-phone" name="phone" type="tel" autocomplete="tel"></div>
+      </div>
+      <div class="field"><label for="m-email">{t("Correo electrónico", "Email")}</label><input id="m-email" name="email" type="email" autocomplete="email"></div>
+      <div class="field"><label for="m-time">{t("¿Cuánto tiempo llevas asistiendo?", "How long have you been attending?")}</label>
+        <select id="m-time" name="attending">
+          <option>{t("Menos de 3 meses", "Less than 3 months")}</option>
+          <option>{t("3 a 12 meses", "3 to 12 months")}</option>
+          <option>{t("Más de un año", "More than a year")}</option>
+        </select></div>
+      <button type="submit">{t("Quiero ser miembro", "I want to become a member")}</button>
+      {form_note()}
+    </form>
+  </div>
+</section>
+""")
+
+print("built")
