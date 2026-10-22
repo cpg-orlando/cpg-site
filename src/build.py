@@ -8,6 +8,25 @@ import pathlib
 
 ROOT = pathlib.Path(__file__).resolve().parent.parent
 CSS = (ROOT / "src/base.css").read_text() + (ROOT / "src/extra.css").read_text()
+# Social links: replace "#" with the church's real pages.
+YOUTUBE = "#"
+FACEBOOK = "#"
+
+ICON_YT = '<svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M23 7.2a3 3 0 0 0-2.1-2.1C19 4.6 12 4.6 12 4.6s-7 0-8.9.5A3 3 0 0 0 1 7.2 31 31 0 0 0 .5 12a31 31 0 0 0 .5 4.8 3 3 0 0 0 2.1 2.1c1.9.5 8.9.5 8.9.5s7 0 8.9-.5a3 3 0 0 0 2.1-2.1c.4-1.6.5-3.2.5-4.8s-.1-3.2-.5-4.8ZM9.7 15.1V8.9l5.8 3.1-5.8 3.1Z"/></svg>'
+ICON_FB = '<svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M24 12a12 12 0 1 0-13.9 11.9v-8.4H7.1V12h3V9.4c0-3 1.8-4.7 4.5-4.7 1.3 0 2.7.2 2.7.2v3h-1.5c-1.5 0-2 .9-2 1.9V12h3.4l-.5 3.5h-2.9v8.4A12 12 0 0 0 24 12Z"/></svg>'
+ICON_PLAY = '<svg viewBox="0 0 24 24" width="30" height="30" aria-hidden="true"><path fill="#e62117" d="M8 5v14l11-7z"/></svg>'
+
+
+def social_btns():
+    return (f'<div class="social-btns"><a class="sbtn yt" href="{YOUTUBE}" target="_blank" rel="noopener">{ICON_YT}YouTube</a>'
+            f'<a class="sbtn fb" href="{FACEBOOK}" target="_blank" rel="noopener">{ICON_FB}Facebook</a></div>')
+
+
+def social_icons():
+    return (f'<div class="social-icons"><a href="{YOUTUBE}" target="_blank" rel="noopener" aria-label="YouTube">{ICON_YT}</a>'
+            f'<a href="{FACEBOOK}" target="_blank" rel="noopener" aria-label="Facebook">{ICON_FB}</a></div>')
+
+
 MAPS = "https://www.google.com/maps/search/?api=1&query=5200+Old+Cheney+Highway+Orlando+FL+32807"
 
 
@@ -61,20 +80,21 @@ def header(current):
     </button>
   </div>
 </header>
-<div class="menu" id="menu" hidden>
+<div class="menu lights" id="menu" hidden>
   <div class="wrap">
     <div class="menu-top">
       <img class="logo" src="images/logo.png" alt="Casa Portadores de Gloria" width="600" height="511">
       <button type="button" class="menu-close" id="menu-close">{t("Cerrar", "Close")}</button>
     </div>
     <nav class="menu-groups" aria-label="Principal">{groups}</nav>
+    {social_icons()}
   </div>
 </div>
 """
 
 
 FOOTER = f"""
-<footer>
+<footer class="lights">
   <div class="wrap">
     <div class="cols">
       <div>
@@ -94,6 +114,11 @@ FOOTER = f"""
         <a href="oracion.html">{t("Peticiones de oración", "Prayer requests")}</a>
         <a href="membresia.html">{t("Hazte miembro", "Become a member")}</a>
         <a href="ofrendar.html">{t("Ofrendar", "Give")}</a>
+      </div>
+      <div>
+        <h2>{t("Síguenos", "Follow us")}</h2>
+        <span>{t("Servicios en vivo y prédicas", "Live services and sermons")}</span>
+        {social_icons()}
       </div>
     </div>
     <p class="legal">© 2026 Casa Portadores de Gloria</p>
@@ -180,6 +205,7 @@ def banner(img, eyebrow, title, sub="", pos="center"):
 <section class="page-hero">
   <img src="images/{img}" alt="" style="object-position: {pos}">
   <div class="wrap">
+    <div class="bar" aria-hidden="true"><i></i><i></i><i></i></div>
     <p class="eyebrow">{eyebrow}</p>
     <h1>{title}</h1>
     {subp}
@@ -233,6 +259,25 @@ EVENTS = [
 ]
 
 
+def live_band():
+    return f"""
+<section class="live">
+  <div class="wrap">
+    <div class="stack">
+      <span class="live-badge">{t("En vivo", "Live")}</span>
+      <h2>{t("Míranos en vivo", "Watch us live")}</h2>
+      <p>{t("¿No puedes venir en persona? Acompáñanos en línea los domingos a las 11:00 AM y vuelve a ver las prédicas cuando quieras.",
+            "Can't make it in person? Join us online Sundays at 11:00 AM and rewatch sermons anytime.")}</p>
+      {social_btns()}
+    </div>
+    <div class="shot">
+      <img src="images/predicacion-logo.jpg" alt="" loading="lazy" style="object-position: 45% center">
+      <a class="play" href="{YOUTUBE}" target="_blank" rel="noopener" aria-label="YouTube"><span>{ICON_PLAY}</span></a>
+    </div>
+  </div>
+</section>"""
+
+
 def event_list(limit=None):
     out = ""
     for m, d, tes, ten, name, des, den in EVENTS[:limit]:
@@ -253,6 +298,7 @@ page("index.html", "Casa Portadores de Gloria", f"""
 <section class="hero" id="inicio">
   <img src="images/oracion-grupo.jpg" alt="Hermanos abrazados orando juntos en Casa Portadores de Gloria" fetchpriority="high">
   <div class="wrap">
+    <div class="bar" aria-hidden="true"><i></i><i></i><i></i></div>
     <p class="eyebrow">Orlando, Florida</p>
     <h1>{t('Bienvenidos a <span class="script">casa</span>', 'Welcome <span class="script">home</span>')}</h1>
     <p>{t("Una iglesia bilingüe donde las familias adoran, crecen en la Palabra y llevan la gloria de Dios a Orlando. Hay un lugar para ti.",
@@ -291,6 +337,15 @@ page("index.html", "Casa Portadores de Gloria", f"""
   </div>
 </section>
 
+<section style="padding-block: 0 clamp(56px, 9vw, 104px)">
+  <div class="wrap strip">
+    <img src="images/domingo.jpg" alt="Equipo de alabanza" loading="lazy">
+    <img src="images/abrazo.jpg" alt="Un abrazo de bienvenida" loading="lazy" style="object-position: 65% 30%">
+    <img src="images/ninos.jpg" alt="Niños con sus Biblias" loading="lazy" style="object-position: 35% center">
+    <img src="images/risas.jpg" alt="Hermanos riendo" loading="lazy" style="object-position: 65% center">
+  </div>
+</section>
+
 <section class="band">
   <div class="wrap">
     {head(t("Empieza aquí", "Start here"), t("¿Cómo te podemos ayudar?", "How can we help?"))}
@@ -303,7 +358,9 @@ page("index.html", "Casa Portadores de Gloria", f"""
   </div>
 </section>
 
-<section class="events-band">
+{live_band()}
+
+<section class="events-band lights">
   <div class="wrap">
     {head(t("Próximamente", "Coming up"), t("Lo que viene", "What's next"))}
     {event_list(2)}
@@ -386,12 +443,13 @@ page("servicios.html", "Servicios · CPG", f"""
     </div>
   </div>
 </section>
+{live_band()}
 """)
 
 # ---------------------------------------------------------------- 5. Events
 page("eventos.html", "Eventos · CPG", f"""
 {banner("alabanza.jpg", t("Reuniones", "Gatherings"), t("Eventos", "Events"), t("Lo que viene en la vida de la iglesia.", "What's coming up in the life of the church."))}
-<section class="events-band">
+<section class="events-band lights">
   <div class="wrap">
     {event_list()}
   </div>
