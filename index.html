@@ -108,12 +108,15 @@ body::before { content: ""; position: fixed; inset: 0 0 auto; height: env(safe-a
 
 /* services */
 .services { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1px; background: var(--line); border: 1px solid var(--line); border-radius: 16px; overflow: hidden; }
-.service { background: var(--surface); padding: 28px 26px; display: grid; gap: 10px; align-content: start; min-width: 0; }
+.service { background: var(--surface); padding: 0 26px 28px; display: grid; gap: 10px; align-content: start; min-width: 0; }
+.service-img { width: calc(100% + 52px); max-width: none; margin: 0 -26px 10px; aspect-ratio: 16 / 10; object-fit: cover; }
 .service .when { font-family: var(--font-display); font-size: 2.1rem; color: var(--violet); font-variant-numeric: tabular-nums; line-height: 1; }
 .service .when span { font-size: 1rem; color: var(--muted); font-family: var(--font-body); margin-left: 4px; }
 .service p { color: var(--muted); }
 @media (max-width: 760px) { .services { grid-template-columns: 1fr; } }
 .visit { margin-top: 28px; display: flex; flex-wrap: wrap; align-items: center; gap: 16px 28px; }
+.visit-img { width: 220px; aspect-ratio: 3 / 2; object-fit: cover; border-radius: 12px; }
+@media (max-width: 520px) { .visit-img { width: 100%; } }
 .visit address { font-style: normal; font-weight: 600; }
 .visit address span { display: block; font-weight: 400; color: var(--muted); }
 
@@ -142,7 +145,7 @@ body::before { content: ""; position: fixed; inset: 0 0 auto; height: env(safe-a
 @media (max-width: 600px) { .ministries { grid-template-columns: 1fr; } }
 
 /* gallery */
-.gallery { display: grid; grid-template-columns: repeat(4, 1fr); grid-template-rows: 220px 220px; gap: 12px; }
+.gallery { display: grid; grid-template-columns: repeat(4, 1fr); grid-auto-rows: 220px; gap: 12px; }
 .gallery img { width: 100%; height: 100%; object-fit: cover; border-radius: 12px; }
 .g1 { grid-column: span 2; grid-row: span 2; }
 @media (max-width: 760px) {
@@ -247,18 +250,21 @@ footer .brand b { color: var(--on-dark); }
     </div>
     <div class="services">
       <div class="service">
+        <img class="service-img" src="images/domingo.jpg" alt="Equipo de alabanza en el servicio del domingo" loading="lazy">
         <p class="eyebrow"><span class="es">Domingo</span><span class="en">Sunday</span></p>
         <div class="when">11:00<span>AM</span></div>
         <h3><span class="es">Servicio Dominical</span><span class="en">Sunday Service</span></h3>
         <p><span class="es">Adoración, la Palabra y comunión para toda la familia.</span><span class="en">Worship, the Word, and fellowship for the whole family.</span></p>
       </div>
       <div class="service">
+        <img class="service-img" src="images/palabra.jpg" alt="Compartiendo la Palabra desde el púlpito" loading="lazy" style="object-position: 45% 30%">
         <p class="eyebrow"><span class="es">Miércoles</span><span class="en">Wednesday</span></p>
         <div class="when">7:00<span>PM</span></div>
         <h3><span class="es">Estudio Bíblico</span><span class="en">Bible Study</span></h3>
         <p><span class="es">Una noche para profundizar juntos en las Escrituras.</span><span class="en">A night to dig deeper into Scripture together.</span></p>
       </div>
       <div class="service">
+        <img class="service-img" src="images/oracion-grupo.jpg" alt="Hermanos abrazados orando juntos" loading="lazy" style="object-position: center 55%">
         <p class="eyebrow"><span class="es">Viernes</span><span class="en">Friday</span></p>
         <div class="when">7:00<span>PM</span></div>
         <h3><span class="es">Culto de Oración</span><span class="en">Prayer Service</span></h3>
@@ -266,6 +272,7 @@ footer .brand b { color: var(--on-dark); }
       </div>
     </div>
     <div class="visit">
+      <img class="visit-img" src="images/edificio.jpg" alt="Hermanos saludando en el pasillo exterior de la iglesia" loading="lazy">
       <address>5200 Old Cheney Highway<span>Orlando, FL 32807</span></address>
       <a class="btn btn-ink" href="https://www.google.com/maps/search/?api=1&query=5200+Old+Cheney+Highway+Orlando+FL+32807" target="_blank" rel="noopener"><span class="es">Cómo llegar</span><span class="en">Get directions</span></a>
     </div>
@@ -325,7 +332,7 @@ footer .brand b { color: var(--on-dark); }
         </div>
       </article>
       <article class="ministry">
-        <img src="images/adoracion-pareja.jpg" alt="Hermanos orando con las manos abiertas" loading="lazy" style="object-position: 70% center">
+        <img src="images/oracion-manos.jpg" alt="Hermanos tomados de las manos orando" loading="lazy" style="object-position: 40% center">
         <div class="body">
           <h3><span class="es">Oración e Intercesión</span><span class="en">Prayer &amp; Intercession</span></h3>
           <p><span class="es">Cada viernes nos unimos para orar por nuestras familias, la iglesia y Orlando.</span><span class="en">Every Friday we come together to pray for our families, the church, and Orlando.</span></p>
@@ -344,10 +351,14 @@ footer .brand b { color: var(--on-dark); }
     </div>
     <div class="gallery">
       <img class="g1" src="images/alabanza.jpg" alt="Equipo de alabanza dirigiendo la adoración" loading="lazy">
-      <img class="g2" src="images/bienvenida.jpg" alt="Saludos y abrazos al final del servicio" loading="lazy" style="object-position: 60% center">
-      <img class="g3" src="images/comunion.jpg" alt="Dos hermanos riendo juntos después del servicio" loading="lazy" style="object-position: 55% center">
-      <img class="g4" src="images/adoracion.jpg" alt="Congregación adorando con la mano levantada" loading="lazy" style="object-position: center 40%">
-      <img class="g5" src="images/predicacion.jpg" alt="Predicación de la Palabra" loading="lazy">
+      <img src="images/abrazo.jpg" alt="Un abrazo de bienvenida después del servicio" loading="lazy" style="object-position: 65% 30%">
+      <img src="images/reconocimiento.jpg" alt="Momento de celebración en la plataforma" loading="lazy" style="object-position: center 40%">
+      <img src="images/risas.jpg" alt="Hermanos riendo juntos" loading="lazy" style="object-position: 65% center">
+      <img src="images/adoracion-pareja.jpg" alt="Hermanos adorando con las manos abiertas" loading="lazy" style="object-position: 70% center">
+      <img src="images/guitarra.jpg" alt="Líder de alabanza con su guitarra" loading="lazy" style="object-position: center 40%">
+      <img src="images/bienvenida.jpg" alt="Saludos y abrazos al final del servicio" loading="lazy" style="object-position: 60% center">
+      <img src="images/comunion.jpg" alt="Dos hermanos riendo después del servicio" loading="lazy" style="object-position: 55% center">
+      <img src="images/adoracion.jpg" alt="Congregación adorando con la mano levantada" loading="lazy" style="object-position: center 40%">
     </div>
   </div>
 </section>
