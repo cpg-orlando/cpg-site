@@ -294,7 +294,7 @@ PHOTOS["index.html"][1] = ("congregacion-adorando.jpg", "60% 35%")
 PHOTOS["index.html"][3] = ("cruz-verde.jpg", "center 35%")
 PHOTOS["index.html"][2] = ("pastores-avatar.jpg", "center")
 PHOTOS["pastores.html"][2] = ("pastores-pareja.jpg", "center 30%")
-PHOTOS["pastores.html"][3] = ("familia-toirac.jpg", "center 22%")
+PHOTOS["pastores.html"][3] = ("familia-toirac.jpg", "center")
 SLOTS = {}
 
 
