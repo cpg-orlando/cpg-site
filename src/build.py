@@ -108,9 +108,9 @@ FOOTER = f"""
       </div>
       <div>
         <h2>{t("Horarios", "Service times")}</h2>
-        <span>{t("Domingo", "Sunday")} · 11:00 AM</span>
-        <span>{t("Miércoles", "Wednesday")} · 7:00 PM</span>
-        <span>{t("Viernes", "Friday")} · 7:00 PM</span>
+        <span><strong style="color:#fff;font-weight:600">{t("Servicio Principal", "Main Service")}</strong><br>{t("Domingo", "Sunday")} · 11:00 AM</span>
+        <span><strong style="color:#fff;font-weight:600">{t("Estudio Bíblico", "Bible Study")}</strong><br>{t("Miércoles", "Wednesday")} · 7:00 PM</span>
+        <span><strong style="color:#fff;font-weight:600">{t("Servicio de Oración", "Prayer Service")}</strong><br>{t("Viernes", "Friday")} · 7:00 PM</span>
       </div>
       <div>
         <h2>{t("Conéctate", "Connect")}</h2>
@@ -192,9 +192,9 @@ SCRIPT = """
   var card = document.getElementById('next-card');
   if (card) {
     var SVCS = [
-      { dow: 0, h: 11, m: 0, es: 'Servicio Dominical', en: 'Sunday Service', wes: 'Domingo · 11:00 AM', wen: 'Sunday · 11:00 AM' },
+      { dow: 0, h: 11, m: 0, es: 'Servicio Principal', en: 'Main Service', wes: 'Domingo · 11:00 AM', wen: 'Sunday · 11:00 AM' },
       { dow: 3, h: 19, m: 0, es: 'Estudio Bíblico', en: 'Bible Study', wes: 'Miércoles · 7:00 PM', wen: 'Wednesday · 7:00 PM' },
-      { dow: 5, h: 19, m: 0, es: 'Culto de Oración', en: 'Prayer Service', wes: 'Viernes · 7:00 PM', wen: 'Friday · 7:00 PM' }
+      { dow: 5, h: 19, m: 0, es: 'Servicio de Oración', en: 'Prayer Service', wes: 'Viernes · 7:00 PM', wen: 'Friday · 7:00 PM' }
     ];
     var DAYS = { Sun: 0, Mon: 1, Tue: 2, Wed: 3, Thu: 4, Fri: 5, Sat: 6 };
     function nyNow() {
@@ -387,11 +387,11 @@ def form_note():
 
 
 SERVICES = [
-    ("domingo.jpg", "center", "Domingo", "Sunday", "11:00", "AM", "Servicio Dominical", "Sunday Service",
+    ("domingo.jpg", "center", "Domingo", "Sunday", "11:00", "AM", "Servicio Principal", "Main Service",
      "Adoración, la Palabra y comunión para toda la familia.", "Worship, the Word, and fellowship for the whole family."),
     ("estudio-biblico.jpg", "center 35%", "Miércoles", "Wednesday", "7:00", "PM", "Estudio Bíblico", "Bible Study",
      "Una noche para profundizar juntos en las Escrituras.", "A night to dig deeper into Scripture together."),
-    ("oracion.jpg", "center", "Viernes", "Friday", "7:00", "PM", "Culto de Oración", "Prayer Service",
+    ("oracion.jpg", "center", "Viernes", "Friday", "7:00", "PM", "Servicio de Oración", "Prayer Service",
      "Nos reunimos para buscar a Dios en oración unida.", "We gather to seek God together in prayer."),
 ]
 
@@ -476,7 +476,7 @@ page("index.html", "Casa Portadores de Gloria", f"""
         </div>
         <div class="next-card" id="next-card" aria-live="polite">
           <span class="lbl"><span class="dot"></span><span class="es" data-live-es>Próximo servicio</span><span class="en" data-live-en>Next service</span></span>
-          <span class="name" id="next-name">{t("Servicio Dominical", "Sunday Service")}</span>
+          <span class="name" id="next-name">{t("Servicio Principal", "Main Service")}</span>
           <span class="when" id="next-when">{t("Domingo · 11:00 AM", "Sunday · 11:00 AM")}</span>
           <div class="count">
             <div><b id="cd-d">–</b><small>{t("días", "days")}</small></div>
@@ -841,7 +841,7 @@ page("oracion.html", "Peticiones de Oración · CPG", f"""
   <div class="wrap split" style="align-items:start">
     <div class="stack">
       {head(t("Oramos contigo", "We pray with you"), t("¿Cómo podemos orar por ti?", "How can we pray for you?"))}
-      <p class="lead">{t("Comparte tu petición. Puedes dejarla anónima si lo prefieres. También puedes acompañarnos cada viernes a las 7:00 PM en nuestro Culto de Oración.",
+      <p class="lead">{t("Comparte tu petición. Puedes dejarla anónima si lo prefieres. También puedes acompañarnos cada viernes a las 7:00 PM en nuestro Servicio de Oración.",
                         "Share your request. You can leave it anonymous if you prefer. You're also welcome to join us every Friday at 7:00 PM for our Prayer Service.")}</p>
     </div>
     <form class="form" data-preview>

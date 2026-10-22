@@ -494,9 +494,9 @@ footer .legal { font-size: .85rem; color: var(--faint); }
       </div>
       <div>
         <h2><span class="es">Horarios</span><span class="en">Service times</span></h2>
-        <span><span class="es">Domingo</span><span class="en">Sunday</span> · 11:00 AM</span>
-        <span><span class="es">Miércoles</span><span class="en">Wednesday</span> · 7:00 PM</span>
-        <span><span class="es">Viernes</span><span class="en">Friday</span> · 7:00 PM</span>
+        <span><strong style="color:#fff;font-weight:600"><span class="es">Servicio Principal</span><span class="en">Main Service</span></strong><br><span class="es">Domingo</span><span class="en">Sunday</span> · 11:00 AM</span>
+        <span><strong style="color:#fff;font-weight:600"><span class="es">Estudio Bíblico</span><span class="en">Bible Study</span></strong><br><span class="es">Miércoles</span><span class="en">Wednesday</span> · 7:00 PM</span>
+        <span><strong style="color:#fff;font-weight:600"><span class="es">Servicio de Oración</span><span class="en">Prayer Service</span></strong><br><span class="es">Viernes</span><span class="en">Friday</span> · 7:00 PM</span>
       </div>
       <div>
         <h2><span class="es">Conéctate</span><span class="en">Connect</span></h2>
@@ -577,9 +577,9 @@ footer .legal { font-size: .85rem; color: var(--faint); }
   var card = document.getElementById('next-card');
   if (card) {
     var SVCS = [
-      { dow: 0, h: 11, m: 0, es: 'Servicio Dominical', en: 'Sunday Service', wes: 'Domingo · 11:00 AM', wen: 'Sunday · 11:00 AM' },
+      { dow: 0, h: 11, m: 0, es: 'Servicio Principal', en: 'Main Service', wes: 'Domingo · 11:00 AM', wen: 'Sunday · 11:00 AM' },
       { dow: 3, h: 19, m: 0, es: 'Estudio Bíblico', en: 'Bible Study', wes: 'Miércoles · 7:00 PM', wen: 'Wednesday · 7:00 PM' },
-      { dow: 5, h: 19, m: 0, es: 'Culto de Oración', en: 'Prayer Service', wes: 'Viernes · 7:00 PM', wen: 'Friday · 7:00 PM' }
+      { dow: 5, h: 19, m: 0, es: 'Servicio de Oración', en: 'Prayer Service', wes: 'Viernes · 7:00 PM', wen: 'Friday · 7:00 PM' }
     ];
     var DAYS = { Sun: 0, Mon: 1, Tue: 2, Wed: 3, Thu: 4, Fri: 5, Sat: 6 };
     function nyNow() {
