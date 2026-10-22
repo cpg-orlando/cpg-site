@@ -525,10 +525,10 @@ page("index.html", "Casa Portadores de Gloria", f"""
   <div class="wrap">
     {head(t("Empieza aquí", "Start here"), t("¿Cómo te podemos ayudar?", "How can we help?"))}
     <div class="quick">
-      <a href="visitanos.html"><b>{t("Planea tu visita", "Plan a visit")}</b><span class="d">{t("Qué esperar y cómo llegar.", "What to expect and how to get here.")}</span><span class="go">→</span></a>
-      <a href="ministerios.html"><b>{t("Ministerios", "Ministries")}</b><span class="d">{t("Niños, jóvenes, hombres, mujeres y ancianos.", "Kids, youth, men, women, and elders.")}</span><span class="go">→</span></a>
-      <a href="oracion.html"><b>{t("Pide oración", "Ask for prayer")}</b><span class="d">{t("Nuestro equipo orará por ti.", "Our team will pray for you.")}</span><span class="go">→</span></a>
-      <a href="ofrendar.html"><b>{t("Ofrendar", "Give")}</b><span class="d">{t("Diezmos y ofrendas.", "Tithes and offerings.")}</span><span class="go">→</span></a>
+      <a href="visitanos.html"><img src="images/q1.jpg" alt=""><b>{t("Planea tu visita", "Plan a visit")}</b><span class="d">{t("Qué esperar y cómo llegar.", "What to expect and how to get here.")}</span><span class="go">→</span></a>
+      <a href="ministerios.html"><img src="images/q2.jpg" alt=""><b>{t("Ministerios", "Ministries")}</b><span class="d">{t("Niños, jóvenes, hombres, mujeres y ancianos.", "Kids, youth, men, women, and elders.")}</span><span class="go">→</span></a>
+      <a href="oracion.html"><img src="images/q3.jpg" alt=""><b>{t("Pide oración", "Ask for prayer")}</b><span class="d">{t("Nuestro equipo orará por ti.", "Our team will pray for you.")}</span><span class="go">→</span></a>
+      <a href="ofrendar.html"><img src="images/q4.jpg" alt=""><b>{t("Ofrendar", "Give")}</b><span class="d">{t("Diezmos y ofrendas.", "Tithes and offerings.")}</span><span class="go">→</span></a>
     </div>
   </div>
 </section>
