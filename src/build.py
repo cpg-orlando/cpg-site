@@ -30,44 +30,6 @@ def social_icons():
             f'<a href="{FACEBOOK}" target="_blank" rel="noopener" aria-label="Facebook">{ICON_FB}</a></div>')
 
 
-# Site color palette ("" = royal blue). Options: violeta, dorado, naranja, esmeralda, turquesa, vino
-PALETTE = ""
-# PREVIEW=1 adds a temporary palette picker for choosing colors (not for the live site)
-PREVIEW = os.environ.get("PREVIEW") == "1"
-
-PALETTES = [("", "#2346ff", "Azul"), ("violeta", "#7b3ff2", "Violeta"), ("dorado", "#b07d1c", "Dorado"),
-            ("naranja", "#e8611a", "Naranja"), ("esmeralda", "#0b8f63", "Esmeralda"),
-            ("turquesa", "#0b8aa0", "Turquesa"), ("vino", "#b3264a", "Vino")]
-
-
-def picker():
-    if not PREVIEW:
-        return ""
-    sw = "".join(f'<button type="button" data-pal="{k}" style="background:{c}" title="{n}" aria-label="{n}"></button>' for k, c, n in PALETTES)
-    return f"""
-<div class="pal-picker" role="group" aria-label="Colores (vista previa)"><span>Colores</span>{sw}</div>
-<style>
-.pal-picker {{ position: fixed; z-index: 25; left: max(12px, env(safe-area-inset-left, 0px)); bottom: calc(env(safe-area-inset-bottom, 0px) + 12px);
-  display: flex; align-items: center; gap: 6px; padding: 8px 10px; border-radius: 999px; background: #ffffff; box-shadow: 0 10px 30px #0004; border: 1px solid #e4e7ef; }}
-.pal-picker span {{ font: 600 .72rem/1 var(--font-body); letter-spacing: .08em; text-transform: uppercase; color: #5a6170; margin-right: 4px; }}
-.pal-picker button {{ width: 24px; height: 24px; border-radius: 50%; border: 2px solid #fff; box-shadow: 0 0 0 1px #0002; cursor: pointer; padding: 0; }}
-.pal-picker button[aria-pressed="true"] {{ box-shadow: 0 0 0 2px #0b0d12; }}
-</style>
-<script>
-(function () {{
-  var root = document.documentElement, btns = document.querySelectorAll('[data-pal]');
-  function set(p) {{
-    if (p) root.setAttribute('data-palette', p); else root.removeAttribute('data-palette');
-    btns.forEach(function (b) {{ b.setAttribute('aria-pressed', String(b.getAttribute('data-pal') === p)); }});
-    try {{ localStorage.setItem('cpg-palette', p); }} catch (e) {{}}
-  }}
-  var saved = ''; try {{ saved = localStorage.getItem('cpg-palette') || ''; }} catch (e) {{}}
-  set(saved);
-  btns.forEach(function (b) {{ b.addEventListener('click', function () {{ set(b.getAttribute('data-pal')); }}); }});
-}})();
-</script>"""
-
-
 MAPS = "https://www.google.com/maps/search/?api=1&query=5200+Old+Cheney+Highway+Orlando+FL+32807"
 
 
@@ -289,6 +251,30 @@ SCRIPT = """
       if (e.key === 'Escape') close(); if (e.key === 'ArrowLeft') show(idx - 1); if (e.key === 'ArrowRight') show(idx + 1);
     });
   }
+  // Cursor spotlight on glass cards
+  document.querySelectorAll('.quick a, .service, .event, .min-row, .expect > div, .way, .value, .soon-block, .next-card, .hl').forEach(function (el) {
+    el.classList.add('spot');
+    el.addEventListener('pointermove', function (e) {
+      var r = el.getBoundingClientRect();
+      el.style.setProperty('--mx', (e.clientX - r.left) + 'px');
+      el.style.setProperty('--my', (e.clientY - r.top) + 'px');
+    });
+  });
+
+  // Slow parallax on hero photos
+  var heroImg = document.querySelector('.hero-frame > img');
+  var still = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  if (heroImg && !still) {
+    var ticking = false;
+    window.addEventListener('scroll', function () {
+      if (ticking) return; ticking = true;
+      requestAnimationFrame(function () {
+        var y = Math.min(window.scrollY, 900);
+        heroImg.style.transform = 'translateY(' + (y * 0.22) + 'px)';
+        ticking = false;
+      });
+    }, { passive: true });
+  }
 })();
 </script>
 """
@@ -310,10 +296,10 @@ SLOTS = {}
 def placeholder(label, n):
     svg = (
         '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 300" preserveAspectRatio="xMidYMid slice">'
-        '<rect width="400" height="300" fill="#e6e9f0"/>'
-        '<g fill="none" stroke="#9aa3b5" stroke-width="3" stroke-linejoin="round">'
+        '<rect width="400" height="300" fill="#14141d"/>'
+        '<g fill="none" stroke="#4a4d66" stroke-width="3" stroke-linejoin="round">'
         '<rect x="176" y="104" width="48" height="36" rx="6"/><circle cx="200" cy="122" r="9"/></g>'
-        f'<text x="200" y="176" text-anchor="middle" font-family="Arial, sans-serif" font-size="26" font-weight="700" fill="#5a6170">{label} · {n}</text>'
+        f'<text x="200" y="176" text-anchor="middle" font-family="Arial, sans-serif" font-size="26" font-weight="700" fill="#8a8daa">{label} · {n}</text>'
         '</svg>'
     )
     return "data:image/svg+xml," + urllib.parse.quote(svg)
@@ -341,7 +327,7 @@ def slotify(fname, html):
 
 def page(fname, title, body):
     html = f"""<!doctype html>
-<html lang="es"{(" data-palette=\"" + PALETTE + "\"") if PALETTE else ""}>
+<html lang="es">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
@@ -357,13 +343,13 @@ def page(fname, title, body):
 </style>
 </head>
 <body>
+<div class="aurora" aria-hidden="true"><i></i><i></i><i></i></div><div class="grain" aria-hidden="true"></div>
 {header(fname)}
 <main>
 {body}
 </main>
 {FOOTER}
 {SCRIPT}
-{picker()}
 </body>
 </html>
 """
