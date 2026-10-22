@@ -326,8 +326,8 @@ page("index.html", "Casa Portadores de Gloria", f"""
     <div class="stack">
       <p class="eyebrow">{t("Te damos la bienvenida", "We're glad you're here")}</p>
       <h2>{t("Una casa para llevar su gloria", "A house that carries His glory")}</h2>
-      <p class="lead">{t("Somos una familia de fe en Orlando, con servicios en español y el inglés presente en todo lo que hacemos. Ya sea tu primera vez en una iglesia o estés buscando un hogar espiritual, aquí eres bienvenido.",
-                        "We're a family of faith in Orlando, with services in Spanish and English woven through everything we do. Whether it's your first time in church or you're looking for a spiritual home, you're welcome here.")}</p>
+      <p class="lead">{t("Somos una familia de fe en Orlando, donde la Palabra se predica en español con traducción al inglés. Ya sea tu primera vez en una iglesia o estés buscando un hogar espiritual, aquí eres bienvenido.",
+                        "We're a family of faith in Orlando, where the Word is preached in Spanish with English translation. Whether it's your first time in church or you're looking for a spiritual home, you're welcome here.")}</p>
       <div class="pastors">
         <img src="images/pastor.jpg" alt="Pastor Esdras Toirac" loading="lazy">
         <div><span class="names">Esdras &amp; Magnolia Toirac</span><span class="role">{t("Pastores", "Senior Pastors")} · <a href="pastores.html">{t("Conócelos", "Meet them")}</a></span></div>
@@ -378,8 +378,8 @@ page("nosotros.html", "Quiénes Somos · CPG", f"""
       {head(t("Nuestra iglesia", "Our church"), t("Una familia que lleva su gloria", "A family that carries His glory"))}
       <p class="lead">{t("Casa Portadores de Gloria es una iglesia cristiana en Orlando. Creemos que cada persona fue creada para conocer a Jesús y reflejar su gloria en su hogar, su trabajo y su ciudad.",
                         "Casa Portadores de Gloria is a Christian church in Orlando. We believe every person was created to know Jesus and reflect His glory at home, at work, and in their city.")}</p>
-      <p class="lead">{t("Somos una comunidad bilingüe: nuestros servicios son en español y el inglés está presente en todo lo que hacemos, para que toda la familia, de todas las generaciones, se sienta en casa.",
-                        "We're a bilingual community: our services are in Spanish, with English woven through everything we do, so the whole family, across generations, feels at home.")}</p>
+      <p class="lead">{t("Somos una comunidad bilingüe: los mensajes del domingo son en español, con traducción al inglés, para que toda la familia, de todas las generaciones, se sienta en casa.",
+                        "We're a bilingual community: Sunday messages are in Spanish with English translation, so the whole family, across generations, feels at home.")}</p>
     </div>
     <img class="photo" src="images/bienvenida.jpg" alt="Saludos al final del servicio" loading="lazy" style="object-position: 60% center">
   </div>
@@ -438,7 +438,7 @@ page("servicios.html", "Servicios · CPG", f"""
     <div class="expect">
       <div><h3>{t("Adoración", "Worship")}</h3><p>{t("Música en vivo con nuestro equipo de alabanza.", "Live music with our worship team.")}</p></div>
       <div><h3>{t("La Palabra", "The Word")}</h3><p>{t("Una enseñanza bíblica clara y práctica.", "Clear, practical Bible teaching.")}</p></div>
-      <div><h3>{t("Bilingüe", "Bilingual")}</h3><p>{t("En español, con el inglés presente.", "In Spanish, with English throughout.")}</p></div>
+      <div><h3>{t("Bilingüe", "Bilingual")}</h3><p>{t("Mensaje en español, con traducción al inglés.", "Message in Spanish, with English translation.")}</p></div>
       <div><h3>{t("Para la familia", "For families")}</h3><p>{t("Hay un lugar para los niños.", "There's a place for the kids.")}</p></div>
     </div>
   </div>
@@ -640,7 +640,7 @@ page("visitanos.html", "Planea Tu Visita · CPG", f"""
     <div class="expect">
       <div><h3>{t("Cuándo", "When")}</h3><p>{t("Domingos a las 11:00 AM. Llega unos minutos antes.", "Sundays at 11:00 AM. Come a few minutes early.")}</p></div>
       <div><h3>{t("Dónde", "Where")}</h3><p>5200 Old Cheney Highway, Orlando, FL 32807</p></div>
-      <div><h3>{t("Idioma", "Language")}</h3><p>{t("En español, con el inglés presente.", "In Spanish, with English throughout.")}</p></div>
+      <div><h3>{t("Idioma", "Language")}</h3><p>{t("Mensaje en español, con traducción al inglés.", "Message in Spanish, with English translation.")}</p></div>
       <div><h3>{t("Niños", "Kids")}</h3><p>{t("Hay un lugar para los niños.", "There's a place for the kids.")}</p></div>
     </div>
   </div>
