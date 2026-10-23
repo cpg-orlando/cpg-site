@@ -422,10 +422,16 @@ SERVICES = [
     ("domingo.jpg", "center", "Domingo", "Sunday", "11:00", "AM", "Servicio Principal", "Main Service",
      "Adoración, la Palabra y comunión para toda la familia.", "Worship, the Word, and fellowship for the whole family."),
     ("estudio-biblico.jpg", "center 35%", "Miércoles", "Wednesday", "7:00", "PM", "Estudio Bíblico", "Bible Study",
-     "Una noche para profundizar juntos en las Escrituras.", "A night to dig deeper into Scripture together."),
+     "Cada grupo de edad tiene su propio estudio para profundizar en las Escrituras.", "Each age group has its own study to dig deeper into Scripture."),
     ("oracion.jpg", "center", "Viernes", "Friday", "7:00", "PM", "Servicio de Oración", "Prayer Service",
      "Nos reunimos para buscar a Dios en oración unida.", "We gather to seek God together in prayer."),
 ]
+
+
+AGES = (f'<ul class="ages">'
+        f'<li>{t("Niños", "Children")}</li>'
+        f'<li>{t("Jóvenes y Jóvenes Adultos", "Youth &amp; Young Adults")}</li>'
+        f'<li>{t("Adultos 30+", "Adults 30+")}</li></ul>')
 
 
 def service_cards():
@@ -437,7 +443,7 @@ def service_cards():
         <p class="eyebrow">{t(des, den)}</p>
         <div class="when">{time}<span>{ap}</span></div>
         <h3>{t(nes, nen)}</h3>
-        <p>{t(des2, den2)}</p>
+        <p>{t(des2, den2)}</p>{AGES if den == "Wednesday" else ""}
       </div>"""
     return f'<div class="services">{out}\n    </div>'
 
