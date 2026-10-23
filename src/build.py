@@ -546,11 +546,11 @@ page("index.html", "Casa Portadores de Gloria", f"""
 
 <section class="verse-band">
   <div class="wrap">
-    <p class="eyebrow">{t("Nuestro nombre", "Our name")}</p>
+    <p class="eyebrow">{t("Nuestro versículo", "Our scripture")}</p>
     <blockquote class="scroll-verse" data-scroll-verse>
-      <span class="es"><span>Porque</span> <span>la</span> <span>tierra</span> <span>será</span> <span>llena</span> <span>del</span> <span>conocimiento</span> <span>de</span> <span>la</span> <span class="g">gloria</span> <span>de</span> <span>Jehová,</span> <span>como</span> <span>las</span> <span>aguas</span> <span>cubren</span> <span>el</span> <span>mar.</span></span><span class="en"><span>For</span> <span>the</span> <span>earth</span> <span>will</span> <span>be</span> <span>filled</span> <span>with</span> <span>the</span> <span>knowledge</span> <span>of</span> <span>the</span> <span class="g">glory</span> <span>of</span> <span>the</span> <span>LORD</span> <span>as</span> <span>the</span> <span>waters</span> <span>cover</span> <span>the</span> <span>sea.</span></span>
+      <span class="es"><span>Mas</span> <span>vosotros</span> <span>sois</span> <span>linaje</span> <span>escogido,</span> <span>real</span> <span>sacerdocio,</span> <span>nación</span> <span>santa,</span> <span>pueblo</span> <span>adquirido</span> <span>por</span> <span>Dios,</span> <span>para</span> <span>que</span> <span>anunciéis</span> <span>las</span> <span>virtudes</span> <span>de</span> <span>aquel</span> <span>que</span> <span>os</span> <span>llamó</span> <span>de</span> <span>las</span> <span>tinieblas</span> <span>a</span> <span>su</span> <span class="g">luz</span> <span class="g">admirable.</span></span><span class="en"><span>But</span> <span>you</span> <span>are</span> <span>a</span> <span>chosen</span> <span>people,</span> <span>a</span> <span>royal</span> <span>priesthood,</span> <span>a</span> <span>holy</span> <span>nation,</span> <span>God&#39;s</span> <span>special</span> <span>possession,</span> <span>that</span> <span>you</span> <span>may</span> <span>declare</span> <span>the</span> <span>praises</span> <span>of</span> <span>him</span> <span>who</span> <span>called</span> <span>you</span> <span>out</span> <span>of</span> <span>darkness</span> <span>into</span> <span>his</span> <span class="g">wonderful</span> <span class="g">light.</span></span>
     </blockquote>
-    <p class="verse-ref">{t("Habacuc 2:14", "Habakkuk 2:14")} · {t("Somos portadores de esa gloria.", "We carry that glory.")}</p>
+    <p class="verse-ref">{t("1 Pedro 2:9", "1 Peter 2:9")}</p>
   </div>
 </section>
 
