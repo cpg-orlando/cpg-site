@@ -362,7 +362,7 @@ P["index.html"].update({4: ("equipo-pulpito.jpg", "50% 60%"), 5: ("mama-nino-bib
     10: ("circulo-oracion.jpg", "35% center"), 11: ("congregacion-orando.jpg", "45% center"),
     12: ("transmision-biblia.jpg", "60% 40%")})
 P["nosotros.html"].update({1: ("pasillo-saludo.jpg", "center 55%"), 2: ("entrada-saludo.jpg", "60% center"),
-    3: ("hombres-bienvenida.jpg", "60% center")})
+    3: ("cruz.jpg", "center 35%")})
 P["servicios.html"].update({1: ("pastor-luces.jpg", "55% 40%"), 3: ("nino-biblia.jpg", "55% center"),
     4: ("circulo-oracion.jpg", "35% 40%"), 5: ("transmision.jpg", "50% center")})
 P["ministerios.html"].update({1: ("ninos-biblias.jpg", "40% 45%"),
