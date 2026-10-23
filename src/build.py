@@ -363,11 +363,11 @@ P["oracion.html"][1] = ("abrazo-oracion.jpg", "30% center")
 P["visitanos.html"][1] = ("saludo-jovenes.jpg", "50% 35%")
 P["membresia.html"][1] = ("ancianos-risas.jpg", "50% 30%")
 P["destacados.html"].update({1: ("adoracion-manos.jpg", "center 55%"),
-    2: ("noche-internacional.jpg", "40% center"), 3: ("bautismos.jpg", "50% 65%"),
-    4: ("pastora-abrazo.jpg", "center 35%"), 5: ("mujeres-orando.jpg", "40% center"), 6: ("glory-night-grupo.jpg", "center 60%"),
-    7: ("abrazo-hermanos.jpg", "50% center"), 8: ("risas-puerta.jpg", "60% center"), 9: ("lider-escenario.jpg", "45% center"),
-    10: ("predicador-invitado.jpg", "center 40%"), 11: ("noche-internacional-2.jpg", "30% center"), 12: ("abrazo-joven.jpg", "55% center"),
-    13: ("pastor-brazos.jpg", "center 30%"), 14: ("saludo-hermanas.jpg", "65% center"), 15: ("jovenes-sonrisa.jpg", "center 30%")})
+    2: ("noche-internacional.jpg", "40% center"), 3: ("bautismos.jpg", "50% 65%"), 4: ("conferencia-mujeres.jpg", "50% 42%"),
+    5: ("pastora-abrazo.jpg", "center 35%"), 6: ("mujeres-orando.jpg", "40% center"), 7: ("glory-night-grupo.jpg", "center 60%"),
+    8: ("abrazo-hermanos.jpg", "50% center"), 9: ("risas-puerta.jpg", "60% center"), 10: ("lider-escenario.jpg", "45% center"),
+    11: ("predicador-invitado.jpg", "center 40%"), 12: ("noche-internacional-2.jpg", "30% center"), 13: ("abrazo-joven.jpg", "55% center"),
+    14: ("pastor-brazos.jpg", "center 30%"), 15: ("saludo-hermanas.jpg", "65% center"), 16: ("jovenes-sonrisa.jpg", "center 30%")})
 PHOTOS["pastores.html"][1] = ("pastora-adorando.jpg", "center 22%")
 PHOTOS["pastores.html"][2] = ("pastores-pareja.jpg", "center 20%")
 PHOTOS["pastores.html"][3] = ("pastor-predicando.jpg", "50% center")
@@ -860,6 +860,8 @@ HLS = [
      "Celebramos y apoyamos la obra de Dios más allá de nuestras paredes.", "We celebrate and support God's work beyond our walls."),
     ("bautismos.jpg", "center", "Bautismos", "Baptisms",
      "Celebramos juntos cada paso público de fe.", "We celebrate every public step of faith together."),
+    ("conferencia-mujeres.jpg", "center", "Conferencia de Mujeres", "Women&#39;s Conference",
+     "Mujeres de todas las edades unidas en adoración, Palabra y comunión.", "Women of every age united in worship, the Word, and fellowship."),
     ("reconocimiento.jpg", "center 40%", "Celebraciones", "Celebrations",
      "Momentos para honrar y celebrar a nuestra familia de fe.", "Moments to honor and celebrate our church family."),
     ("oracion.jpg", "center", "Noches de Oración", "Prayer Nights",

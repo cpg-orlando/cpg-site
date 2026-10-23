@@ -426,8 +426,8 @@ footer .legal { font-size: .85rem; color: var(--faint); }
 /* highlights: 5 cards -> 3 on top, 2 wide below */
 .hl-grid { grid-template-columns: repeat(6, 1fr); }
 .hl-grid > .hl { grid-column: span 2; }
-.hl-grid > .hl:nth-child(n+4) { grid-column: span 3; }
-@media (max-width: 900px) { .hl-grid { grid-template-columns: 1fr 1fr; } .hl-grid > .hl, .hl-grid > .hl:nth-child(n+4) { grid-column: span 1; } .hl-grid > .hl:last-child { grid-column: 1 / -1; } }
+.hl-grid > .hl:nth-child(n+4) { grid-column: span 2; }
+@media (max-width: 900px) { .hl-grid { grid-template-columns: 1fr 1fr; } .hl-grid > .hl, .hl-grid > .hl:nth-child(n+4) { grid-column: span 1; } .hl-grid > .hl:last-child { grid-column: auto; } }
 @media (max-width: 560px) { .hl-grid { grid-template-columns: 1fr; } }
 
 /* home: scroll-lit verse (replaces the marquee) */
