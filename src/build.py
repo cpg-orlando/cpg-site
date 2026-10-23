@@ -724,6 +724,9 @@ EXP_ICONS = {
     "family": '<circle cx="6.5" cy="6.5" r="2.2"/><path d="M3 20.5V15a3.5 3.5 0 0 1 7 0"/><circle cx="17.5" cy="6.5" r="2.2"/><path d="M14 15a3.5 3.5 0 0 1 7 0v5.5"/><circle cx="12" cy="12" r="1.7"/><path d="M9.5 20.5v-2.5a2.5 2.5 0 0 1 5 0v2.5"/>',
     "clock": '<circle cx="12" cy="12" r="8.5"/><path d="M12 7.5V12l3 2"/>',
     "pin": '<path d="M12 21s-7-6.2-7-11.3a7 7 0 0 1 14 0C19 14.8 12 21 12 21z"/><circle cx="12" cy="9.7" r="2.5"/>',
+    "house": '<path d="M3.5 11 12 4l8.5 7"/><path d="M5.5 9.5v10h13v-10"/><path d="M10 19.5v-5h4v5"/>',
+    "city": '<path d="M3 20.5h18"/><path d="M5 20.5v-9l4-2v11"/><path d="M9 20.5v-15h6v15"/><path d="M15 20.5v-8h4v8"/><path d="M11.5 8.5h1M11.5 11.5h1M11.5 14.5h1"/>',
+    "nation": '<circle cx="12" cy="12" r="8.5"/><path d="M3.5 12h17"/><path d="M12 3.5c2.5 2.5 3.7 5.3 3.7 8.5s-1.2 6-3.7 8.5c-2.5-2.5-3.7-5.3-3.7-8.5s1.2-6 3.7-8.5z"/>',
     "kids": '<circle cx="12" cy="5.5" r="2.5"/><path d="M12 8.5v6.5M12 15l-3 5.5M12 15l3 5.5M6.5 10.5l5.5 1.5 5.5-1.5"/>',
 }
 
@@ -933,7 +936,7 @@ page("ministerios.html", "Ministerios · CPG", f"""
 
 # ---------------------------------------------------------------- 7. Giving
 page("ofrendar.html", "Ofrendar · CPG", f"""
-{banner("adoracion.jpg", t("Conéctate", "Connect"), t("Diezmos y ofrendas", "Tithes and offerings"), t("Tu generosidad sostiene la obra de Dios en esta casa y en nuestra ciudad.", "Your generosity supports God's work in this house and in our city."), pos="center 35%")}
+{banner("adoracion.jpg", t("Conéctate", "Connect"), t("Diezmos y ofrendas", "Tithes and offerings"), t("Tu generosidad sostiene la obra de Dios en esta casa, en nuestra ciudad y a lo largo de la nación.", "Your generosity supports God's work in this house, in our city, and across the nation."), pos="center 35%")}
 <section>
   <div class="wrap give-grid">
     <div class="stack">
@@ -955,6 +958,20 @@ page("ofrendar.html", "Ofrendar · CPG", f"""
         <h3>{t("En persona", "In person")}</h3>
         <p>{t("Durante cualquiera de nuestros servicios.", "During any of our services.")}</p>
       </div>
+    </div>
+  </div>
+</section>
+<section class="band">
+  <div class="wrap">
+    {head(t("Tu ofrenda en acción", "Your giving at work"), t("Más allá de <em>estas paredes</em>", "Beyond <em>these walls</em>"),
+          t("Cada diezmo y ofrenda sostiene la obra que Dios nos ha confiado, aquí y más allá.", "Every tithe and offering supports the work God has entrusted to us, here and beyond."))}
+    <div class="expect">
+      {exp_box("house", t("Esta casa", "This house"), t("Los servicios, los ministerios y el cuidado de nuestra familia de fe.", "Our services, ministries, and care for our church family."))}
+      {exp_box("city", t("Nuestra ciudad", "Our city"), t("Alcanzar y servir a nuestra comunidad en Orlando.", "Reaching and serving our community in Orlando."))}
+      {exp_box("nation", t("La nación", "The nation"), t("Esfuerzos a lo largo de la nación a los que CPG contribuye.", "Efforts across the nation that CPG contributes to."))}
+    </div>
+    <div class="cta-row" style="margin-top:28px">
+      <a class="btn btn-primary" href="{GIVE_URL}" target="_blank" rel="noopener">{t("Ofrendar en línea", "Give online")} <span class="arr">→</span></a>
     </div>
   </div>
 </section>
