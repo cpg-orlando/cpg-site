@@ -294,6 +294,32 @@ PHOTOS["index.html"][1] = ("equipo-alabanza.jpg", "8% 30%")
 PHOTOS["index.html"][3] = ("cruz-verde.jpg", "center 35%")
 PHOTOS["index.html"][2] = ("pastores-avatar.jpg", "center")
 PHOTOS["servicios.html"][2] = ("alabanza-domingo.jpg", "45% 40%")
+# --- photo picks (Oct 23)
+P = PHOTOS
+P["index.html"].update({4: ("equipo-pulpito.jpg", "50% 60%"), 5: ("mama-nino-biblia.jpg", "55% center"),
+    6: ("pastor-congregacion.jpg", "40% center"), 7: ("saludo-mayores.jpg", "45% center"),
+    8: ("pasillo-hermanos.jpg", "45% center"), 9: ("ninos-biblias-2.jpg", "35% center"),
+    10: ("circulo-oracion.jpg", "35% center"), 11: ("congregacion-orando.jpg", "45% center"),
+    12: ("transmision-biblia.jpg", "60% 40%")})
+P["nosotros.html"].update({1: ("pasillo-saludo.jpg", "center 55%"), 2: ("entrada-saludo.jpg", "60% center"),
+    3: ("hombres-bienvenida.jpg", "60% center")})
+P["servicios.html"].update({1: ("pastor-luces.jpg", "55% 40%"), 3: ("nino-biblia.jpg", "55% center"),
+    4: ("circulo-oracion.jpg", "35% 40%"), 5: ("transmision.jpg", "50% center")})
+P["ministerios.html"].update({1: ("ninos-biblias.jpg", "40% 45%"), 2: ("ninos-clase.jpg", "45% center"),
+    3: ("jovenes-adorando.jpg", "70% center"), 4: ("hombres-orando.jpg", "50% center"),
+    5: ("mujeres-sirviendo.jpg", "60% center"), 6: ("hermanos-ventana.jpg", "45% center")})
+P["eventos.html"][1] = ("salon-reunion.jpg", "center 60%")
+P["ofrendar.html"][1] = ("manos-alzadas.jpg", "40% center")
+P["creencias.html"][1] = ("cruz-adoracion.jpg", "60% 45%")
+P["oracion.html"][1] = ("abrazo-oracion.jpg", "30% center")
+P["visitanos.html"][1] = ("saludo-jovenes.jpg", "50% 35%")
+P["membresia.html"][1] = ("ancianos-risas.jpg", "50% 30%")
+P["destacados.html"].update({1: ("adoracion-manos.jpg", "center 55%"), 2: ("cantante-flores.jpg", "center 20%"),
+    3: ("noche-internacional.jpg", "40% center"), 4: ("bautismos.jpg", "50% 65%"),
+    5: ("pastora-abrazo.jpg", "center 35%"), 6: ("mujeres-orando.jpg", "40% center"), 7: ("jovenes-orando.jpg", "35% center"),
+    8: ("abrazo-hermanos.jpg", "50% center"), 9: ("risas-puerta.jpg", "60% center"), 10: ("lider-escenario.jpg", "45% center"),
+    11: ("predicador-invitado.jpg", "center 40%"), 12: ("noche-internacional-2.jpg", "30% center"), 13: ("abrazo-joven.jpg", "55% center"),
+    14: ("pastor-senalando.jpg", "center 25%"), 15: ("saludo-hermanas.jpg", "65% center"), 16: ("jovenes-sonrisa.jpg", "center 30%")})
 PHOTOS["pastores.html"][1] = ("pastora-adorando.jpg", "center 22%")
 PHOTOS["pastores.html"][2] = ("pastores-pareja.jpg", "center 30%")
 PHOTOS["pastores.html"][3] = ("familia-toirac.jpg", "center")
@@ -732,9 +758,9 @@ page("ofrendar.html", "Ofrendar · CPG", f"""
 HLS = [
     ("cantante-azul.jpg", "center 25%", "Noches de Adoración", "Worship Nights",
      "Noches dedicadas a la presencia de Dios a través de la alabanza.", "Nights devoted to God's presence through worship."),
-    (None, None, "Servicio de Misiones", "Missions Service",
+    ("noche-internacional.jpg", "center", "Servicio de Misiones", "Missions Service",
      "Celebramos y apoyamos la obra de Dios más allá de nuestras paredes.", "We celebrate and support God's work beyond our walls."),
-    (None, None, "Bautismos", "Baptisms",
+    ("bautismos.jpg", "center", "Bautismos", "Baptisms",
      "Celebramos juntos cada paso público de fe.", "We celebrate every public step of faith together."),
     ("reconocimiento.jpg", "center 40%", "Celebraciones", "Celebrations",
      "Momentos para honrar y celebrar a nuestra familia de fe.", "Moments to honor and celebrate our church family."),
