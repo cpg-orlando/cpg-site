@@ -134,6 +134,14 @@ SCRIPT = """
 <script>
 (function () {
   var root = document.documentElement;
+  // Always open a new page at the top (phones and in-app viewers otherwise keep the old scroll spot)
+  try { if ('scrollRestoration' in history) history.scrollRestoration = 'manual'; } catch (e) {}
+  function toTop() { if (!location.hash) window.scrollTo(0, 0); }
+  toTop(); window.addEventListener('load', toTop); window.addEventListener('pageshow', toTop);
+  document.addEventListener('click', function (e) {
+    var a = e.target.closest && e.target.closest('a[href$=".html"]');
+    if (a) { document.body.style.overflow = ''; window.scrollTo(0, 0); }
+  });
   function setLang(lang) {
     root.setAttribute('data-lang', lang);
     root.setAttribute('lang', lang);
