@@ -334,7 +334,7 @@ P["visitanos.html"][1] = ("saludo-jovenes.jpg", "50% 35%")
 P["membresia.html"][1] = ("ancianos-risas.jpg", "50% 30%")
 P["destacados.html"].update({1: ("adoracion-manos.jpg", "center 55%"),
     2: ("noche-internacional.jpg", "40% center"), 3: ("bautismos.jpg", "50% 65%"),
-    4: ("pastora-abrazo.jpg", "center 35%"), 5: ("mujeres-orando.jpg", "40% center"), 6: ("cantante-flores.jpg", "center 20%"),
+    4: ("pastora-abrazo.jpg", "center 35%"), 5: ("mujeres-orando.jpg", "40% center"), 6: ("glory-night-grupo.jpg", "center 60%"),
     7: ("abrazo-hermanos.jpg", "50% center"), 8: ("risas-puerta.jpg", "60% center"), 9: ("lider-escenario.jpg", "45% center"),
     10: ("predicador-invitado.jpg", "center 40%"), 11: ("noche-internacional-2.jpg", "30% center"), 12: ("abrazo-joven.jpg", "55% center"),
     13: ("pastor-brazos.jpg", "center 30%"), 14: ("saludo-hermanas.jpg", "65% center"), 15: ("jovenes-sonrisa.jpg", "center 30%")})
