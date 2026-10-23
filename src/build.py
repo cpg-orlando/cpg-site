@@ -564,7 +564,7 @@ page("index.html", "Casa Portadores de Gloria", f"""
   <div class="wrap hero-wrap">
     <div class="hero-frame">
       <picture>
-        <source media="(max-width: 600px)" srcset="images/pastora-adorando.jpg">
+        <source media="(max-width: 600px)" srcset="images/cantante-flores.jpg">
         <img src="images/oracion-grupo.jpg" alt="Adoración en Casa Portadores de Gloria" fetchpriority="high" style="object-position: 50% 45%">
       </picture>
       <div class="hero-inner">
