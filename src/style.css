@@ -409,3 +409,10 @@ footer .legal { font-size: .85rem; color: var(--faint); }
 
 .ages { list-style: none; margin: 4px 0 0; padding: 0; display: flex; flex-wrap: wrap; gap: 8px; }
 .ages li { font-size: .82rem; font-weight: 600; padding: 6px 12px; border-radius: 999px; border: 1px solid var(--line-2); color: #dfe5ff; background: rgba(111,141,255,.12); }
+
+/* highlights: 5 cards -> 3 on top, 2 wide below */
+.hl-grid { grid-template-columns: repeat(6, 1fr); }
+.hl-grid > .hl { grid-column: span 2; }
+.hl-grid > .hl:nth-child(n+4) { grid-column: span 3; }
+@media (max-width: 900px) { .hl-grid { grid-template-columns: 1fr 1fr; } .hl-grid > .hl, .hl-grid > .hl:nth-child(n+4) { grid-column: span 1; } .hl-grid > .hl:last-child { grid-column: 1 / -1; } }
+@media (max-width: 560px) { .hl-grid { grid-template-columns: 1fr; } }

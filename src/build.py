@@ -314,12 +314,12 @@ P["creencias.html"][1] = ("cruz-adoracion.jpg", "60% 45%")
 P["oracion.html"][1] = ("abrazo-oracion.jpg", "30% center")
 P["visitanos.html"][1] = ("saludo-jovenes.jpg", "50% 35%")
 P["membresia.html"][1] = ("ancianos-risas.jpg", "50% 30%")
-P["destacados.html"].update({1: ("adoracion-manos.jpg", "center 55%"), 2: ("cantante-flores.jpg", "center 20%"),
-    3: ("noche-internacional.jpg", "40% center"), 4: ("bautismos.jpg", "50% 65%"),
-    5: ("pastora-abrazo.jpg", "center 35%"), 6: ("mujeres-orando.jpg", "40% center"), 7: ("jovenes-orando.jpg", "35% center"),
-    8: ("abrazo-hermanos.jpg", "50% center"), 9: ("risas-puerta.jpg", "60% center"), 10: ("lider-escenario.jpg", "45% center"),
-    11: ("predicador-invitado.jpg", "center 40%"), 12: ("noche-internacional-2.jpg", "30% center"), 13: ("abrazo-joven.jpg", "55% center"),
-    14: ("pastor-brazos.jpg", "center 30%"), 15: ("saludo-hermanas.jpg", "65% center"), 16: ("jovenes-sonrisa.jpg", "center 30%")})
+P["destacados.html"].update({1: ("adoracion-manos.jpg", "center 55%"),
+    2: ("noche-internacional.jpg", "40% center"), 3: ("bautismos.jpg", "50% 65%"),
+    4: ("pastora-abrazo.jpg", "center 35%"), 5: ("mujeres-orando.jpg", "40% center"), 6: ("cantante-flores.jpg", "center 20%"),
+    7: ("abrazo-hermanos.jpg", "50% center"), 8: ("risas-puerta.jpg", "60% center"), 9: ("lider-escenario.jpg", "45% center"),
+    10: ("predicador-invitado.jpg", "center 40%"), 11: ("noche-internacional-2.jpg", "30% center"), 12: ("abrazo-joven.jpg", "55% center"),
+    13: ("pastor-brazos.jpg", "center 30%"), 14: ("saludo-hermanas.jpg", "65% center"), 15: ("jovenes-sonrisa.jpg", "center 30%")})
 PHOTOS["pastores.html"][1] = ("pastora-adorando.jpg", "center 22%")
 PHOTOS["pastores.html"][2] = ("pastores-pareja.jpg", "center 20%")
 PHOTOS["pastores.html"][3] = ("pastor-predicando.jpg", "50% center")
@@ -773,8 +773,6 @@ page("ofrendar.html", "Ofrendar · CPG", f"""
 
 # ---------------------------------------------------------------- 8. Highlights
 HLS = [
-    ("cantante-azul.jpg", "center 25%", "Noches de Adoración", "Worship Nights",
-     "Noches dedicadas a la presencia de Dios a través de la alabanza.", "Nights devoted to God's presence through worship."),
     ("noche-internacional.jpg", "center", "Servicio de Misiones", "Missions Service",
      "Celebramos y apoyamos la obra de Dios más allá de nuestras paredes.", "We celebrate and support God's work beyond our walls."),
     ("bautismos.jpg", "center", "Bautismos", "Baptisms",
@@ -784,7 +782,7 @@ HLS = [
     ("oracion.jpg", "center", "Noches de Oración", "Prayer Nights",
      "La iglesia unida buscando a Dios.", "The church united in seeking God."),
     ("joven-cantando.jpg", "center 35%", "Glory Night", "Glory Night",
-     "Una noche mensual de CPG Youth para adorar y escuchar la Palabra.", "A monthly CPG Youth night of worship and the Word."),
+     "Nuestra noche mensual de adoración y Palabra, el último miércoles de cada mes.", "Our monthly night of worship and the Word, the last Wednesday of every month."),
 ]
 
 
