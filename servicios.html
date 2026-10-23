@@ -636,6 +636,24 @@ footer h2 { color: var(--gold); }
 .sbtn.ig:hover { background: linear-gradient(45deg, #f58529, #dd2a7b 55%, #8134af); border-color: transparent; }
 .sbtn.ig:hover svg { color: #fff; }
 
+/* location card with illustrated map */
+.loc-card { margin-top: 28px; display: grid; grid-template-columns: minmax(0, 1.15fr) minmax(0, 1fr); border: 1px solid var(--line-2); border-radius: var(--radius); overflow: hidden; background: rgba(15,31,54,.6); }
+.loc-visual { position: relative; display: block; min-height: 280px; overflow: hidden; }
+.loc-map { position: absolute; inset: 0; width: 100%; height: 100%; transition: transform .8s cubic-bezier(.2,.7,.2,1); }
+.loc-visual:hover .loc-map { transform: scale(1.05); }
+.loc-pulse { transform-origin: 0 0; animation: locPulse 2.4s ease-out infinite; }
+.loc-pulse.d2 { animation-delay: 1.2s; }
+@keyframes locPulse { from { transform: scale(.6); opacity: .55; } to { transform: scale(3.2); opacity: 0; } }
+.loc-pin path { filter: drop-shadow(0 6px 10px rgba(0,0,0,.45)); }
+.loc-chip { position: absolute; left: 18px; bottom: 18px; padding: 8px 14px; border-radius: 2px; background: rgba(11,22,38,.85); border: 1px solid var(--line-2); color: var(--gold); font-size: .78rem; font-weight: 600; letter-spacing: .12em; text-transform: uppercase; }
+.loc-info { padding: clamp(24px, 4vw, 40px); display: grid; gap: 14px; align-content: center; }
+.loc-info address { font-style: normal; display: grid; gap: 2px; }
+.loc-info address b { font-family: var(--font-display); font-weight: 400; font-size: clamp(1.6rem, 3vw, 2.2rem); letter-spacing: -0.015em; line-height: 1.1; }
+.loc-info address span { color: var(--muted); font-size: 1.05rem; }
+.loc-note { color: var(--muted); font-size: .95rem; }
+.loc-actions { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 6px; }
+@media (max-width: 820px) { .loc-card { grid-template-columns: 1fr; } .loc-visual { min-height: 220px; } }
+
 </style>
 </head>
 <body>
@@ -705,9 +723,41 @@ footer h2 { color: var(--gold); }
         <p><span class="es">Una noche para buscar el rostro de Dios juntos e interceder por nuestra comunidad, nuestra ciudad y las naciones.</span><span class="en">A night to seek God's face together and intercede for our community, our city, and the nations.</span></p>
       </div>
     </div>
-    <div class="visit">
-      <address>5200 Old Cheney Highway<span>Orlando, FL 32807</span></address>
-      <a class="btn btn-ink" href="https://www.google.com/maps/search/?api=1&query=5200+Old+Cheney+Highway+Orlando+FL+32807" target="_blank" rel="noopener"><span class="es">Cómo llegar</span><span class="en">Get directions</span></a>
+    
+    <div class="loc-card">
+      <a class="loc-visual" href="https://www.google.com/maps/search/?api=1&query=5200+Old+Cheney+Highway+Orlando+FL+32807" target="_blank" rel="noopener" aria-label="<span class="es">Abrir mapa</span><span class="en">Open map</span>"><svg class="loc-map" viewBox="0 0 600 340" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
+  <rect width="600" height="340" fill="#0f1f36"/>
+  <g stroke="#1d3354" stroke-width="1">
+    <path d="M0 40H600M0 95H600M0 150H600M0 205H600M0 260H600M0 315H600"/>
+    <path d="M60 0V340M140 0V340M220 0V340M380 0V340M460 0V340M540 0V340"/>
+  </g>
+  <rect x="70" y="105" width="60" height="38" rx="3" fill="#13284a"/><rect x="390" y="50" width="60" height="38" rx="3" fill="#13284a"/>
+  <rect x="470" y="215" width="62" height="38" rx="3" fill="#13284a"/><rect x="150" y="215" width="62" height="38" rx="3" fill="#13284a"/>
+  <path d="M-10 250 C120 230 200 190 300 172 S480 120 610 96" fill="none" stroke="#2a4670" stroke-width="18" stroke-linecap="round"/>
+  <path d="M-10 250 C120 230 200 190 300 172 S480 120 610 96" fill="none" stroke="#d6a84a" stroke-width="2" stroke-dasharray="10 9" opacity=".75"/>
+  <path d="M300 -10V350" stroke="#22395c" stroke-width="12"/>
+  <text x="430" y="132" fill="#6f84a6" font-family="Figtree, Arial, sans-serif" font-size="13" letter-spacing="2" transform="rotate(-13 430 132)">OLD CHENEY HWY</text>
+  <g class="loc-pin" transform="translate(300 172)">
+    <circle class="loc-pulse" r="18" fill="#d6a84a" opacity=".35"/>
+    <circle class="loc-pulse d2" r="18" fill="#d6a84a" opacity=".25"/>
+    <path d="M0 -6 C-14 -6 -22 -18 -22 -30 C-22 -43 -12 -52 0 -52 C12 -52 22 -43 22 -30 C22 -18 14 -6 0 -6Z" transform="translate(0 6)" fill="#d6a84a"/>
+    <circle cy="-24" r="7.5" fill="#0b1626"/>
+  </g>
+</svg>
+        <span class="loc-chip"><span class="es">Te esperamos aquí</span><span class="en">Find us here</span></span>
+      </a>
+      <div class="loc-info">
+        <p class="eyebrow"><span class="es">Ubicación</span><span class="en">Location</span></p>
+        <address><b>5200 Old Cheney Highway</b><span>Orlando, FL 32807</span></address>
+        <p class="loc-note"><span class="es">Hay estacionamiento en el lugar. ¡Llega unos minutos antes y te recibimos!</span><span class="en">Parking is available on site. Come a few minutes early and we&#39;ll welcome you!</span></p>
+        <div class="loc-actions">
+          <a class="btn btn-primary" href="https://www.google.com/maps/search/?api=1&query=5200+Old+Cheney+Highway+Orlando+FL+32807" target="_blank" rel="noopener"><span class="es">Cómo llegar</span><span class="en">Get directions</span> <span class="arr">→</span></a>
+          <a class="btn btn-outline" href="https://maps.apple.com/?q=Casa+Portadores+de+Gloria&address=5200+Old+Cheney+Hwy,+Orlando,+FL+32807" target="_blank" rel="noopener">Apple Maps</a>
+          <button type="button" class="btn btn-outline loc-copy" data-copy="5200 Old Cheney Highway, Orlando, FL 32807">
+            <span class="c1"><span class="es">Copiar dirección</span><span class="en">Copy address</span></span><span class="c2" hidden><span class="es">¡Copiada!</span><span class="en">Copied!</span></span>
+          </button>
+        </div>
+      </div>
     </div>
   </div>
 </section>
@@ -896,6 +946,16 @@ footer h2 { color: var(--gold); }
       if (!open) gal2.scrollIntoView({ block: 'center', behavior: 'smooth' });
     });
   }
+
+  // Copy address
+  document.querySelectorAll('.loc-copy').forEach(function (b) {
+    b.addEventListener('click', function () {
+      var txt = b.getAttribute('data-copy');
+      function done() { b.querySelector('.c1').hidden = true; b.querySelector('.c2').hidden = false;
+        setTimeout(function () { b.querySelector('.c1').hidden = false; b.querySelector('.c2').hidden = true; }, 1800); }
+      try { navigator.clipboard.writeText(txt).then(done, function () { window.prompt && done(); }); } catch (e) { done(); }
+    });
+  });
 
   // Tap-to-enlarge gallery
   var gal = Array.prototype.slice.call(document.querySelectorAll('.gallery img'));
