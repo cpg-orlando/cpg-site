@@ -580,3 +580,19 @@ footer .big { font-weight: 400; letter-spacing: -0.02em; }
 footer h2 { color: var(--gold); }
 ::selection { background: rgba(214,168,74,.4); }
 :focus-visible { outline-color: var(--gold); }
+
+/* pastors page: consistent photo sizes (overrides) */
+.pastor-grid { max-width: 1240px; }
+.pastor-intro { grid-template-columns: minmax(0, 5fr) minmax(0, 6fr); gap: clamp(28px, 5vw, 72px); align-items: center; }
+.pastor-photo { width: 100%; height: auto; aspect-ratio: 4 / 5; max-height: 600px; object-fit: cover; border-radius: var(--radius); border: 1px solid var(--line); }
+.pastor-intro h2 { font-size: clamp(2.2rem, 4.4vw, 3.6rem); }
+.calling-grid { grid-template-columns: minmax(0, 5fr) minmax(0, 6fr); align-items: center; gap: clamp(28px, 5vw, 72px); }
+.calling-photo { aspect-ratio: 4 / 5; max-height: 600px; filter: brightness(1.12) contrast(1.05); }
+.family-grid { grid-template-columns: minmax(0, 6fr) minmax(0, 5fr); gap: clamp(28px, 5vw, 72px); }
+.family-photo { aspect-ratio: 5 / 4; object-position: 50% 30%; }
+.family-grid { grid-template-columns: minmax(0, 5fr) minmax(0, 7fr); }
+@media (max-width: 860px) {
+  .pastor-intro, .calling-grid, .family-grid { grid-template-columns: 1fr; }
+  .pastor-photo, .calling-photo, .family-photo { aspect-ratio: 4 / 3; max-height: none; order: -1; }
+  .pastor-photo { aspect-ratio: 1 / 1; object-position: center 20%; }
+}
