@@ -34,6 +34,7 @@ def social_icons():
             f'<a href="{INSTAGRAM}" target="_blank" rel="noopener" aria-label="Instagram">{ICON_IG}</a></div>')
 
 
+SITE_URL = "https://cpgorlando.vercel.app"  # change to https://cpgorlando.org once the domain is connected
 GIVE_URL = "https://give.tithe.ly/?formId=1d0a6db2-1fd2-4e47-a150-3e891cfab3f8&amp;locationId=8738e6ec-eb21-4808-9f24-1148a0f17b5d&amp;fundId=c3bb9a7b-24f9-4adc-bb63-8488060e0ea7"
 MAPS = "https://www.google.com/maps/search/?api=1&query=5200+Old+Cheney+Highway+Orlando+FL+32807"
 
@@ -431,6 +432,21 @@ def page(fname, title, body):
 <title>{title}</title>
 <meta name="claude:viewport-fit-sides" content="cover">
 <meta name="description" content="Casa Portadores de Gloria — iglesia cristiana bilingüe en Orlando, Florida.">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Casa Portadores de Gloria">
+<meta property="og:title" content="{title}">
+<meta property="og:description" content="Iglesia cristiana bilingüe en Orlando, FL. Domingos 11:00 AM · 5200 Old Cheney Hwy.">
+<meta property="og:url" content="{SITE_URL}/{'' if fname == 'index.html' else fname}">
+<meta property="og:image" content="{SITE_URL}/images/og-share.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Casa Portadores de Gloria — Bienvenidos a casa">
+<meta property="og:locale" content="es_US">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="{SITE_URL}/images/og-share.jpg">
+<meta name="theme-color" content="#0b1626">
+<link rel="icon" type="image/png" href="images/favicon.png">
+<link rel="apple-touch-icon" href="images/apple-touch-icon.png">
 <link rel="icon" href="images/logo.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
