@@ -319,7 +319,7 @@ P["destacados.html"].update({1: ("adoracion-manos.jpg", "center 55%"), 2: ("cant
     5: ("pastora-abrazo.jpg", "center 35%"), 6: ("mujeres-orando.jpg", "40% center"), 7: ("jovenes-orando.jpg", "35% center"),
     8: ("abrazo-hermanos.jpg", "50% center"), 9: ("risas-puerta.jpg", "60% center"), 10: ("lider-escenario.jpg", "45% center"),
     11: ("predicador-invitado.jpg", "center 40%"), 12: ("noche-internacional-2.jpg", "30% center"), 13: ("abrazo-joven.jpg", "55% center"),
-    14: ("pastor-senalando.jpg", "center 25%"), 15: ("saludo-hermanas.jpg", "65% center"), 16: ("jovenes-sonrisa.jpg", "center 30%")})
+    14: ("pastor-brazos.jpg", "center 30%"), 15: ("saludo-hermanas.jpg", "65% center"), 16: ("jovenes-sonrisa.jpg", "center 30%")})
 PHOTOS["pastores.html"][1] = ("pastora-adorando.jpg", "center 22%")
 PHOTOS["pastores.html"][2] = ("pastores-pareja.jpg", "center 30%")
 PHOTOS["pastores.html"][3] = ("familia-toirac.jpg", "center")
