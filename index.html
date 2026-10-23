@@ -718,7 +718,7 @@ footer h2 { color: var(--gold); }
 
   /* hero: headline, one sentence, one button, one quiet link */
   .hero-frame::after { background: linear-gradient(0deg, var(--bg) 0%, rgba(11,22,38,.9) 26%, rgba(11,22,38,.45) 52%, rgba(11,22,38,.12) 72%, rgba(11,22,38,.55) 100%); }
-  .hero-frame > picture > img { object-position: 50% 30% !important; height: 104%; filter: saturate(1.02) contrast(1.04); }
+  .hero-frame > picture > img { object-position: var(--m-pos, 50% 30%) !important; height: 104%; filter: saturate(1.02) contrast(1.04); }
   .hero .hero-frame { min-height: 100vh; min-height: 100svh; display: flex; flex-direction: column; justify-content: flex-end; }
   .hero-inner { width: 100%; padding-top: 140px; padding-bottom: 104px; }
   .hero::after { content: ""; position: absolute; left: 50%; bottom: 34px; width: 12px; height: 12px; margin-left: -6px;
@@ -803,9 +803,20 @@ footer h2 { color: var(--gold); }
   <div class="wrap hero-wrap">
     <div class="hero-frame">
       <picture>
-        <source media="(max-width: 600px)" srcset="images/familia-abrazo.jpg">
+        <source media="(max-width: 600px)" srcset="images/familia-abrazo.jpg" id="hero-m">
         <img src="images/equipo-alabanza.jpg" style="object-position: 8% 30%" alt="Adoración en Casa Portadores de Gloria" fetchpriority="high">
       </picture>
+      <script>
+        /* phones: rotate the welcome photo on each visit */
+        (function () {
+          var opts = [["mano-alzada.jpg", "50% 20%"], ["oracion-abrazo.jpg", "55% 30%"], ["familia-abrazo.jpg", "50% 30%"]];
+          var pick = opts[Math.floor(Math.random() * opts.length)];
+          var src = document.getElementById("hero-m");
+          if (!src) return;
+          src.srcset = "images/" + pick[0];
+          src.parentNode.querySelector("img").style.setProperty("--m-pos", pick[1]);
+        })();
+      </script>
       <div class="hero-inner">
         <div class="hero-copy">
           <p class="eyebrow">Casa Portadores de Gloria · Orlando</p>

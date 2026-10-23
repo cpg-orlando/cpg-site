@@ -564,9 +564,20 @@ page("index.html", "Casa Portadores de Gloria", f"""
   <div class="wrap hero-wrap">
     <div class="hero-frame">
       <picture>
-        <source media="(max-width: 600px)" srcset="images/familia-abrazo.jpg">
+        <source media="(max-width: 600px)" srcset="images/familia-abrazo.jpg" id="hero-m">
         <img src="images/oracion-grupo.jpg" alt="Adoración en Casa Portadores de Gloria" fetchpriority="high" style="object-position: 50% 45%">
       </picture>
+      <script>
+        /* phones: rotate the welcome photo on each visit */
+        (function () {{
+          var opts = [["mano-alzada.jpg", "50% 20%"], ["oracion-abrazo.jpg", "55% 30%"], ["familia-abrazo.jpg", "50% 30%"]];
+          var pick = opts[Math.floor(Math.random() * opts.length)];
+          var src = document.getElementById("hero-m");
+          if (!src) return;
+          src.srcset = "images/" + pick[0];
+          src.parentNode.querySelector("img").style.setProperty("--m-pos", pick[1]);
+        }})();
+      </script>
       <div class="hero-inner">
         <div class="hero-copy">
           <p class="eyebrow">Casa Portadores de Gloria · Orlando</p>
