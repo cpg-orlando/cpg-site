@@ -563,7 +563,10 @@ page("index.html", "Casa Portadores de Gloria", f"""
 <section class="hero" id="inicio">
   <div class="wrap hero-wrap">
     <div class="hero-frame">
-      <img src="images/oracion-grupo.jpg" alt="Hermanos abrazados orando juntos en Casa Portadores de Gloria" fetchpriority="high" style="object-position: 50% 45%">
+      <picture>
+        <source media="(max-width: 600px)" srcset="images/pastora-adorando.jpg">
+        <img src="images/oracion-grupo.jpg" alt="Adoración en Casa Portadores de Gloria" fetchpriority="high" style="object-position: 50% 45%">
+      </picture>
       <div class="hero-inner">
         <div class="hero-copy">
           <p class="eyebrow">Casa Portadores de Gloria · Orlando</p>
