@@ -251,6 +251,22 @@ SCRIPT = """
       if (e.key === 'Escape') close(); if (e.key === 'ArrowLeft') show(idx - 1); if (e.key === 'ArrowRight') show(idx + 1);
     });
   }
+  // Verse words light up as the reader scrolls through it
+  var verse = document.querySelector('[data-scroll-verse]');
+  if (verse) {
+    var groups = Array.prototype.map.call(verse.children, function (g) { return g.querySelectorAll('span'); });
+    var calm = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    function paint() {
+      var r = verse.getBoundingClientRect(), vh = window.innerHeight;
+      var prog = calm ? 1 : Math.min(1, Math.max(0, (vh * 0.85 - r.top) / (vh * 0.55)));
+      groups.forEach(function (ws) {
+        var lit = Math.round(prog * ws.length);
+        ws.forEach(function (w, i) { w.classList.toggle('lit', i < lit); });
+      });
+    }
+    paint(); window.addEventListener('scroll', function () { requestAnimationFrame(paint); }, { passive: true });
+  }
+
   // Cursor spotlight on glass cards
   document.querySelectorAll('.quick a, .service, .event, .min-row, .expect > div, .way, .value, .soon-block, .next-card, .hl').forEach(function (el) {
     el.classList.add('spot');
@@ -528,11 +544,15 @@ page("index.html", "Casa Portadores de Gloria", f"""
   </div>
 </section>
 
-<div class="marquee" aria-hidden="true">
-  <div class="marquee-track">
-    {"".join(f'<span>{w}</span>' for w in ["Adoración", "Palabra", "Familia", "Oración", "Gloria", "Comunidad"] * 4)}
+<section class="verse-band">
+  <div class="wrap">
+    <p class="eyebrow">{t("Nuestro nombre", "Our name")}</p>
+    <blockquote class="scroll-verse" data-scroll-verse>
+      <span class="es"><span>Porque</span> <span>la</span> <span>tierra</span> <span>será</span> <span>llena</span> <span>del</span> <span>conocimiento</span> <span>de</span> <span>la</span> <span class="g">gloria</span> <span>de</span> <span>Jehová,</span> <span>como</span> <span>las</span> <span>aguas</span> <span>cubren</span> <span>el</span> <span>mar.</span></span><span class="en"><span>For</span> <span>the</span> <span>earth</span> <span>will</span> <span>be</span> <span>filled</span> <span>with</span> <span>the</span> <span>knowledge</span> <span>of</span> <span>the</span> <span class="g">glory</span> <span>of</span> <span>the</span> <span>LORD</span> <span>as</span> <span>the</span> <span>waters</span> <span>cover</span> <span>the</span> <span>sea.</span></span>
+    </blockquote>
+    <p class="verse-ref">{t("Habacuc 2:14", "Habakkuk 2:14")} · {t("Somos portadores de esa gloria.", "We carry that glory.")}</p>
   </div>
-</div>
+</section>
 
 <section>
   <div class="wrap split">

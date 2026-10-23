@@ -416,3 +416,13 @@ footer .legal { font-size: .85rem; color: var(--faint); }
 .hl-grid > .hl:nth-child(n+4) { grid-column: span 3; }
 @media (max-width: 900px) { .hl-grid { grid-template-columns: 1fr 1fr; } .hl-grid > .hl, .hl-grid > .hl:nth-child(n+4) { grid-column: span 1; } .hl-grid > .hl:last-child { grid-column: 1 / -1; } }
 @media (max-width: 560px) { .hl-grid { grid-template-columns: 1fr; } }
+
+/* home: scroll-lit verse (replaces the marquee) */
+.verse-band { padding-block: clamp(80px, 13vw, 170px); border-block: 1px solid var(--line); position: relative; overflow: hidden; }
+.verse-band::before { content: ""; position: absolute; left: 50%; top: 50%; width: 900px; height: 500px; transform: translate(-50%, -50%); background: radial-gradient(closest-side, rgba(111,141,255,.16), transparent); pointer-events: none; }
+.verse-band .wrap { display: grid; gap: 28px; position: relative; }
+.scroll-verse { margin: 0; font-family: var(--font-display); font-weight: 700; font-size: clamp(2rem, 5.2vw, 4.4rem); line-height: 1.08; letter-spacing: -0.035em; text-wrap: balance; max-width: 22ch; }
+.scroll-verse span > span { color: rgba(245,245,250,.28); transition: color .4s ease; }
+.scroll-verse span > span.lit { color: #f5f5fa; }
+.scroll-verse span > span.g.lit { background: var(--grad); -webkit-background-clip: text; background-clip: text; color: transparent; }
+.verse-ref { color: var(--muted); font-size: 1.05rem; }
