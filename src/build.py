@@ -669,12 +669,15 @@ page("pastores.html", "Nuestros Pastores · CPG", f"""
     </div>
   </div>
 </section>
-<section class="band family-section">
-  <div class="wrap">
-    <figure class="family-card">
-      <img src="images/familia-toirac.jpg" alt="Los pastores Esdras y Magnolia Toirac con sus hijos" loading="lazy">
-      <figcaption><span class="eyebrow">{t("Su familia", "Their family")}</span><b>{t("La familia Toirac", "The Toirac family")}</b></figcaption>
-    </figure>
+<section class="family-section">
+  <div class="wrap family-grid">
+    <div class="stack">
+      <p class="eyebrow">{t("Su familia", "Their family")}</p>
+      <h2>{t("La familia Toirac", "The Toirac family")}</h2>
+      <p class="lead">{t("Los pastores Esdras y Magnolia sirven a esta casa junto a sus hijos, como una familia que lleva la gloria de Dios a Orlando.",
+                        "Pastors Esdras and Magnolia serve this house alongside their children, as a family carrying God&#39;s glory to Orlando.")}</p>
+    </div>
+    <img class="family-photo" src="images/familia-toirac.jpg" alt="Los pastores Esdras y Magnolia Toirac con sus hijos" loading="lazy">
   </div>
 </section>
 """)
