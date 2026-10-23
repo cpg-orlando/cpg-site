@@ -477,6 +477,11 @@ footer .legal { font-size: .85rem; color: var(--faint); }
 @media (max-width: 600px) { .faith summary { grid-template-columns: 36px 1fr auto; padding: 16px; } .faith-body { padding: 0 16px 20px; } }
 .purpose-text em { font-style: normal; background: var(--grad); -webkit-background-clip: text; background-clip: text; color: transparent; }
 
+.serve-note { margin-top: 28px; display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 20px 32px; padding: clamp(22px, 4vw, 34px); border-radius: var(--radius); border: 1px solid var(--line-2); background: linear-gradient(130deg, rgba(109,61,240,.22), rgba(44,91,255,.16) 55%, rgba(15,181,212,.14)); }
+.serve-note > .stack { flex: 1 1 420px; min-width: 0; }
+.serve-title { font-family: var(--font-display); font-weight: 700; font-size: clamp(1.4rem, 2.6vw, 1.9rem); letter-spacing: -0.02em; line-height: 1.15; }
+.serve-note p:not(.eyebrow):not(.serve-title) { color: #c9cbe0; max-width: 60ch; }
+
 </style>
 </head>
 <body>
@@ -530,7 +535,7 @@ footer .legal { font-size: .85rem; color: var(--faint); }
           <span class="who"><span class="es">Hermandad</span><span class="en">Brotherhood</span></span>
           <h3><span class="es">Caballeros</span><span class="en">Men&#39;s Ministry</span></h3>
           <p><span class="es">Hombres que se apoyan, oran juntos y crecen como líderes en su hogar y en la iglesia.</span><span class="en">Men who support each other, pray together, and grow as leaders at home and in the church.</span></p>
-          <a class="more" href="visitanos.html"><span class="es">Quiero participar →</span><span class="en">I want to join →</span></a>
+          <a class="more" href="membresia.html"><span class="es">Quiero servir →</span><span class="en">I want to serve →</span></a>
         </div>
       </article>
       <article class="min-row">
@@ -539,7 +544,7 @@ footer .legal { font-size: .85rem; color: var(--faint); }
           <span class="who"><span class="es">Hermandad</span><span class="en">Sisterhood</span></span>
           <h3><span class="es">Damas</span><span class="en">Women&#39;s Ministry</span></h3>
           <p><span class="es">Mujeres que se animan en la fe, oran unas por otras y sirven con amor.</span><span class="en">Women who encourage each other in faith, pray for one another, and serve with love.</span></p>
-          <a class="more" href="visitanos.html"><span class="es">Quiero participar →</span><span class="en">I want to join →</span></a>
+          <a class="more" href="membresia.html"><span class="es">Quiero servir →</span><span class="en">I want to serve →</span></a>
         </div>
       </article>
       <article class="min-row">
@@ -557,7 +562,7 @@ footer .legal { font-size: .85rem; color: var(--faint); }
           <span class="who"><span class="es">Para los más pequeños</span><span class="en">For the little ones</span></span>
           <h3><span class="es">Niños</span><span class="en">Kids Ministry</span></h3>
           <p><span class="es">Un lugar seguro y alegre donde los niños aprenden la Palabra de Dios y crecen en su fe.</span><span class="en">A safe, joyful place where kids learn God's Word and grow in their faith.</span></p>
-          <a class="more" href="visitanos.html"><span class="es">Quiero participar →</span><span class="en">I want to join →</span></a>
+          <a class="more" href="membresia.html"><span class="es">Quiero servir →</span><span class="en">I want to serve →</span></a>
         </div>
       </article>
       <article class="min-row">
@@ -566,7 +571,7 @@ footer .legal { font-size: .85rem; color: var(--faint); }
           <span class="who"><span class="es">Música, producción y medios</span><span class="en">Music, production &amp; media</span></span>
           <h3><span class="es">Ministerio de Alabanza</span><span class="en">Worship Team</span></h3>
           <p><span class="es">Músicos, cantantes y el equipo de producción y medios que guían a la iglesia a adorar y llevan cada servicio en vivo.</span><span class="en">Musicians, singers, and the production and media team who lead the church in worship and bring every service live.</span></p>
-          <a class="more" href="visitanos.html"><span class="es">Quiero participar →</span><span class="en">I want to join →</span></a>
+          <a class="more" href="membresia.html"><span class="es">Quiero servir →</span><span class="en">I want to serve →</span></a>
         </div>
       </article>
       <article class="min-row">
@@ -575,7 +580,7 @@ footer .legal { font-size: .85rem; color: var(--faint); }
           <span class="who"><span class="es">Servir con una sonrisa</span><span class="en">Serving with a smile</span></span>
           <h3><span class="es">Ujieres</span><span class="en">Ushers</span></h3>
           <p><span class="es">Los primeros en recibirte: dan la bienvenida, ayudan a cada familia a encontrar su lugar y cuidan el orden del servicio.</span><span class="en">The first faces you meet: they welcome you, help every family find a seat, and keep each service running smoothly.</span></p>
-          <a class="more" href="visitanos.html"><span class="es">Quiero participar →</span><span class="en">I want to join →</span></a>
+          <a class="more" href="membresia.html"><span class="es">Quiero servir →</span><span class="en">I want to serve →</span></a>
         </div>
       </article>
       <article class="min-row">
@@ -584,7 +589,7 @@ footer .legal { font-size: .85rem; color: var(--faint); }
           <span class="who"><span class="es">Más allá de nuestras paredes</span><span class="en">Beyond our walls</span></span>
           <h3><span class="es">Misiones</span><span class="en">Missions</span></h3>
           <p><span class="es">Llevamos el evangelio y el amor de Cristo a nuestra comunidad y a las naciones.</span><span class="en">We carry the gospel and the love of Christ to our community and to the nations.</span></p>
-          <a class="more" href="visitanos.html"><span class="es">Quiero participar →</span><span class="en">I want to join →</span></a>
+          <a class="more" href="membresia.html"><span class="es">Quiero servir →</span><span class="en">I want to serve →</span></a>
         </div>
       </article>
       <article class="min-row">
@@ -593,9 +598,17 @@ footer .legal { font-size: .85rem; color: var(--faint); }
           <span class="who"><span class="es">Sabiduría y experiencia</span><span class="en">Wisdom and experience</span></span>
           <h3><span class="es">Años Dorados</span><span class="en">Golden Years</span></h3>
           <p><span class="es">Hombres y mujeres de fe probada que bendicen a la iglesia con su sabiduría, oración y ejemplo.</span><span class="en">Men and women of proven faith who bless the church with their wisdom, prayer, and example.</span></p>
-          <a class="more" href="visitanos.html"><span class="es">Quiero participar →</span><span class="en">I want to join →</span></a>
+          <a class="more" href="membresia.html"><span class="es">Quiero servir →</span><span class="en">I want to serve →</span></a>
         </div>
       </article>
+    </div>
+    <div class="serve-note">
+      <div class="stack" style="gap:8px">
+        <p class="eyebrow"><span class="es">Para servir</span><span class="en">To serve</span></p>
+        <p class="serve-title"><span class="es">Servir comienza con ser parte de la familia</span><span class="en">Serving starts with belonging</span></p>
+        <p><span class="es">Para formar parte de cualquier ministerio es necesario ser miembro de la iglesia. Esto protege tanto a la iglesia como a cada persona que sirve.</span><span class="en">To be part of any ministry, you need to be a member of the church. This protects both the church and every person who serves.</span></p>
+      </div>
+      <a class="btn btn-primary" href="membresia.html"><span class="es">Hazte miembro</span><span class="en">Become a member</span> <span class="arr">→</span></a>
     </div>
   </div>
 </section>

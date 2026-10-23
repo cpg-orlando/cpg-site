@@ -463,3 +463,8 @@ footer .legal { font-size: .85rem; color: var(--faint); }
 .affiliation { margin-top: 36px; padding: 24px 26px; border-radius: var(--radius); border: 1px solid var(--line); display: grid; gap: 10px; color: var(--muted); max-width: 900px; }
 @media (max-width: 600px) { .faith summary { grid-template-columns: 36px 1fr auto; padding: 16px; } .faith-body { padding: 0 16px 20px; } }
 .purpose-text em { font-style: normal; background: var(--grad); -webkit-background-clip: text; background-clip: text; color: transparent; }
+
+.serve-note { margin-top: 28px; display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 20px 32px; padding: clamp(22px, 4vw, 34px); border-radius: var(--radius); border: 1px solid var(--line-2); background: linear-gradient(130deg, rgba(109,61,240,.22), rgba(44,91,255,.16) 55%, rgba(15,181,212,.14)); }
+.serve-note > .stack { flex: 1 1 420px; min-width: 0; }
+.serve-title { font-family: var(--font-display); font-weight: 700; font-size: clamp(1.4rem, 2.6vw, 1.9rem); letter-spacing: -0.02em; line-height: 1.15; }
+.serve-note p:not(.eyebrow):not(.serve-title) { color: #c9cbe0; max-width: 60ch; }

@@ -766,7 +766,7 @@ def min_rows():
     out = ""
     for img, pos, nes, nen, wes, wen, des, den, link in MINS:
         more = (f'<a class="more" href="{link[0]}" target="_blank" rel="noopener">{t(link[1], link[2])}</a>' if link
-                else f'<a class="more" href="visitanos.html">{t("Quiero participar →", "I want to join →")}</a>')
+                else f'<a class="more" href="membresia.html">{t("Quiero servir →", "I want to serve →")}</a>')
         out += f"""
       <article class="min-row">
         <img src="images/{img}" alt="" loading="lazy" style="object-position: {pos}">
@@ -785,6 +785,15 @@ page("ministerios.html", "Ministerios · CPG", f"""
 <section>
   <div class="wrap">
     {min_rows()}
+    <div class="serve-note">
+      <div class="stack" style="gap:8px">
+        <p class="eyebrow">{t("Para servir", "To serve")}</p>
+        <p class="serve-title">{t("Servir comienza con ser parte de la familia", "Serving starts with belonging")}</p>
+        <p>{t("Para formar parte de cualquier ministerio es necesario ser miembro de la iglesia. Esto protege tanto a la iglesia como a cada persona que sirve.",
+              "To be part of any ministry, you need to be a member of the church. This protects both the church and every person who serves.")}</p>
+      </div>
+      <a class="btn btn-primary" href="membresia.html">{t("Hazte miembro", "Become a member")} <span class="arr">→</span></a>
+    </div>
   </div>
 </section>
 """)
@@ -1105,6 +1114,8 @@ page("membresia.html", "Hazte Miembro · CPG", f"""
       {head(t("Membresía", "Membership"), t("Echa raíces en esta casa", "Put down roots in this house"))}
       <p class="lead">{t("Si Casa Portadores de Gloria se ha vuelto tu hogar, nos encantaría caminar contigo en el siguiente paso. Déjanos tus datos y los pastores te contactarán con los detalles.",
                         "If Casa Portadores de Gloria has become your home, we'd love to walk with you in the next step. Leave your info and the pastors will contact you with the details.")}</p>
+      <p class="lead">{t("La membresía también es el primer paso para servir en cualquiera de nuestros ministerios.",
+                        "Membership is also the first step to serving in any of our ministries.")}</p>
       <div class="soon-block" style="padding:20px 22px">
         <span class="soon">{t("Próximamente", "Coming soon")}</span>
         <p style="color:var(--muted)">{t("Los pasos y las fechas de la clase de membresía.", "Membership steps and class dates.")}</p>

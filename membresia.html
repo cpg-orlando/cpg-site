@@ -477,6 +477,11 @@ footer .legal { font-size: .85rem; color: var(--faint); }
 @media (max-width: 600px) { .faith summary { grid-template-columns: 36px 1fr auto; padding: 16px; } .faith-body { padding: 0 16px 20px; } }
 .purpose-text em { font-style: normal; background: var(--grad); -webkit-background-clip: text; background-clip: text; color: transparent; }
 
+.serve-note { margin-top: 28px; display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 20px 32px; padding: clamp(22px, 4vw, 34px); border-radius: var(--radius); border: 1px solid var(--line-2); background: linear-gradient(130deg, rgba(109,61,240,.22), rgba(44,91,255,.16) 55%, rgba(15,181,212,.14)); }
+.serve-note > .stack { flex: 1 1 420px; min-width: 0; }
+.serve-title { font-family: var(--font-display); font-weight: 700; font-size: clamp(1.4rem, 2.6vw, 1.9rem); letter-spacing: -0.02em; line-height: 1.15; }
+.serve-note p:not(.eyebrow):not(.serve-title) { color: #c9cbe0; max-width: 60ch; }
+
 </style>
 </head>
 <body>
@@ -526,6 +531,7 @@ footer .legal { font-size: .85rem; color: var(--faint); }
     <div class="stack">
       <div class="section-head"><p class="eyebrow"><span class="es">Membresía</span><span class="en">Membership</span></p><h2><span class="es">Echa raíces en esta casa</span><span class="en">Put down roots in this house</span></h2></div>
       <p class="lead"><span class="es">Si Casa Portadores de Gloria se ha vuelto tu hogar, nos encantaría caminar contigo en el siguiente paso. Déjanos tus datos y los pastores te contactarán con los detalles.</span><span class="en">If Casa Portadores de Gloria has become your home, we'd love to walk with you in the next step. Leave your info and the pastors will contact you with the details.</span></p>
+      <p class="lead"><span class="es">La membresía también es el primer paso para servir en cualquiera de nuestros ministerios.</span><span class="en">Membership is also the first step to serving in any of our ministries.</span></p>
       <div class="soon-block" style="padding:20px 22px">
         <span class="soon"><span class="es">Próximamente</span><span class="en">Coming soon</span></span>
         <p style="color:var(--muted)"><span class="es">Los pasos y las fechas de la clase de membresía.</span><span class="en">Membership steps and class dates.</span></p>
