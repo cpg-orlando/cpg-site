@@ -691,3 +691,7 @@ footer h2 { color: var(--gold); }
 .exp-ico svg { width: 28px; height: 28px; stroke-width: 1.7; }
 .expect > div:hover .exp-ico { background: var(--gold); color: var(--bg); }
 .expect h3 { font-size: 1.45rem; }
+
+/* giving: online card leads */
+.way-online { gap: 10px; border-color: var(--line-2); background: linear-gradient(130deg, rgba(29,58,99,.75), rgba(19,40,74,.6)); }
+.way-online .btn { justify-self: start; margin-top: 8px; }

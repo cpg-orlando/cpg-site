@@ -34,6 +34,7 @@ def social_icons():
             f'<a href="{INSTAGRAM}" target="_blank" rel="noopener" aria-label="Instagram">{ICON_IG}</a></div>')
 
 
+GIVE_URL = "https://give.tithe.ly/?formId=1d0a6db2-1fd2-4e47-a150-3e891cfab3f8&amp;locationId=8738e6ec-eb21-4808-9f24-1148a0f17b5d&amp;fundId=c3bb9a7b-24f9-4adc-bb63-8488060e0ea7"
 MAPS = "https://www.google.com/maps/search/?api=1&query=5200+Old+Cheney+Highway+Orlando+FL+32807"
 
 
@@ -77,7 +78,7 @@ def header(current):
 <header class="site-header">
   <div class="wrap">
     <a class="brand" href="index.html"><img class="logo" src="images/logo.png" alt="Casa Portadores de Gloria" width="600" height="511"></a>
-    <a class="give-pill" href="ofrendar.html">{t("Ofrendar", "Give")}</a>
+    <a class="give-pill" href="{GIVE_URL}" target="_blank" rel="noopener">{t("Ofrendar", "Give")}</a>
     <div class="lang" role="group" aria-label="Idioma / Language">
       <button type="button" id="lang-es" data-set-lang="es" aria-pressed="true">ES</button>
       <button type="button" id="lang-en" data-set-lang="en" aria-pressed="false">EN</button>
@@ -943,14 +944,16 @@ page("ofrendar.html", "Ofrendar · CPG", f"""
       <p class="lead">{t("Diezmar es un acto de adoración y confianza en Dios. Gracias por sembrar en esta casa.", "Tithing is an act of worship and trust in God. Thank you for sowing into this house.")}</p>
     </div>
     <div class="ways">
+      <div class="way way-online">
+        <span class="soon">{t("Rápido y seguro", "Quick and secure")}</span>
+        <h3>{t("En línea", "Online")}</h3>
+        <p>{t("Diezma y ofrenda desde tu teléfono o computadora a través de Tithe.ly, nuestra plataforma de ofrendas.",
+              "Tithe and give from your phone or computer through Tithe.ly, our giving platform.")}</p>
+        <a class="btn btn-primary" href="{GIVE_URL}" target="_blank" rel="noopener">{t("Ofrendar en línea", "Give online")} <span class="arr">→</span></a>
+      </div>
       <div class="way">
         <h3>{t("En persona", "In person")}</h3>
         <p>{t("Durante cualquiera de nuestros servicios.", "During any of our services.")}</p>
-      </div>
-      <div class="way">
-        <span class="soon">{t("Próximamente", "Coming soon")}</span>
-        <h3>{t("En línea", "Online")}</h3>
-        <p>{t("Pronto podrás diezmar y ofrendar de forma segura desde aquí.", "Soon you'll be able to tithe and give securely right here.")}</p>
       </div>
     </div>
   </div>
