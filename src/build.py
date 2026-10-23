@@ -290,7 +290,7 @@ PAGE_LABELS = {
     "oracion.html": "Oración", "visitanos.html": "Visítanos", "membresia.html": "Membresía",
 }
 PHOTOS = {f: {} for f in PAGE_LABELS}
-PHOTOS["index.html"][1] = ("congregacion-adorando.jpg", "60% 35%")
+PHOTOS["index.html"][1] = ("equipo-alabanza.jpg", "8% 30%")
 PHOTOS["index.html"][3] = ("cruz-verde.jpg", "center 35%")
 PHOTOS["index.html"][2] = ("pastores-avatar.jpg", "center")
 PHOTOS["servicios.html"][2] = ("alabanza-domingo.jpg", "45% 40%")
