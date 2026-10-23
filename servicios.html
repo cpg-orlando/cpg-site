@@ -654,6 +654,49 @@ footer h2 { color: var(--gold); }
 .loc-actions { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 6px; }
 @media (max-width: 820px) { .loc-card { grid-template-columns: 1fr; } .loc-visual { min-height: 220px; } }
 
+/* "Dónde estamos": real map figure + pinned photo */
+.where { border-top: 1px solid var(--line); }
+.where-grid { display: grid; grid-template-columns: minmax(0, 7fr) minmax(0, 5fr); gap: clamp(36px, 6vw, 88px); align-items: center; }
+.where-fig { margin: 0; position: relative; padding: 0 0 56px 0; }
+.where-map { position: relative; aspect-ratio: 4 / 3; border: 1px solid var(--line-2); border-radius: var(--radius); overflow: hidden; background: #0f1f36; box-shadow: 0 50px 90px -40px #000; }
+.where-map .loc-map { position: absolute; inset: 0; width: 100%; height: 100%; }
+.where-map iframe { position: absolute; inset: -60px -60px; width: calc(100% + 120px); height: calc(100% + 120px); border: 0; pointer-events: none;
+  filter: grayscale(1) invert(.92) contrast(.9) brightness(.95); }
+.where-tint { position: absolute; inset: 0; pointer-events: none; background: #16345f; mix-blend-mode: color; opacity: .9; }
+.where-tint::after { content: ""; position: absolute; inset: 0; background: radial-gradient(ellipse at 50% 50%, transparent 45%, rgba(11,22,38,.75) 100%); }
+.where-ring { position: absolute; left: 50%; top: 50%; width: 0; height: 0; pointer-events: none; }
+.where-ring i { position: absolute; left: -22px; top: -22px; width: 44px; height: 44px; border-radius: 50%; border: 2px solid var(--gold); animation: whereRing 2.6s ease-out infinite; }
+.where-ring i + i { animation-delay: 1.3s; }
+@keyframes whereRing { from { transform: scale(.4); opacity: .9; } to { transform: scale(3.4); opacity: 0; } }
+.where-tag { position: absolute; left: 16px; top: 16px; padding: 8px 12px; background: rgba(11,22,38,.88); border: 1px solid var(--line-2); border-radius: 2px; color: var(--gold); font-size: .74rem; font-weight: 600; letter-spacing: .14em; text-transform: uppercase; }
+.where-open { position: absolute; inset: 0; display: flex; align-items: flex-start; justify-content: flex-end; padding: 16px; text-decoration: none; }
+.where-open span { padding: 8px 12px; background: var(--gold); color: var(--bg); border-radius: 2px; font-size: .74rem; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; opacity: 0; transform: translateY(-4px); transition: opacity .25s ease, transform .25s ease; }
+.where-open:hover span, .where-open:focus-visible span { opacity: 1; transform: none; }
+.where-photo { position: absolute; left: clamp(-28px, -2vw, 0px); bottom: 0; width: 38%; aspect-ratio: 4 / 5; object-fit: cover; border-radius: 4px; border: 6px solid var(--bg); outline: 1px solid var(--line-2); box-shadow: 0 30px 60px -20px #000; transform: rotate(-3deg); filter: sepia(.15); }
+.where-fig figcaption { position: absolute; right: 0; bottom: 14px; color: var(--muted); font-size: .78rem; letter-spacing: .14em; text-transform: uppercase; }
+.where-info { display: grid; gap: 22px; }
+.where-info .section-head { margin-bottom: 0; }
+.where-info address { font-style: normal; display: grid; gap: 2px; }
+.where-info address b { font-family: var(--font-display); font-weight: 400; font-size: clamp(1.6rem, 3vw, 2.3rem); letter-spacing: -0.015em; line-height: 1.1; }
+.where-info address span { color: var(--muted); font-size: 1.05rem; }
+.where-times { list-style: none; margin: 0; padding: 0; border-top: 1px solid var(--line); }
+.where-times li { display: grid; grid-template-columns: 56px 92px 1fr; align-items: baseline; gap: 12px; padding: 12px 0; border-bottom: 1px solid var(--line); }
+.where-times .d { color: var(--gold); font-size: .74rem; font-weight: 700; letter-spacing: .16em; text-transform: uppercase; }
+.where-times b { font-family: var(--font-display); font-weight: 400; font-size: 1.25rem; font-variant-numeric: tabular-nums; }
+.where-times .n { color: var(--muted); }
+.where-note { margin: 0; color: var(--muted); font-size: .95rem; }
+.where-plan { justify-self: start; color: var(--gold); text-decoration: none; font-weight: 600; font-size: .95rem; }
+.where-plan:hover .arr { transform: translateX(4px); }
+.where-plan .arr { display: inline-block; transition: transform .25s ease; }
+@media (max-width: 900px) {
+  .where-grid { grid-template-columns: minmax(0, 1fr); }
+  .where-fig { padding-bottom: 44px; }
+  .where-photo { left: 8px; width: 34%; border-width: 4px; }
+  .where-fig figcaption { font-size: .68rem; bottom: 10px; }
+}
+@media (max-width: 420px) { .where-times li { grid-template-columns: 44px 78px 1fr; gap: 8px; } .where-times b { font-size: 1.1rem; } .where-fig figcaption { display: none; } }
+@media (prefers-reduced-motion: reduce) { .where-ring i { animation: none; opacity: .6; } }
+
 </style>
 </head>
 <body>
@@ -725,7 +768,7 @@ footer h2 { color: var(--gold); }
     </div>
     
     <div class="loc-card">
-      <a class="loc-visual" href="https://www.google.com/maps/search/?api=1&query=5200+Old+Cheney+Highway+Orlando+FL+32807" target="_blank" rel="noopener" aria-label="<span class="es">Abrir mapa</span><span class="en">Open map</span>"><svg class="loc-map" viewBox="0 0 600 340" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
+      <a class="loc-visual" href="https://www.google.com/maps/search/?api=1&query=5200+Old+Cheney+Highway+Orlando+FL+32807" target="_blank" rel="noopener" aria-label="Abrir mapa / Open map"><svg class="loc-map" viewBox="0 0 600 340" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
   <rect width="600" height="340" fill="#0f1f36"/>
   <g stroke="#1d3354" stroke-width="1">
     <path d="M0 40H600M0 95H600M0 150H600M0 205H600M0 260H600M0 315H600"/>

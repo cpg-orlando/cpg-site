@@ -648,6 +648,72 @@ page("index.html", "Casa Portadores de Gloria", f"""
 </section>
 """)
 
+APPLE_MAPS = "https://maps.apple.com/?q=Casa+Portadores+de+Gloria&address=5200+Old+Cheney+Hwy,+Orlando,+FL+32807"
+MAP_SVG = """<svg class="loc-map" viewBox="0 0 600 340" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
+  <rect width="600" height="340" fill="#0f1f36"/>
+  <g stroke="#1d3354" stroke-width="1">
+    <path d="M0 40H600M0 95H600M0 150H600M0 205H600M0 260H600M0 315H600"/>
+    <path d="M60 0V340M140 0V340M220 0V340M380 0V340M460 0V340M540 0V340"/>
+  </g>
+  <rect x="70" y="105" width="60" height="38" rx="3" fill="#13284a"/><rect x="390" y="50" width="60" height="38" rx="3" fill="#13284a"/>
+  <rect x="470" y="215" width="62" height="38" rx="3" fill="#13284a"/><rect x="150" y="215" width="62" height="38" rx="3" fill="#13284a"/>
+  <path d="M-10 250 C120 230 200 190 300 172 S480 120 610 96" fill="none" stroke="#2a4670" stroke-width="18" stroke-linecap="round"/>
+  <path d="M-10 250 C120 230 200 190 300 172 S480 120 610 96" fill="none" stroke="#d6a84a" stroke-width="2" stroke-dasharray="10 9" opacity=".75"/>
+  <path d="M300 -10V350" stroke="#22395c" stroke-width="12"/>
+  <text x="430" y="132" fill="#6f84a6" font-family="Figtree, Arial, sans-serif" font-size="13" letter-spacing="2" transform="rotate(-13 430 132)">OLD CHENEY HWY</text>
+  <g class="loc-pin" transform="translate(300 172)">
+    <circle class="loc-pulse" r="18" fill="#d6a84a" opacity=".35"/>
+    <circle class="loc-pulse d2" r="18" fill="#d6a84a" opacity=".25"/>
+    <path d="M0 -6 C-14 -6 -22 -18 -22 -30 C-22 -43 -12 -52 0 -52 C12 -52 22 -43 22 -30 C22 -18 14 -6 0 -6Z" transform="translate(0 6)" fill="#d6a84a"/>
+    <circle cy="-24" r="7.5" fill="#0b1626"/>
+  </g>
+</svg>"""
+
+
+
+MAP_EMBED = "https://maps.google.com/maps?q=5200%20Old%20Cheney%20Highway%2C%20Orlando%2C%20FL%2032807&z=15&output=embed"
+
+
+def where_section():
+    rows = [
+        (t("Dom", "Sun"), "11:00 AM", t("Servicio Principal", "Main Service")),
+        (t("Mié", "Wed"), "7:00 PM", t("Estudio Bíblico", "Bible Study")),
+        (t("Vie", "Fri"), "7:00 PM", t("Servicio de Oración", "Prayer Service")),
+    ]
+    times = "".join(f'<li><span class="d">{d}</span><b>{h}</b><span class="n">{n}</span></li>' for d, h, n in rows)
+    return f"""
+<section class="where" id="ubicacion">
+  <div class="wrap where-grid">
+    <figure class="where-fig">
+      <div class="where-map">
+        {MAP_SVG}
+        <iframe src="{MAP_EMBED}" title="Mapa / Map: Casa Portadores de Gloria" loading="lazy" referrerpolicy="no-referrer-when-downgrade" tabindex="-1"></iframe>
+        <span class="where-tint" aria-hidden="true"></span>
+        <span class="where-ring" aria-hidden="true"><i></i><i></i></span>
+        <span class="where-tag">5200 Old Cheney Hwy</span>
+        <a class="where-open" href="{MAPS}" target="_blank" rel="noopener" aria-label="Abrir en Google Maps / Open in Google Maps"><span>{t("Abrir mapa", "Open map")} ↗</span></a>
+      </div>
+      <img class="where-photo" src="images/edificio.jpg" alt="Pasillo exterior de la iglesia" loading="lazy">
+      <figcaption>Casa Portadores de Gloria · Orlando, FL</figcaption>
+    </figure>
+    <div class="where-info">
+      {head(t("Ubicación", "Location"), t("Dónde <em>estamos</em>", "Where <em>we are</em>"))}
+      <address><b>5200 Old Cheney Highway</b><span>Orlando, FL 32807</span></address>
+      <ul class="where-times">{times}</ul>
+      <p class="where-note">{t("Estacionamiento gratis en el lugar. Mensaje en español con traducción al inglés.",
+                              "Free parking on site. Message in Spanish with English translation.")}</p>
+      <div class="cta-row">
+        <a class="btn btn-primary" href="{MAPS}" target="_blank" rel="noopener">{t("Cómo llegar", "Get directions")} <span class="arr">→</span></a>
+        <a class="btn btn-outline" href="{APPLE_MAPS}" target="_blank" rel="noopener">Apple Maps</a>
+        <button type="button" class="btn btn-outline loc-copy" data-copy="5200 Old Cheney Highway, Orlando, FL 32807">
+          <span class="c1">{t("Copiar dirección", "Copy address")}</span><span class="c2" hidden>{t("¡Copiada!", "Copied!")}</span>
+        </button>
+      </div>
+      <a class="where-plan" href="visitanos.html">{t("¿Primera vez? Planea tu visita", "First time? Plan your visit")} <span class="arr">→</span></a>
+    </div>
+  </div>
+</section>"""
+
 # ---------------------------------------------------------------- 2. Who we are
 page("nosotros.html", "Quiénes Somos · CPG", f"""
 {banner("predicacion-logo.jpg", t("Nosotros", "About"), t("Quiénes somos", "Who we are"), pos="45% center")}
@@ -666,20 +732,7 @@ page("nosotros.html", "Quiénes Somos · CPG", f"""
     <img class="photo" src="images/bienvenida.jpg" alt="Saludos al final del servicio" loading="lazy" style="object-position: 60% center">
   </div>
 </section>
-<section class="band" id="ubicacion">
-  <div class="wrap split">
-    <img class="photo" src="images/edificio.jpg" alt="Pasillo exterior de la iglesia" loading="lazy">
-    <div class="stack">
-      {head(t("Ubicación", "Location"), t("Dónde estamos", "Where we are"))}
-      <address class="lead" style="font-style:normal"><strong style="color:var(--ink)">5200 Old Cheney Highway</strong><br>Orlando, FL 32807</address>
-      <p class="lead">{t("Hay estacionamiento disponible en el lugar.", "Parking is available on site.")}</p>
-      <div class="cta-row">
-        <a class="btn btn-ink" href="{MAPS}" target="_blank" rel="noopener">{t("Abrir en Google Maps", "Open in Google Maps")}</a>
-        <a class="btn btn-outline" href="visitanos.html">{t("Planea tu visita", "Plan a visit")}</a>
-      </div>
-    </div>
-  </div>
-</section>
+{where_section()}
 """)
 
 # ---------------------------------------------------------------- 3. Pastors
@@ -731,32 +784,10 @@ page("pastores.html", "Nuestros Pastores · CPG", f"""
 </section>
 """)
 
-APPLE_MAPS = "https://maps.apple.com/?q=Casa+Portadores+de+Gloria&address=5200+Old+Cheney+Hwy,+Orlando,+FL+32807"
-MAP_SVG = """<svg class="loc-map" viewBox="0 0 600 340" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
-  <rect width="600" height="340" fill="#0f1f36"/>
-  <g stroke="#1d3354" stroke-width="1">
-    <path d="M0 40H600M0 95H600M0 150H600M0 205H600M0 260H600M0 315H600"/>
-    <path d="M60 0V340M140 0V340M220 0V340M380 0V340M460 0V340M540 0V340"/>
-  </g>
-  <rect x="70" y="105" width="60" height="38" rx="3" fill="#13284a"/><rect x="390" y="50" width="60" height="38" rx="3" fill="#13284a"/>
-  <rect x="470" y="215" width="62" height="38" rx="3" fill="#13284a"/><rect x="150" y="215" width="62" height="38" rx="3" fill="#13284a"/>
-  <path d="M-10 250 C120 230 200 190 300 172 S480 120 610 96" fill="none" stroke="#2a4670" stroke-width="18" stroke-linecap="round"/>
-  <path d="M-10 250 C120 230 200 190 300 172 S480 120 610 96" fill="none" stroke="#d6a84a" stroke-width="2" stroke-dasharray="10 9" opacity=".75"/>
-  <path d="M300 -10V350" stroke="#22395c" stroke-width="12"/>
-  <text x="430" y="132" fill="#6f84a6" font-family="Figtree, Arial, sans-serif" font-size="13" letter-spacing="2" transform="rotate(-13 430 132)">OLD CHENEY HWY</text>
-  <g class="loc-pin" transform="translate(300 172)">
-    <circle class="loc-pulse" r="18" fill="#d6a84a" opacity=".35"/>
-    <circle class="loc-pulse d2" r="18" fill="#d6a84a" opacity=".25"/>
-    <path d="M0 -6 C-14 -6 -22 -18 -22 -30 C-22 -43 -12 -52 0 -52 C12 -52 22 -43 22 -30 C22 -18 14 -6 0 -6Z" transform="translate(0 6)" fill="#d6a84a"/>
-    <circle cy="-24" r="7.5" fill="#0b1626"/>
-  </g>
-</svg>"""
-
-
 def location_card():
     return f"""
     <div class="loc-card">
-      <a class="loc-visual" href="{MAPS}" target="_blank" rel="noopener" aria-label="{t('Abrir mapa', 'Open map')}">{MAP_SVG}
+      <a class="loc-visual" href="{MAPS}" target="_blank" rel="noopener" aria-label="Abrir mapa / Open map">{MAP_SVG}
         <span class="loc-chip">{t("Te esperamos aquí", "Find us here")}</span>
       </a>
       <div class="loc-info">
