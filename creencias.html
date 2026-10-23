@@ -619,11 +619,18 @@ footer h2 { color: var(--gold); }
 .gallery.expanded img:nth-child(n+4) { display: block; animation: rise .45s ease backwards; }
 .gallery-actions { margin-top: 18px; display: flex; justify-content: center; }
 @media (max-width: 760px) {
-  .gallery { grid-template-columns: 1fr 1fr; grid-auto-rows: 170px; gap: 10px; }
-  .gallery img:nth-child(n+3) { display: none; }
-  .gallery:not(.expanded)::after { width: calc((100% - 10px) / 2); height: 170px; content: var(--more-m, ""); }
-  .gallery.expanded img { display: block; }
+  /* phones: swipeable carousel of large photos */
+  .gallery, .gallery.expanded { display: flex; gap: 10px; overflow-x: auto; scroll-snap-type: x mandatory; -webkit-overflow-scrolling: touch;
+    margin-left: calc(-1 * var(--gutter-l)); margin-right: calc(-1 * var(--gutter-r)); padding: 0 var(--gutter-r) 6px var(--gutter-l); scroll-padding-left: var(--gutter-l); scrollbar-width: none; }
+  .gallery::-webkit-scrollbar { display: none; }
+  .gallery img, .gallery img:nth-child(n), .gallery.expanded img { display: block; flex: 0 0 84%; height: 300px; scroll-snap-align: start; border-radius: 8px; }
+  .gallery:not(.expanded)::after { display: none; }
+  .gallery-actions { display: none; }
+  .swipe-hint { display: flex; }
 }
+
+.swipe-hint { display: none; align-items: center; gap: 8px; margin-top: 12px; color: var(--muted); font-size: .85rem; letter-spacing: .04em; }
+.swipe-hint b { color: var(--gold); font-weight: 600; font-variant-numeric: tabular-nums; }
 
 </style>
 </head>
@@ -918,6 +925,13 @@ footer h2 { color: var(--gold); }
     var total = gal2.querySelectorAll('img').length;
     if (total > 3) gal2.style.setProperty('--more', '"+' + (total - 2) + '"');
     if (total > 2) gal2.style.setProperty('--more-m', '"+' + (total - 1) + '"');
+    var pos = document.getElementById('gal-pos'), tot = document.getElementById('gal-total');
+    if (tot) tot.textContent = total;
+    gal2.addEventListener('scroll', function () {
+      var first = gal2.querySelector('img'); if (!first || !pos) return;
+      var step = first.getBoundingClientRect().width + 10;
+      pos.textContent = Math.min(total, Math.round(gal2.scrollLeft / step) + 1);
+    }, { passive: true });
     gtog.addEventListener('click', function () {
       var open = gal2.classList.toggle('expanded');
       gtog.setAttribute('aria-expanded', String(open));

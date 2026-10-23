@@ -239,6 +239,13 @@ SCRIPT = """
     var total = gal2.querySelectorAll('img').length;
     if (total > 3) gal2.style.setProperty('--more', '"+' + (total - 2) + '"');
     if (total > 2) gal2.style.setProperty('--more-m', '"+' + (total - 1) + '"');
+    var pos = document.getElementById('gal-pos'), tot = document.getElementById('gal-total');
+    if (tot) tot.textContent = total;
+    gal2.addEventListener('scroll', function () {
+      var first = gal2.querySelector('img'); if (!first || !pos) return;
+      var step = first.getBoundingClientRect().width + 10;
+      pos.textContent = Math.min(total, Math.round(gal2.scrollLeft / step) + 1);
+    }, { passive: true });
     gtog.addEventListener('click', function () {
       var open = gal2.classList.toggle('expanded');
       gtog.setAttribute('aria-expanded', String(open));
@@ -892,6 +899,7 @@ page("destacados.html", "Momentos Destacados · CPG", f"""
       <img src="images/cantante-morado.jpg" alt="Adoración en el servicio" loading="lazy" style="object-position: center 25%">
       <img src="images/guitarra.jpg" alt="Líder de alabanza con su guitarra" loading="lazy" style="object-position: center 40%">
     </div>
+    <p class="swipe-hint" aria-hidden="true"><b id="gal-pos">1</b> / <span id="gal-total">9</span> · {t("Desliza para ver más →", "Swipe for more →")}</p>
     <div class="gallery-actions">
       <button type="button" class="btn btn-outline" id="gallery-toggle" aria-expanded="false" aria-controls="gallery">
         <span class="open-label">{t("Ver galería completa", "View full gallery")} (9)</span><span class="close-label" hidden>{t("Ver menos", "Show less")}</span>
