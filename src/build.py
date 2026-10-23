@@ -368,7 +368,7 @@ P["servicios.html"].update({1: ("pastor-luces.jpg", "55% 40%"), 3: ("nino-biblia
 P["ministerios.html"].update({1: ("ninos-biblias.jpg", "40% 45%"),
     2: ("hombres-orando.jpg", "50% center"), 3: ("damas-oracion.jpg", "45% 55%"),
     4: ("youth-adoracion.jpg", "40% 30%"), 5: ("ninos-clase.jpg", "45% center"),
-    6: ("equipo-pulpito.jpg", "50% 60%"), 7: ("entrada-saludo.jpg", "55% center"),
+    6: ("alabanza-cantante.jpg", "50% 30%"), 7: ("entrada-saludo.jpg", "55% center"),
     8: ("noche-internacional.jpg", "40% center"), 9: ("hermanos-ventana.jpg", "45% center")})
 P["eventos.html"][1] = ("salon-reunion.jpg", "center 60%")
 P["ofrendar.html"][1] = ("manos-alzadas.jpg", "40% center")
