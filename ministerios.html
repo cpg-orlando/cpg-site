@@ -482,6 +482,29 @@ footer .legal { font-size: .85rem; color: var(--faint); }
 .serve-title { font-family: var(--font-display); font-weight: 700; font-size: clamp(1.4rem, 2.6vw, 1.9rem); letter-spacing: -0.02em; line-height: 1.15; }
 .serve-note p:not(.eyebrow):not(.serve-title) { color: #c9cbe0; max-width: 60ch; }
 
+/* ministries: photo bento with hover reveal */
+.min-bento { display: grid; grid-template-columns: repeat(4, 1fr); grid-auto-rows: 300px; gap: 14px; }
+.min-tile { position: relative; overflow: hidden; border-radius: var(--radius); border: 1px solid var(--line); isolation: isolate; display: grid; align-content: end; color: #fff; min-width: 0; outline: none; }
+.min-tile:nth-child(1), .min-tile:nth-child(2), .min-tile:nth-child(6), .min-tile:nth-child(7) { grid-column: span 2; }
+.min-tile:nth-child(3) { grid-column: span 2; grid-row: span 2; }
+.min-tile:nth-child(8) { grid-column: span 2; }
+.min-tile > img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; z-index: -2; transition: transform .9s cubic-bezier(.2,.7,.2,1), filter .6s ease; filter: saturate(.95); }
+.min-tile::after { content: ""; position: absolute; inset: 0; z-index: -1; background: linear-gradient(180deg, rgba(7,7,11,0) 30%, rgba(7,7,11,.92) 100%); transition: background .5s ease; }
+.min-tile .body { padding: 22px 24px; display: grid; gap: 4px; }
+.min-tile .who { font-size: .72rem; font-weight: 700; letter-spacing: .16em; text-transform: uppercase; color: #9fd8ff; }
+.min-tile h3 { font-size: clamp(1.5rem, 2.4vw, 2.1rem); letter-spacing: -0.03em; }
+.min-tile:nth-child(3) h3 { font-size: clamp(2rem, 3.6vw, 3rem); }
+.min-tile .reveal { display: grid; gap: 10px; max-height: 0; opacity: 0; overflow: hidden; transition: max-height .5s ease, opacity .4s ease, margin .4s ease; }
+.min-tile .reveal p { color: #d5d7e6; font-size: .95rem; line-height: 1.5; }
+.min-tile .more { font-weight: 600; color: #fff; text-decoration: none; width: fit-content; padding: 8px 14px; border-radius: 999px; background: rgba(255,255,255,.14); backdrop-filter: blur(8px); }
+.min-tile .more:hover { background: #fff; color: #07070b; }
+.min-tile:hover > img, .min-tile:focus-within > img { transform: scale(1.07); filter: saturate(1.1); }
+.min-tile:hover::after, .min-tile:focus-within::after { background: linear-gradient(180deg, rgba(7,7,11,.15) 0%, rgba(7,7,11,.94) 100%); }
+.min-tile:hover .reveal, .min-tile:focus-within .reveal { max-height: 240px; opacity: 1; margin-top: 6px; }
+@media (hover: none) { .min-tile .reveal { max-height: none; opacity: 1; margin-top: 6px; } .min-tile::after { background: linear-gradient(180deg, rgba(7,7,11,.05) 20%, rgba(7,7,11,.94) 100%); } }
+@media (max-width: 960px) { .min-bento { grid-template-columns: 1fr 1fr; grid-auto-rows: 280px; } .min-tile:nth-child(n) { grid-column: span 1; grid-row: span 1; } .min-tile:nth-child(3), .min-tile:nth-child(8) { grid-column: span 2; } }
+@media (max-width: 600px) { .min-bento { grid-template-columns: 1fr; grid-auto-rows: 340px; } .min-tile:nth-child(n) { grid-column: span 1; } }
+
 </style>
 </head>
 <body>
@@ -528,77 +551,69 @@ footer .legal { font-size: .85rem; color: var(--faint); }
 </section>
 <section>
   <div class="wrap">
-    <div class="min-list">
-      <article class="min-row">
+    <div class="min-bento">
+      <article class="min-tile" tabindex="0">
         <img src="images/hombres-orando.jpg" style="object-position: 50% center" alt="" loading="lazy">
         <div class="body">
           <span class="who"><span class="es">Hermandad</span><span class="en">Brotherhood</span></span>
           <h3><span class="es">Caballeros</span><span class="en">Men&#39;s Ministry</span></h3>
-          <p><span class="es">Hombres que se apoyan, oran juntos y crecen como líderes en su hogar y en la iglesia.</span><span class="en">Men who support each other, pray together, and grow as leaders at home and in the church.</span></p>
-          <a class="more" href="membresia.html"><span class="es">Quiero servir →</span><span class="en">I want to serve →</span></a>
+          <div class="reveal"><p><span class="es">Hombres que se apoyan, oran juntos y crecen como líderes en su hogar y en la iglesia.</span><span class="en">Men who support each other, pray together, and grow as leaders at home and in the church.</span></p><a class="more" href="membresia.html"><span class="es">Quiero servir →</span><span class="en">I want to serve →</span></a></div>
         </div>
       </article>
-      <article class="min-row">
+      <article class="min-tile" tabindex="0">
         <img src="images/mujeres-sirviendo.jpg" style="object-position: 60% center" alt="" loading="lazy">
         <div class="body">
           <span class="who"><span class="es">Hermandad</span><span class="en">Sisterhood</span></span>
           <h3><span class="es">Damas</span><span class="en">Women&#39;s Ministry</span></h3>
-          <p><span class="es">Mujeres que se animan en la fe, oran unas por otras y sirven con amor.</span><span class="en">Women who encourage each other in faith, pray for one another, and serve with love.</span></p>
-          <a class="more" href="membresia.html"><span class="es">Quiero servir →</span><span class="en">I want to serve →</span></a>
+          <div class="reveal"><p><span class="es">Mujeres que se animan en la fe, oran unas por otras y sirven con amor.</span><span class="en">Women who encourage each other in faith, pray for one another, and serve with love.</span></p><a class="more" href="membresia.html"><span class="es">Quiero servir →</span><span class="en">I want to serve →</span></a></div>
         </div>
       </article>
-      <article class="min-row">
+      <article class="min-tile" tabindex="0">
         <img src="images/jovenes-adorando.jpg" style="object-position: 70% center" alt="" loading="lazy">
         <div class="body">
           <span class="who"><span class="es">CPG Youth &amp; YA</span><span class="en">CPG Youth &amp; YA</span></span>
           <h3><span class="es">Jóvenes y Jóvenes Adultos</span><span class="en">Youth &amp; Young Adults</span></h3>
-          <p><span class="es">Estudio bíblico los miércoles, Glory Night el último miércoles de cada mes, deportes y mucha comunión.</span><span class="en">Wednesday Bible study, Glory Night on the last Wednesday of every month, sports, and plenty of fellowship.</span></p>
-          <a class="more" href="https://cpgyouth.vercel.app" target="_blank" rel="noopener"><span class="es">Visitar CPG Youth →</span><span class="en">Visit CPG Youth →</span></a>
+          <div class="reveal"><p><span class="es">Estudio bíblico los miércoles, Glory Night el último miércoles de cada mes, deportes y mucha comunión.</span><span class="en">Wednesday Bible study, Glory Night on the last Wednesday of every month, sports, and plenty of fellowship.</span></p><a class="more" href="https://cpgyouth.vercel.app" target="_blank" rel="noopener"><span class="es">Visitar CPG Youth →</span><span class="en">Visit CPG Youth →</span></a></div>
         </div>
       </article>
-      <article class="min-row">
+      <article class="min-tile" tabindex="0">
         <img src="images/ninos-clase.jpg" style="object-position: 45% center" alt="" loading="lazy">
         <div class="body">
           <span class="who"><span class="es">Para los más pequeños</span><span class="en">For the little ones</span></span>
           <h3><span class="es">Niños</span><span class="en">Kids Ministry</span></h3>
-          <p><span class="es">Un lugar seguro y alegre donde los niños aprenden la Palabra de Dios y crecen en su fe.</span><span class="en">A safe, joyful place where kids learn God's Word and grow in their faith.</span></p>
-          <a class="more" href="membresia.html"><span class="es">Quiero servir →</span><span class="en">I want to serve →</span></a>
+          <div class="reveal"><p><span class="es">Un lugar seguro y alegre donde los niños aprenden la Palabra de Dios y crecen en su fe.</span><span class="en">A safe, joyful place where kids learn God's Word and grow in their faith.</span></p><a class="more" href="membresia.html"><span class="es">Quiero servir →</span><span class="en">I want to serve →</span></a></div>
         </div>
       </article>
-      <article class="min-row">
+      <article class="min-tile" tabindex="0">
         <img src="images/equipo-pulpito.jpg" style="object-position: 50% 60%" alt="" loading="lazy">
         <div class="body">
           <span class="who"><span class="es">Música, producción y medios</span><span class="en">Music, production &amp; media</span></span>
           <h3><span class="es">Ministerio de Alabanza</span><span class="en">Worship Team</span></h3>
-          <p><span class="es">Músicos, cantantes y el equipo de producción y medios que guían a la iglesia a adorar y llevan cada servicio en vivo.</span><span class="en">Musicians, singers, and the production and media team who lead the church in worship and bring every service live.</span></p>
-          <a class="more" href="membresia.html"><span class="es">Quiero servir →</span><span class="en">I want to serve →</span></a>
+          <div class="reveal"><p><span class="es">Músicos, cantantes y el equipo de producción y medios que guían a la iglesia a adorar y llevan cada servicio en vivo.</span><span class="en">Musicians, singers, and the production and media team who lead the church in worship and bring every service live.</span></p><a class="more" href="membresia.html"><span class="es">Quiero servir →</span><span class="en">I want to serve →</span></a></div>
         </div>
       </article>
-      <article class="min-row">
+      <article class="min-tile" tabindex="0">
         <img src="images/entrada-saludo.jpg" style="object-position: 55% center" alt="" loading="lazy">
         <div class="body">
           <span class="who"><span class="es">Servir con una sonrisa</span><span class="en">Serving with a smile</span></span>
           <h3><span class="es">Ujieres</span><span class="en">Ushers</span></h3>
-          <p><span class="es">Los primeros en recibirte: dan la bienvenida, ayudan a cada familia a encontrar su lugar y cuidan el orden del servicio.</span><span class="en">The first faces you meet: they welcome you, help every family find a seat, and keep each service running smoothly.</span></p>
-          <a class="more" href="membresia.html"><span class="es">Quiero servir →</span><span class="en">I want to serve →</span></a>
+          <div class="reveal"><p><span class="es">Los primeros en recibirte: dan la bienvenida, ayudan a cada familia a encontrar su lugar y cuidan el orden del servicio.</span><span class="en">The first faces you meet: they welcome you, help every family find a seat, and keep each service running smoothly.</span></p><a class="more" href="membresia.html"><span class="es">Quiero servir →</span><span class="en">I want to serve →</span></a></div>
         </div>
       </article>
-      <article class="min-row">
+      <article class="min-tile" tabindex="0">
         <img src="images/noche-internacional.jpg" style="object-position: 40% center" alt="" loading="lazy">
         <div class="body">
           <span class="who"><span class="es">Más allá de nuestras paredes</span><span class="en">Beyond our walls</span></span>
           <h3><span class="es">Misiones</span><span class="en">Missions</span></h3>
-          <p><span class="es">Llevamos el evangelio y el amor de Cristo a nuestra comunidad y a las naciones.</span><span class="en">We carry the gospel and the love of Christ to our community and to the nations.</span></p>
-          <a class="more" href="membresia.html"><span class="es">Quiero servir →</span><span class="en">I want to serve →</span></a>
+          <div class="reveal"><p><span class="es">Llevamos el evangelio y el amor de Cristo a nuestra comunidad y a las naciones.</span><span class="en">We carry the gospel and the love of Christ to our community and to the nations.</span></p><a class="more" href="membresia.html"><span class="es">Quiero servir →</span><span class="en">I want to serve →</span></a></div>
         </div>
       </article>
-      <article class="min-row">
+      <article class="min-tile" tabindex="0">
         <img src="images/hermanos-ventana.jpg" style="object-position: 45% center" alt="" loading="lazy">
         <div class="body">
           <span class="who"><span class="es">Sabiduría y experiencia</span><span class="en">Wisdom and experience</span></span>
           <h3><span class="es">Años Dorados</span><span class="en">Golden Years</span></h3>
-          <p><span class="es">Hombres y mujeres de fe probada que bendicen a la iglesia con su sabiduría, oración y ejemplo.</span><span class="en">Men and women of proven faith who bless the church with their wisdom, prayer, and example.</span></p>
-          <a class="more" href="membresia.html"><span class="es">Quiero servir →</span><span class="en">I want to serve →</span></a>
+          <div class="reveal"><p><span class="es">Hombres y mujeres de fe probada que bendicen a la iglesia con su sabiduría, oración y ejemplo.</span><span class="en">Men and women of proven faith who bless the church with their wisdom, prayer, and example.</span></p><a class="more" href="membresia.html"><span class="es">Quiero servir →</span><span class="en">I want to serve →</span></a></div>
         </div>
       </article>
     </div>
@@ -693,7 +708,7 @@ footer .legal { font-size: .85rem; color: var(--faint); }
   window.addEventListener('scroll', onScroll, { passive: true }); onScroll();
 
   // Gentle rise-in for blocks as they scroll into view (content is visible either way)
-  var targets = document.querySelectorAll('main section .wrap > *:not(.hero-frame), .quick > a, .services > div, .events > div, .min-list > article, .hl-grid > article, .gallery > img, .expect > div');
+  var targets = document.querySelectorAll('main section .wrap > *:not(.hero-frame), .quick > a, .services > div, .events > div, .min-bento > article, .hl-grid > article, .gallery > img, .expect > div');
   if ('IntersectionObserver' in window) {
     var io = new IntersectionObserver(function (entries) {
       entries.forEach(function (e) { if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); } });

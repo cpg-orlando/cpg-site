@@ -176,7 +176,7 @@ SCRIPT = """
   window.addEventListener('scroll', onScroll, { passive: true }); onScroll();
 
   // Gentle rise-in for blocks as they scroll into view (content is visible either way)
-  var targets = document.querySelectorAll('main section .wrap > *:not(.hero-frame), .quick > a, .services > div, .events > div, .min-list > article, .hl-grid > article, .gallery > img, .expect > div');
+  var targets = document.querySelectorAll('main section .wrap > *:not(.hero-frame), .quick > a, .services > div, .events > div, .min-bento > article, .hl-grid > article, .gallery > img, .expect > div');
   if ('IntersectionObserver' in window) {
     var io = new IntersectionObserver(function (entries) {
       entries.forEach(function (e) { if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); } });
@@ -768,16 +768,15 @@ def min_rows():
         more = (f'<a class="more" href="{link[0]}" target="_blank" rel="noopener">{t(link[1], link[2])}</a>' if link
                 else f'<a class="more" href="membresia.html">{t("Quiero servir →", "I want to serve →")}</a>')
         out += f"""
-      <article class="min-row">
+      <article class="min-tile" tabindex="0">
         <img src="images/{img}" alt="" loading="lazy" style="object-position: {pos}">
         <div class="body">
           <span class="who">{t(wes, wen)}</span>
           <h3>{t(nes, nen)}</h3>
-          <p>{t(des, den)}</p>
-          {more}
+          <div class="reveal"><p>{t(des, den)}</p>{more}</div>
         </div>
       </article>"""
-    return f'<div class="min-list">{out}\n    </div>'
+    return f'<div class="min-bento">{out}\n    </div>'
 
 
 page("ministerios.html", "Ministerios · CPG", f"""
