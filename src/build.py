@@ -714,6 +714,24 @@ def where_section():
   </div>
 </section>"""
 
+
+# ---------------------------------------------------------------- "Qué esperar" icons (gold line icons, 24px grid)
+EXP_ICONS = {
+    "music": '<path d="M9 18V5.5l11-2V16"/><circle cx="6.5" cy="18" r="2.5"/><circle cx="17.5" cy="16" r="2.5"/><path d="M9 9.5l11-2"/>',
+    "book": '<path d="M12 6.5C10 5 7 4.5 3.5 4.5v14c3.5 0 6.5.5 8.5 2 2-1.5 5-2 8.5-2v-14C17 4.5 14 5 12 6.5z"/><path d="M12 6.5v14"/>',
+    "bilingual": '<path d="M3.5 4.5h11v8h-6l-4 3.5v-3.5h-1z"/><path d="M14.5 8.5h6v8h-1V20l-4-3.5h-4.5v-4"/><path d="M6.5 8.5h5"/>',
+    "family": '<circle cx="6.5" cy="6.5" r="2.2"/><path d="M3 20.5V15a3.5 3.5 0 0 1 7 0"/><circle cx="17.5" cy="6.5" r="2.2"/><path d="M14 15a3.5 3.5 0 0 1 7 0v5.5"/><circle cx="12" cy="12" r="1.7"/><path d="M9.5 20.5v-2.5a2.5 2.5 0 0 1 5 0v2.5"/>',
+    "clock": '<circle cx="12" cy="12" r="8.5"/><path d="M12 7.5V12l3 2"/>',
+    "pin": '<path d="M12 21s-7-6.2-7-11.3a7 7 0 0 1 14 0C19 14.8 12 21 12 21z"/><circle cx="12" cy="9.7" r="2.5"/>',
+    "kids": '<circle cx="12" cy="5.5" r="2.5"/><path d="M12 8.5v6.5M12 15l-3 5.5M12 15l3 5.5M6.5 10.5l5.5 1.5 5.5-1.5"/>',
+}
+
+
+def exp_box(icon, h, p):
+    return (f'<div><span class="exp-ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" '
+            f'stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">{EXP_ICONS[icon]}</svg></span>'
+            f'<h3>{h}</h3><p>{p}</p></div>')
+
 # ---------------------------------------------------------------- 2. Who we are
 page("nosotros.html", "Quiénes Somos · CPG", f"""
 {banner("predicacion-logo.jpg", t("Nosotros", "About"), t("Quiénes somos", "Who we are"), pos="45% center")}
@@ -818,10 +836,10 @@ page("servicios.html", "Servicios · CPG", f"""
   <div class="wrap">
     {head(t("Tu primera vez", "Your first time"), t("Qué esperar", "What to expect"))}
     <div class="expect">
-      <div><h3>{t("Adoración", "Worship")}</h3><p>{t("Música en vivo con nuestro equipo de alabanza.", "Live music with our worship team.")}</p></div>
-      <div><h3>{t("La Palabra", "The Word")}</h3><p>{t("Una enseñanza bíblica clara y práctica.", "Clear, practical Bible teaching.")}</p></div>
-      <div><h3>{t("Bilingüe", "Bilingual")}</h3><p>{t("Mensaje en español, con traducción al inglés.", "Message in Spanish, with English translation.")}</p></div>
-      <div><h3>{t("Para la familia", "For families")}</h3><p>{t("Hay un lugar para los niños.", "There's a place for the kids.")}</p></div>
+      {exp_box("music", t("Adoración", "Worship"), t("Música en vivo con nuestro equipo de alabanza.", "Live music with our worship team."))}
+      {exp_box("book", t("La Palabra", "The Word"), t("Una enseñanza bíblica clara y práctica.", "Clear, practical Bible teaching."))}
+      {exp_box("bilingual", t("Bilingüe", "Bilingual"), t("Mensaje en español, con traducción al inglés.", "Message in Spanish, with English translation."))}
+      {exp_box("family", t("Para la familia", "For families"), t("Hay un lugar para los niños.", "There's a place for the kids."))}
     </div>
   </div>
 </section>
@@ -1206,10 +1224,10 @@ page("visitanos.html", "Planea Tu Visita · CPG", f"""
   <div class="wrap">
     {head(t("Tu primera visita", "Your first visit"), t("Qué esperar", "What to expect"))}
     <div class="expect">
-      <div><h3>{t("Cuándo", "When")}</h3><p>{t("Domingos a las 11:00 AM. Llega unos minutos antes.", "Sundays at 11:00 AM. Come a few minutes early.")}</p></div>
-      <div><h3>{t("Dónde", "Where")}</h3><p>5200 Old Cheney Highway, Orlando, FL 32807</p></div>
-      <div><h3>{t("Idioma", "Language")}</h3><p>{t("Mensaje en español, con traducción al inglés.", "Message in Spanish, with English translation.")}</p></div>
-      <div><h3>{t("Niños", "Kids")}</h3><p>{t("Hay un lugar para los niños.", "There's a place for the kids.")}</p></div>
+      {exp_box("clock", t("Cuándo", "When"), t("Domingos a las 11:00 AM. Llega unos minutos antes.", "Sundays at 11:00 AM. Come a few minutes early."))}
+      {exp_box("pin", t("Dónde", "Where"), '5200 Old Cheney Highway, Orlando, FL 32807')}
+      {exp_box("bilingual", t("Idioma", "Language"), t("Mensaje en español, con traducción al inglés.", "Message in Spanish, with English translation."))}
+      {exp_box("kids", t("Niños", "Kids"), t("Hay un lugar para los niños.", "There's a place for the kids."))}
     </div>
   </div>
 </section>

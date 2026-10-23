@@ -697,6 +697,14 @@ footer h2 { color: var(--gold); }
 @media (max-width: 420px) { .where-times li { grid-template-columns: 44px 78px 1fr; gap: 8px; } .where-times b { font-size: 1.1rem; } .where-fig figcaption { display: none; } }
 @media (prefers-reduced-motion: reduce) { .where-ring i { animation: none; opacity: .6; } }
 
+/* "Qué esperar": icon boxes */
+.expect > div { position: relative; gap: 10px; align-content: start; transition: border-color .3s ease, transform .3s ease; }
+.expect > div:hover { border-color: var(--line-2); transform: translateY(-3px); }
+.exp-ico { display: grid; place-items: center; width: 56px; height: 56px; margin-bottom: 8px; border: 1px solid var(--line-2); border-radius: 2px; color: var(--gold); background: rgba(214,168,74,.06); transition: background .3s ease, color .3s ease; }
+.exp-ico svg { width: 28px; height: 28px; stroke-width: 1.7; }
+.expect > div:hover .exp-ico { background: var(--gold); color: var(--bg); }
+.expect h3 { font-size: 1.45rem; }
+
 </style>
 </head>
 <body>
@@ -745,10 +753,10 @@ footer h2 { color: var(--gold); }
   <div class="wrap">
     <div class="section-head"><p class="eyebrow"><span class="es">Tu primera visita</span><span class="en">Your first visit</span></p><h2><span class="es">Qué esperar</span><span class="en">What to expect</span></h2></div>
     <div class="expect">
-      <div><h3><span class="es">Cuándo</span><span class="en">When</span></h3><p><span class="es">Domingos a las 11:00 AM. Llega unos minutos antes.</span><span class="en">Sundays at 11:00 AM. Come a few minutes early.</span></p></div>
-      <div><h3><span class="es">Dónde</span><span class="en">Where</span></h3><p>5200 Old Cheney Highway, Orlando, FL 32807</p></div>
-      <div><h3><span class="es">Idioma</span><span class="en">Language</span></h3><p><span class="es">Mensaje en español, con traducción al inglés.</span><span class="en">Message in Spanish, with English translation.</span></p></div>
-      <div><h3><span class="es">Niños</span><span class="en">Kids</span></h3><p><span class="es">Hay un lugar para los niños.</span><span class="en">There's a place for the kids.</span></p></div>
+      <div><span class="exp-ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="8.5"/><path d="M12 7.5V12l3 2"/></svg></span><h3><span class="es">Cuándo</span><span class="en">When</span></h3><p><span class="es">Domingos a las 11:00 AM. Llega unos minutos antes.</span><span class="en">Sundays at 11:00 AM. Come a few minutes early.</span></p></div>
+      <div><span class="exp-ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21s-7-6.2-7-11.3a7 7 0 0 1 14 0C19 14.8 12 21 12 21z"/><circle cx="12" cy="9.7" r="2.5"/></svg></span><h3><span class="es">Dónde</span><span class="en">Where</span></h3><p>5200 Old Cheney Highway, Orlando, FL 32807</p></div>
+      <div><span class="exp-ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M3.5 4.5h11v8h-6l-4 3.5v-3.5h-1z"/><path d="M14.5 8.5h6v8h-1V20l-4-3.5h-4.5v-4"/><path d="M6.5 8.5h5"/></svg></span><h3><span class="es">Idioma</span><span class="en">Language</span></h3><p><span class="es">Mensaje en español, con traducción al inglés.</span><span class="en">Message in Spanish, with English translation.</span></p></div>
+      <div><span class="exp-ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="5.5" r="2.5"/><path d="M12 8.5v6.5M12 15l-3 5.5M12 15l3 5.5M6.5 10.5l5.5 1.5 5.5-1.5"/></svg></span><h3><span class="es">Niños</span><span class="en">Kids</span></h3><p><span class="es">Hay un lugar para los niños.</span><span class="en">There's a place for the kids.</span></p></div>
     </div>
   </div>
 </section>

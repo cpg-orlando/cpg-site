@@ -697,6 +697,14 @@ footer h2 { color: var(--gold); }
 @media (max-width: 420px) { .where-times li { grid-template-columns: 44px 78px 1fr; gap: 8px; } .where-times b { font-size: 1.1rem; } .where-fig figcaption { display: none; } }
 @media (prefers-reduced-motion: reduce) { .where-ring i { animation: none; opacity: .6; } }
 
+/* "Qué esperar": icon boxes */
+.expect > div { position: relative; gap: 10px; align-content: start; transition: border-color .3s ease, transform .3s ease; }
+.expect > div:hover { border-color: var(--line-2); transform: translateY(-3px); }
+.exp-ico { display: grid; place-items: center; width: 56px; height: 56px; margin-bottom: 8px; border: 1px solid var(--line-2); border-radius: 2px; color: var(--gold); background: rgba(214,168,74,.06); transition: background .3s ease, color .3s ease; }
+.exp-ico svg { width: 28px; height: 28px; stroke-width: 1.7; }
+.expect > div:hover .exp-ico { background: var(--gold); color: var(--bg); }
+.expect h3 { font-size: 1.45rem; }
+
 </style>
 </head>
 <body>
