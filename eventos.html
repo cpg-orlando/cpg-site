@@ -718,7 +718,11 @@ footer h2 { color: var(--gold); }
 
   /* hero: headline, one sentence, one button, one quiet link */
   .hero-frame::after { background: linear-gradient(0deg, var(--bg) 2%, rgba(11,22,38,.8) 45%, rgba(11,22,38,.5) 100%); }
-  .hero-inner { padding-top: 140px; padding-bottom: 56px; }
+  .hero .hero-frame { min-height: 100vh; min-height: 100svh; display: flex; flex-direction: column; justify-content: flex-end; }
+  .hero-inner { width: 100%; padding-top: 140px; padding-bottom: 104px; }
+  .hero::after { content: ""; position: absolute; left: 50%; bottom: 34px; width: 12px; height: 12px; margin-left: -6px;
+    border-right: 1.5px solid var(--gold); border-bottom: 1.5px solid var(--gold); transform: rotate(45deg); opacity: .8;
+    animation: heroCue 2.2s ease-in-out infinite; pointer-events: none; }
   .hero-copy { gap: 20px; }
   .hero .eyebrow, .next-card { display: none; }
   .hero h1 { font-size: 3.4rem; }
@@ -759,6 +763,8 @@ footer h2 { color: var(--gold); }
   footer .big { font-size: 2.4rem; }
   footer .cols > :nth-child(3) { display: none; }
 }
+@keyframes heroCue { 0%, 100% { transform: translateY(0) rotate(45deg); opacity: .8; } 50% { transform: translateY(7px) rotate(45deg); opacity: .35; } }
+@media (prefers-reduced-motion: reduce) { .hero::after { animation: none; } }
 
 </style>
 </head>
