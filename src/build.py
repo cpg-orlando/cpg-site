@@ -367,7 +367,7 @@ P["destacados.html"].update({1: ("adoracion-manos.jpg", "center 55%"),
     5: ("pastora-abrazo.jpg", "center 35%"), 6: ("mujeres-orando.jpg", "40% center"), 7: ("glory-night-grupo.jpg", "center 60%"),
     8: ("abrazo-hermanos.jpg", "50% center"), 9: ("risas-puerta.jpg", "60% center"), 10: ("lider-escenario.jpg", "45% center"),
     11: ("predicador-invitado.jpg", "center 40%"), 12: ("noche-internacional-2.jpg", "30% center"), 13: ("abrazo-joven.jpg", "55% center"),
-    14: ("pastor-brazos.jpg", "center 30%"), 15: ("saludo-hermanas.jpg", "65% center"), 16: ("jovenes-sonrisa.jpg", "center 30%")})
+    14: ("pastor-brazos.jpg", "center 30%"), 15: ("saludo-hermanas.jpg", "65% center"), 16: ("jovenes-sonrisa.jpg", "center 30%"), 17: ("mujeres-risas.jpg", "30% 45%"), 18: ("mujeres-convivio.jpg", "center 55%")})
 PHOTOS["pastores.html"][1] = ("pastora-adorando.jpg", "center 22%")
 PHOTOS["pastores.html"][2] = ("pastores-pareja.jpg", "center 20%")
 PHOTOS["pastores.html"][3] = ("pastor-predicando.jpg", "50% center")
@@ -890,7 +890,7 @@ page("destacados.html", "Momentos Destacados · CPG", f"""
 <section class="band">
   <div class="wrap">
     {head(t("Galería", "Gallery"), t("La vida en CPG", "Life at CPG"))}
-    <div class="gallery" id="gallery" data-count="9">
+    <div class="gallery" id="gallery" data-count="11">
       <img src="images/domingo.jpg" alt="Equipo de alabanza" loading="lazy">
       <img src="images/abrazo.jpg" alt="Un abrazo de bienvenida" loading="lazy" style="object-position: 65% 30%">
       <img src="images/risas.jpg" alt="Hermanos riendo juntos" loading="lazy" style="object-position: 65% center">
@@ -900,11 +900,13 @@ page("destacados.html", "Momentos Destacados · CPG", f"""
       <img src="images/comunion.jpg" alt="Dos hermanos riendo" loading="lazy" style="object-position: 55% center">
       <img src="images/cantante-morado.jpg" alt="Adoración en el servicio" loading="lazy" style="object-position: center 25%">
       <img src="images/guitarra.jpg" alt="Líder de alabanza con su guitarra" loading="lazy" style="object-position: center 40%">
+      <img src="images/mujeres-risas.jpg" alt="Hermanas riendo en el convivio de la conferencia de mujeres" loading="lazy">
+      <img src="images/mujeres-convivio.jpg" alt="Convivio de la conferencia de mujeres en el pasillo de la iglesia" loading="lazy">
     </div>
     <p class="swipe-hint" aria-hidden="true"><b id="gal-pos">1</b> / <span id="gal-total">9</span> · {t("Desliza para ver más →", "Swipe for more →")}</p>
     <div class="gallery-actions">
       <button type="button" class="btn btn-outline" id="gallery-toggle" aria-expanded="false" aria-controls="gallery">
-        <span class="open-label">{t("Ver galería completa", "View full gallery")} (9)</span><span class="close-label" hidden>{t("Ver menos", "Show less")}</span>
+        <span class="open-label">{t("Ver galería completa", "View full gallery")} (11)</span><span class="close-label" hidden>{t("Ver menos", "Show less")}</span>
       </button>
     </div>
   </div>
