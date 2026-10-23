@@ -424,7 +424,7 @@ SERVICES = [
     ("estudio-biblico.jpg", "center 35%", "Miércoles", "Wednesday", "7:00", "PM", "Estudio Bíblico", "Bible Study",
      "Cada grupo de edad tiene su propio estudio para profundizar en las Escrituras.", "Each age group has its own study to dig deeper into Scripture."),
     ("oracion.jpg", "center", "Viernes", "Friday", "7:00", "PM", "Servicio de Oración", "Prayer Service",
-     "Nos reunimos para buscar a Dios en oración unida.", "We gather to seek God together in prayer."),
+     "Una noche para buscar el rostro de Dios juntos e interceder por nuestra comunidad, nuestra ciudad y las naciones.", "A night to seek God's face together and intercede for our community, our city, and the nations."),
 ]
 
 
