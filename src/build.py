@@ -321,8 +321,9 @@ P["destacados.html"].update({1: ("adoracion-manos.jpg", "center 55%"), 2: ("cant
     11: ("predicador-invitado.jpg", "center 40%"), 12: ("noche-internacional-2.jpg", "30% center"), 13: ("abrazo-joven.jpg", "55% center"),
     14: ("pastor-brazos.jpg", "center 30%"), 15: ("saludo-hermanas.jpg", "65% center"), 16: ("jovenes-sonrisa.jpg", "center 30%")})
 PHOTOS["pastores.html"][1] = ("pastora-adorando.jpg", "center 22%")
-PHOTOS["pastores.html"][2] = ("pastores-pareja.jpg", "center 30%")
-PHOTOS["pastores.html"][3] = ("familia-toirac.jpg", "center")
+PHOTOS["pastores.html"][2] = ("pastores-pareja.jpg", "center 20%")
+PHOTOS["pastores.html"][3] = ("pastor-predicando.jpg", "50% center")
+PHOTOS["pastores.html"][4] = ("familia-toirac.jpg", "center")
 SLOTS = {}
 
 
@@ -618,9 +619,24 @@ page("pastores.html", "Nuestros Pastores · CPG", f"""
         <h2>Esdras &amp; Magnolia Toirac</h2>
         <p class="lead">{t("Los pastores Esdras y Magnolia Toirac guían a la familia de Casa Portadores de Gloria con amor por Dios, por su Palabra y por la gente de Orlando.",
                           "Pastors Esdras and Magnolia Toirac lead the Casa Portadores de Gloria family with a love for God, His Word, and the people of Orlando.")}</p>
-        <p class="soon-line"><span class="soon">{t("Próximamente", "Coming soon")}</span> {t("Su historia y su llamado.", "Their story and their calling.")}</p>
       </div>
     </div>
+  </div>
+</section>
+<section class="calling">
+  <div class="wrap calling-grid">
+    <img class="calling-photo" src="images/pastor-predicando.jpg" alt="Pastor Esdras Toirac predicando" loading="lazy">
+    <div class="stack">
+      <p class="eyebrow">{t("Su llamado", "Their calling")}</p>
+      <h2>{t("Llamados a servir", "Called to serve")}</h2>
+      <p class="lead">{t("Aquí compartiremos la historia del llamado de los pastores Esdras y Magnolia al ministerio y cómo nació Casa Portadores de Gloria.",
+                        "This is where we'll share the story of Pastors Esdras and Magnolia's calling to ministry and how Casa Portadores de Gloria began.")}</p>
+      <p class="soon-line"><span class="soon">{t("Próximamente", "Coming soon")}</span></p>
+    </div>
+  </div>
+</section>
+<section class="band family-section">
+  <div class="wrap">
     <figure class="family-card">
       <img src="images/familia-toirac.jpg" alt="Los pastores Esdras y Magnolia Toirac con sus hijos" loading="lazy">
       <figcaption><span class="eyebrow">{t("Su familia", "Their family")}</span><b>{t("La familia Toirac", "The Toirac family")}</b></figcaption>

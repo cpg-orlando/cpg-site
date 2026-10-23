@@ -395,7 +395,7 @@ footer .legal { font-size: .85rem; color: var(--faint); }
 .page-hero.compact .hero-frame { min-height: clamp(280px, 34vw, 380px); }
 .page-hero.compact h1 { font-size: clamp(2.4rem, 7vw, 4.6rem); }
 .pastors-page { padding-block: clamp(48px, 7vw, 88px); }
-.pastor-grid { display: grid; grid-template-columns: 1.15fr 1fr; gap: clamp(24px, 4vw, 48px); align-items: center; }
+.pastor-grid { display: grid; grid-template-columns: 1fr; max-width: 820px; gap: clamp(24px, 4vw, 48px); align-items: center; }
 .pastor-grid > * { min-width: 0; }
 .pastor-intro { display: grid; grid-template-columns: 200px 1fr; gap: 28px; align-items: center; }
 .pastor-intro > * { min-width: 0; }
@@ -408,6 +408,17 @@ footer .legal { font-size: .85rem; color: var(--faint); }
 .family-card figcaption b { font-family: var(--font-display); font-size: 1.4rem; letter-spacing: -0.02em; }
 @media (max-width: 960px) { .pastor-grid { grid-template-columns: 1fr; } }
 @media (max-width: 520px) { .pastor-intro { grid-template-columns: 1fr; } .pastor-photo { width: 160px; height: 192px; } }
+
+.pastor-photo { width: 220px; height: 264px; }
+.pastor-intro { grid-template-columns: 220px 1fr; }
+.calling { padding-block: clamp(40px, 6vw, 80px); }
+.calling-grid { display: grid; grid-template-columns: 1fr 1fr; gap: clamp(24px, 5vw, 64px); align-items: center; }
+.calling-grid > * { min-width: 0; }
+.calling-photo { width: 100%; aspect-ratio: 3 / 2; object-fit: cover; border-radius: var(--radius); border: 1px solid var(--line); }
+.family-section { padding-block: clamp(40px, 6vw, 80px); }
+.family-section .family-card { max-width: 760px; margin: 0 auto; }
+.family-card img { aspect-ratio: 16 / 9; }
+@media (max-width: 820px) { .calling-grid { grid-template-columns: 1fr; } }
 
 </style>
 </head>
@@ -456,14 +467,28 @@ footer .legal { font-size: .85rem; color: var(--faint); }
 <section class="pastors-page">
   <div class="wrap pastor-grid">
     <div class="pastor-intro">
-      <img class="pastor-photo" src="images/pastores-pareja.jpg" style="object-position: center 30%" alt="Pastores Esdras y Magnolia Toirac" loading="lazy">
+      <img class="pastor-photo" src="images/pastores-pareja.jpg" style="object-position: center 20%" alt="Pastores Esdras y Magnolia Toirac" loading="lazy">
       <div class="stack">
         <p class="eyebrow"><span class="es">Pastores principales</span><span class="en">Senior Pastors</span></p>
         <h2>Esdras &amp; Magnolia Toirac</h2>
         <p class="lead"><span class="es">Los pastores Esdras y Magnolia Toirac guían a la familia de Casa Portadores de Gloria con amor por Dios, por su Palabra y por la gente de Orlando.</span><span class="en">Pastors Esdras and Magnolia Toirac lead the Casa Portadores de Gloria family with a love for God, His Word, and the people of Orlando.</span></p>
-        <p class="soon-line"><span class="soon"><span class="es">Próximamente</span><span class="en">Coming soon</span></span> <span class="es">Su historia y su llamado.</span><span class="en">Their story and their calling.</span></p>
       </div>
     </div>
+  </div>
+</section>
+<section class="calling">
+  <div class="wrap calling-grid">
+    <img class="calling-photo" src="images/pastor-predicando.jpg" style="object-position: 50% center" alt="Pastor Esdras Toirac predicando" loading="lazy">
+    <div class="stack">
+      <p class="eyebrow"><span class="es">Su llamado</span><span class="en">Their calling</span></p>
+      <h2><span class="es">Llamados a servir</span><span class="en">Called to serve</span></h2>
+      <p class="lead"><span class="es">Aquí compartiremos la historia del llamado de los pastores Esdras y Magnolia al ministerio y cómo nació Casa Portadores de Gloria.</span><span class="en">This is where we'll share the story of Pastors Esdras and Magnolia's calling to ministry and how Casa Portadores de Gloria began.</span></p>
+      <p class="soon-line"><span class="soon"><span class="es">Próximamente</span><span class="en">Coming soon</span></span></p>
+    </div>
+  </div>
+</section>
+<section class="band family-section">
+  <div class="wrap">
     <figure class="family-card">
       <img src="images/familia-toirac.jpg" style="object-position: center" alt="Los pastores Esdras y Magnolia Toirac con sus hijos" loading="lazy">
       <figcaption><span class="eyebrow"><span class="es">Su familia</span><span class="en">Their family</span></span><b><span class="es">La familia Toirac</span><span class="en">The Toirac family</span></b></figcaption>
