@@ -653,11 +653,19 @@ page("pastores.html", "Nuestros Pastores · CPG", f"""
   <div class="wrap calling-grid">
     <img class="calling-photo" src="images/pastor-predicando.jpg" alt="Pastor Esdras Toirac predicando" loading="lazy">
     <div class="stack">
-      <p class="eyebrow">{t("Su llamado", "Their calling")}</p>
-      <h2>{t("Llamados a servir", "Called to serve")}</h2>
-      <p class="lead">{t("Aquí compartiremos la historia del llamado de los pastores Esdras y Magnolia al ministerio y cómo nació Casa Portadores de Gloria.",
-                        "This is where we'll share the story of Pastors Esdras and Magnolia's calling to ministry and how Casa Portadores de Gloria began.")}</p>
-      <p class="soon-line"><span class="soon">{t("Próximamente", "Coming soon")}</span></p>
+      <p class="eyebrow">{t("Su llamado", "His calling")}</p>
+      <h2>{t("Pastor Esdras Toirac", "Pastor Esdras Toirac")}</h2>
+      <p class="lead">{t("El pastor Esdras Toirac ha predicado en Casa Portadores de Gloria desde 1996, y en agosto de 2003 asumió como pastor principal.",
+                        "Pastor Esdras Toirac has been preaching at Casa Portadores de Gloria since 1996, and in August 2003 he became senior pastor.")}</p>
+      <p class="lead">{t("Servir en esta casa es la pasión de su vida, junto a los extraordinarios miembros y líderes de esta increíble comunidad de creyentes.",
+                        "Serving this house is the passion of his life, alongside the extraordinary members and leaders of this incredible community of believers.")}</p>
+      <p class="lead">{t("Obtuvo su bachillerato y su maestría en Estudios Bíblicos y Teológicos en la UBI en Orlando, Florida (1999–2002).",
+                        "He earned his bachelor's and master's degrees in Biblical and Theological Studies at UBI in Orlando, Florida (1999–2002).")}</p>
+      <dl class="facts">
+        <div><dt>1996</dt><dd>{t("Comienza a predicar en CPG", "Begins preaching at CPG")}</dd></div>
+        <div><dt>2003</dt><dd>{t("Pastor principal", "Senior pastor")}</dd></div>
+        <div><dt>B.A. · M.A.</dt><dd>{t("Estudios Bíblicos y Teológicos, UBI", "Biblical &amp; Theological Studies, UBI")}</dd></div>
+      </dl>
     </div>
   </div>
 </section>

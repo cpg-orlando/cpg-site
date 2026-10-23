@@ -440,6 +440,16 @@ footer .legal { font-size: .85rem; color: var(--faint); }
 .scroll-verse span > span.g.lit { background: var(--grad); -webkit-background-clip: text; background-clip: text; color: transparent; }
 .verse-ref { color: var(--muted); font-size: 1.05rem; }
 
+.calling .lead { font-size: 1.05rem; }
+.calling .stack { gap: 16px; }
+.facts { margin: 8px 0 0; display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; }
+.facts > div { padding: 14px 16px; border-radius: 16px; border: 1px solid var(--line); background: var(--glass); min-width: 0; }
+.facts dt { font-family: var(--font-display); font-weight: 800; font-size: 1.5rem; letter-spacing: -0.03em; background: var(--grad); -webkit-background-clip: text; background-clip: text; color: transparent; }
+.facts dd { margin: 2px 0 0; font-size: .85rem; color: var(--muted); line-height: 1.35; }
+@media (max-width: 520px) { .facts { grid-template-columns: 1fr; } }
+.calling-grid { align-items: start; }
+.calling-photo { position: sticky; top: 100px; }
+
 </style>
 </head>
 <body>
@@ -500,10 +510,16 @@ footer .legal { font-size: .85rem; color: var(--faint); }
   <div class="wrap calling-grid">
     <img class="calling-photo" src="images/pastor-predicando.jpg" style="object-position: 50% center" alt="Pastor Esdras Toirac predicando" loading="lazy">
     <div class="stack">
-      <p class="eyebrow"><span class="es">Su llamado</span><span class="en">Their calling</span></p>
-      <h2><span class="es">Llamados a servir</span><span class="en">Called to serve</span></h2>
-      <p class="lead"><span class="es">Aquí compartiremos la historia del llamado de los pastores Esdras y Magnolia al ministerio y cómo nació Casa Portadores de Gloria.</span><span class="en">This is where we'll share the story of Pastors Esdras and Magnolia's calling to ministry and how Casa Portadores de Gloria began.</span></p>
-      <p class="soon-line"><span class="soon"><span class="es">Próximamente</span><span class="en">Coming soon</span></span></p>
+      <p class="eyebrow"><span class="es">Su llamado</span><span class="en">His calling</span></p>
+      <h2><span class="es">Pastor Esdras Toirac</span><span class="en">Pastor Esdras Toirac</span></h2>
+      <p class="lead"><span class="es">El pastor Esdras Toirac ha predicado en Casa Portadores de Gloria desde 1996, y en agosto de 2003 asumió como pastor principal.</span><span class="en">Pastor Esdras Toirac has been preaching at Casa Portadores de Gloria since 1996, and in August 2003 he became senior pastor.</span></p>
+      <p class="lead"><span class="es">Servir en esta casa es la pasión de su vida, junto a los extraordinarios miembros y líderes de esta increíble comunidad de creyentes.</span><span class="en">Serving this house is the passion of his life, alongside the extraordinary members and leaders of this incredible community of believers.</span></p>
+      <p class="lead"><span class="es">Obtuvo su bachillerato y su maestría en Estudios Bíblicos y Teológicos en la UBI en Orlando, Florida (1999–2002).</span><span class="en">He earned his bachelor's and master's degrees in Biblical and Theological Studies at UBI in Orlando, Florida (1999–2002).</span></p>
+      <dl class="facts">
+        <div><dt>1996</dt><dd><span class="es">Comienza a predicar en CPG</span><span class="en">Begins preaching at CPG</span></dd></div>
+        <div><dt>2003</dt><dd><span class="es">Pastor principal</span><span class="en">Senior pastor</span></dd></div>
+        <div><dt>B.A. · M.A.</dt><dd><span class="es">Estudios Bíblicos y Teológicos, UBI</span><span class="en">Biblical &amp; Theological Studies, UBI</span></dd></div>
+      </dl>
     </div>
   </div>
 </section>
