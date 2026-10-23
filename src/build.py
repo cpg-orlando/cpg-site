@@ -608,27 +608,22 @@ page("nosotros.html", "Quiénes Somos · CPG", f"""
 
 # ---------------------------------------------------------------- 3. Pastors
 page("pastores.html", "Nuestros Pastores · CPG", f"""
-{banner("predicacion.jpg", t("Nosotros", "About"), t("Nuestros pastores", "Our pastors"), pos="center 40%")}
-<section>
-  <div class="wrap pastor-card">
-    <img src="images/pastor-pulpito.jpg" alt="Pastor Esdras Toirac predicando" loading="lazy">
-    <div class="stack">
-      <p class="eyebrow">{t("Pastores principales", "Senior Pastors")}</p>
-      <h2>Esdras &amp; Magnolia Toirac</h2>
-      <p class="lead">{t("Los pastores Esdras y Magnolia Toirac guían a la familia de Casa Portadores de Gloria con amor por Dios, por su Palabra y por la gente de Orlando.",
-                        "Pastors Esdras and Magnolia Toirac lead the Casa Portadores de Gloria family with a love for God, His Word, and the people of Orlando.")}</p>
-      <div class="soon-block" style="padding:20px 22px">
-        <span class="soon">{t("Próximamente", "Coming soon")}</span>
-        <p style="color:var(--muted)">{t("Su historia y su llamado.", "Their story and their calling.")}</p>
+{banner("predicacion.jpg", t("Nosotros", "About"), t("Nuestros pastores", "Our pastors"), pos="center 40%").replace('class="page-hero"', 'class="page-hero compact"')}
+<section class="pastors-page">
+  <div class="wrap pastor-grid">
+    <div class="pastor-intro">
+      <img class="pastor-photo" src="images/pastor-pulpito.jpg" alt="Pastores Esdras y Magnolia Toirac" loading="lazy">
+      <div class="stack">
+        <p class="eyebrow">{t("Pastores principales", "Senior Pastors")}</p>
+        <h2>Esdras &amp; Magnolia Toirac</h2>
+        <p class="lead">{t("Los pastores Esdras y Magnolia Toirac guían a la familia de Casa Portadores de Gloria con amor por Dios, por su Palabra y por la gente de Orlando.",
+                          "Pastors Esdras and Magnolia Toirac lead the Casa Portadores de Gloria family with a love for God, His Word, and the people of Orlando.")}</p>
+        <p class="soon-line"><span class="soon">{t("Próximamente", "Coming soon")}</span> {t("Su historia y su llamado.", "Their story and their calling.")}</p>
       </div>
     </div>
-  </div>
-</section>
-<section class="band" style="padding-top:0">
-  <div class="wrap">
-    {head(t("Su familia", "Their family"), t("La familia <em>Toirac</em>", "The <em>Toirac</em> family"))}
-    <figure class="family">
+    <figure class="family-card">
       <img src="images/familia-toirac.jpg" alt="Los pastores Esdras y Magnolia Toirac con sus hijos" loading="lazy">
+      <figcaption><span class="eyebrow">{t("Su familia", "Their family")}</span><b>{t("La familia Toirac", "The Toirac family")}</b></figcaption>
     </figure>
   </div>
 </section>

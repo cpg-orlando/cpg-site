@@ -377,3 +377,21 @@ footer .legal { font-size: .85rem; color: var(--faint); }
 @media (max-width: 640px) { .family img { aspect-ratio: 4 / 3; } }
 
 [hidden] { display: none !important; }
+
+/* pastors page: compact layout */
+.page-hero.compact .hero-frame { min-height: clamp(280px, 34vw, 380px); }
+.page-hero.compact h1 { font-size: clamp(2.4rem, 7vw, 4.6rem); }
+.pastors-page { padding-block: clamp(48px, 7vw, 88px); }
+.pastor-grid { display: grid; grid-template-columns: 1.15fr 1fr; gap: clamp(24px, 4vw, 48px); align-items: center; }
+.pastor-grid > * { min-width: 0; }
+.pastor-intro { display: grid; grid-template-columns: 200px 1fr; gap: 28px; align-items: center; }
+.pastor-intro > * { min-width: 0; }
+.pastor-photo { width: 200px; height: 240px; object-fit: cover; border-radius: 20px; border: 1px solid var(--line); }
+.pastor-intro h2 { font-size: clamp(2rem, 3.6vw, 2.8rem); }
+.soon-line { color: var(--muted); font-size: .95rem; display: flex; gap: 10px; align-items: center; flex-wrap: wrap; }
+.family-card { margin: 0; position: relative; border-radius: var(--radius); overflow: hidden; border: 1px solid var(--line); }
+.family-card img { width: 100%; aspect-ratio: 3 / 2; object-fit: cover; }
+.family-card figcaption { position: absolute; left: 0; right: 0; bottom: 0; padding: 40px 20px 16px; display: grid; gap: 2px; background: linear-gradient(180deg, transparent, rgba(7,7,11,.85)); }
+.family-card figcaption b { font-family: var(--font-display); font-size: 1.4rem; letter-spacing: -0.02em; }
+@media (max-width: 960px) { .pastor-grid { grid-template-columns: 1fr; } }
+@media (max-width: 520px) { .pastor-intro { grid-template-columns: 1fr; } .pastor-photo { width: 160px; height: 192px; } }
