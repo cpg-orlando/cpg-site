@@ -584,7 +584,7 @@ page("index.html", "Casa Portadores de Gloria", f"""
             <div><b id="cd-h">–</b><small>{t("horas", "hours")}</small></div>
             <div><b id="cd-m">–</b><small>{t("min", "min")}</small></div>
           </div>
-          <a class="btn btn-primary" href="visitanos.html">{t("Te esperamos", "Save my seat")} <span class="arr">→</span></a>
+          <a class="btn btn-primary" href="visitanos.html">{t("Acompáñanos", "Join us")} <span class="arr">→</span></a>
         </div>
       </div>
     </div>
