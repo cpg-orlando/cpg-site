@@ -229,8 +229,8 @@ SCRIPT = """
   var gal2 = document.getElementById('gallery'), gtog = document.getElementById('gallery-toggle');
   if (gal2 && gtog) {
     var total = gal2.querySelectorAll('img').length;
-    if (total > 5) gal2.style.setProperty('--more', '"+' + (total - 4) + '"');
-    if (total > 3) gal2.style.setProperty('--more-m', '"+' + (total - 2) + '"');
+    if (total > 3) gal2.style.setProperty('--more', '"+' + (total - 2) + '"');
+    if (total > 2) gal2.style.setProperty('--more-m', '"+' + (total - 1) + '"');
     gtog.addEventListener('click', function () {
       var open = gal2.classList.toggle('expanded');
       gtog.setAttribute('aria-expanded', String(open));
