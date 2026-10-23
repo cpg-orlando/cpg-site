@@ -225,6 +225,21 @@ SCRIPT = """
     tick(); setInterval(tick, 30000);
   }
 
+  // Gallery: small preview, expand on demand
+  var gal2 = document.getElementById('gallery'), gtog = document.getElementById('gallery-toggle');
+  if (gal2 && gtog) {
+    var total = gal2.querySelectorAll('img').length;
+    if (total > 5) gal2.style.setProperty('--more', '"+' + (total - 4) + '"');
+    if (total > 3) gal2.style.setProperty('--more-m', '"+' + (total - 2) + '"');
+    gtog.addEventListener('click', function () {
+      var open = gal2.classList.toggle('expanded');
+      gtog.setAttribute('aria-expanded', String(open));
+      gtog.querySelector('.open-label').hidden = open;
+      gtog.querySelector('.close-label').hidden = !open;
+      if (!open) gal2.scrollIntoView({ block: 'center', behavior: 'smooth' });
+    });
+  }
+
   // Tap-to-enlarge gallery
   var gal = Array.prototype.slice.call(document.querySelectorAll('.gallery img'));
   if (gal.length) {
@@ -858,8 +873,8 @@ page("destacados.html", "Momentos Destacados · CPG", f"""
 <section class="band">
   <div class="wrap">
     {head(t("Galería", "Gallery"), t("La vida en CPG", "Life at CPG"))}
-    <div class="gallery">
-      <img class="g1" src="images/domingo.jpg" alt="Equipo de alabanza" loading="lazy">
+    <div class="gallery" id="gallery" data-count="9">
+      <img src="images/domingo.jpg" alt="Equipo de alabanza" loading="lazy">
       <img src="images/abrazo.jpg" alt="Un abrazo de bienvenida" loading="lazy" style="object-position: 65% 30%">
       <img src="images/risas.jpg" alt="Hermanos riendo juntos" loading="lazy" style="object-position: 65% center">
       <img src="images/adoracion-pareja.jpg" alt="Hermanos adorando" loading="lazy" style="object-position: 70% center">
@@ -868,6 +883,11 @@ page("destacados.html", "Momentos Destacados · CPG", f"""
       <img src="images/comunion.jpg" alt="Dos hermanos riendo" loading="lazy" style="object-position: 55% center">
       <img src="images/cantante-morado.jpg" alt="Adoración en el servicio" loading="lazy" style="object-position: center 25%">
       <img src="images/guitarra.jpg" alt="Líder de alabanza con su guitarra" loading="lazy" style="object-position: center 40%">
+    </div>
+    <div class="gallery-actions">
+      <button type="button" class="btn btn-outline" id="gallery-toggle" aria-expanded="false" aria-controls="gallery">
+        <span class="open-label">{t("Ver galería completa", "View full gallery")} (9)</span><span class="close-label" hidden>{t("Ver menos", "Show less")}</span>
+      </button>
     </div>
   </div>
 </section>
