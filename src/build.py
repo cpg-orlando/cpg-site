@@ -321,9 +321,11 @@ P["nosotros.html"].update({1: ("pasillo-saludo.jpg", "center 55%"), 2: ("entrada
     3: ("hombres-bienvenida.jpg", "60% center")})
 P["servicios.html"].update({1: ("pastor-luces.jpg", "55% 40%"), 3: ("nino-biblia.jpg", "55% center"),
     4: ("circulo-oracion.jpg", "35% 40%"), 5: ("transmision.jpg", "50% center")})
-P["ministerios.html"].update({1: ("ninos-biblias.jpg", "40% 45%"), 2: ("ninos-clase.jpg", "45% center"),
-    3: ("jovenes-adorando.jpg", "70% center"), 4: ("hombres-orando.jpg", "50% center"),
-    5: ("mujeres-sirviendo.jpg", "60% center"), 6: ("hermanos-ventana.jpg", "45% center")})
+P["ministerios.html"].update({1: ("ninos-biblias.jpg", "40% 45%"),
+    2: ("hombres-orando.jpg", "50% center"), 3: ("mujeres-sirviendo.jpg", "60% center"),
+    4: ("jovenes-adorando.jpg", "70% center"), 5: ("ninos-clase.jpg", "45% center"),
+    6: ("equipo-pulpito.jpg", "50% 60%"), 7: ("entrada-saludo.jpg", "55% center"),
+    8: ("noche-internacional.jpg", "40% center"), 9: ("hermanos-ventana.jpg", "45% center")})
 P["eventos.html"][1] = ("salon-reunion.jpg", "center 60%")
 P["ofrendar.html"][1] = ("manos-alzadas.jpg", "40% center")
 P["creencias.html"][1] = ("cruz-adoracion.jpg", "60% 45%")
@@ -584,7 +586,7 @@ page("index.html", "Casa Portadores de Gloria", f"""
     {head(t("Empieza aquí", "Start here"), t("¿Cómo te podemos ayudar?", "How can we help?"))}
     <div class="quick">
       <a href="visitanos.html"><img src="images/q1.jpg" alt=""><b>{t("Planea tu visita", "Plan a visit")}</b><span class="d">{t("Qué esperar y cómo llegar.", "What to expect and how to get here.")}</span><span class="go">→</span></a>
-      <a href="ministerios.html"><img src="images/q2.jpg" alt=""><b>{t("Ministerios", "Ministries")}</b><span class="d">{t("Niños, jóvenes, hombres, mujeres y Años Dorados.", "Kids, youth, men, women, and Golden Years.")}</span><span class="go">→</span></a>
+      <a href="ministerios.html"><img src="images/q2.jpg" alt=""><b>{t("Ministerios", "Ministries")}</b><span class="d">{t("Caballeros, damas, jóvenes, niños, alabanza y más.", "Men, women, youth, kids, worship, and more.")}</span><span class="go">→</span></a>
       <a href="oracion.html"><img src="images/q3.jpg" alt=""><b>{t("Pide oración", "Ask for prayer")}</b><span class="d">{t("Nuestro equipo orará por ti.", "Our team will pray for you.")}</span><span class="go">→</span></a>
       <a href="ofrendar.html"><img src="images/q4.jpg" alt=""><b>{t("Ofrendar", "Give")}</b><span class="d">{t("Diezmos y ofrendas.", "Tithes and offerings.")}</span><span class="go">→</span></a>
     </div>
@@ -732,20 +734,29 @@ page("eventos.html", "Eventos · CPG", f"""
 
 # ---------------------------------------------------------------- 6. Ministries
 MINS = [
-    ("ninos-oracion.jpg", "center 45%", "Niños", "Kids", "Para los más pequeños", "For the little ones",
-     "Un lugar seguro y alegre donde los niños aprenden la Palabra de Dios y crecen en su fe.",
-     "A safe, joyful place where kids learn God's Word and grow in their faith.", None),
-    ("estudio.jpg", "center 60%", "Jóvenes y Jóvenes Adultos", "Youth &amp; Young Adults", "CPG Youth", "CPG Youth",
+    ("x.jpg", "center", "Caballeros", "Men&#39;s Ministry", "Hermandad", "Brotherhood",
+     "Hombres que se apoyan, oran juntos y crecen como líderes en su hogar y en la iglesia.",
+     "Men who support each other, pray together, and grow as leaders at home and in the church.", None),
+    ("x.jpg", "center", "Damas", "Women&#39;s Ministry", "Hermandad", "Sisterhood",
+     "Mujeres que se animan en la fe, oran unas por otras y sirven con amor.",
+     "Women who encourage each other in faith, pray for one another, and serve with love.", None),
+    ("x.jpg", "center", "Jóvenes y Jóvenes Adultos", "Youth &amp; Young Adults", "CPG Youth &amp; YA", "CPG Youth &amp; YA",
      "Estudio bíblico los miércoles, Glory Night el último miércoles de cada mes, deportes y mucha comunión.",
      "Wednesday Bible study, Glory Night on the last Wednesday of every month, sports, and plenty of fellowship.",
      ("https://cpgyouth.vercel.app", "Visitar CPG Youth →", "Visit CPG Youth →")),
-    ("edificio.jpg", "center", "Hombres", "Men", "Hermandad", "Brotherhood",
-     "Hombres que se apoyan, oran juntos y crecen como líderes en su hogar y en la iglesia.",
-     "Men who support each other, pray together, and grow as leaders at home and in the church.", None),
-    ("oracion.jpg", "center", "Mujeres", "Women", "Hermandad", "Sisterhood",
-     "Mujeres que se animan en la fe, oran unas por otras y sirven con amor.",
-     "Women who encourage each other in faith, pray for one another, and serve with love.", None),
-    ("comunion.jpg", "55% center", "Años Dorados", "Golden Years", "Sabiduría y experiencia", "Wisdom and experience",
+    ("x.jpg", "center", "Niños", "Kids Ministry", "Para los más pequeños", "For the little ones",
+     "Un lugar seguro y alegre donde los niños aprenden la Palabra de Dios y crecen en su fe.",
+     "A safe, joyful place where kids learn God's Word and grow in their faith.", None),
+    ("x.jpg", "center", "Ministerio de Alabanza", "Worship Team", "Música, producción y medios", "Music, production &amp; media",
+     "Músicos, cantantes y el equipo de producción y medios que guían a la iglesia a adorar y llevan cada servicio en vivo.",
+     "Musicians, singers, and the production and media team who lead the church in worship and bring every service live.", None),
+    ("x.jpg", "center", "Ujieres", "Ushers", "Servir con una sonrisa", "Serving with a smile",
+     "Los primeros en recibirte: dan la bienvenida, ayudan a cada familia a encontrar su lugar y cuidan el orden del servicio.",
+     "The first faces you meet: they welcome you, help every family find a seat, and keep each service running smoothly.", None),
+    ("x.jpg", "center", "Misiones", "Missions", "Más allá de nuestras paredes", "Beyond our walls",
+     "Llevamos el evangelio y el amor de Cristo a nuestra comunidad y a las naciones.",
+     "We carry the gospel and the love of Christ to our community and to the nations.", None),
+    ("x.jpg", "center", "Años Dorados", "Golden Years", "Sabiduría y experiencia", "Wisdom and experience",
      "Hombres y mujeres de fe probada que bendicen a la iglesia con su sabiduría, oración y ejemplo.",
      "Men and women of proven faith who bless the church with their wisdom, prayer, and example.", None),
 ]
@@ -770,7 +781,7 @@ def min_rows():
 
 
 page("ministerios.html", "Ministerios · CPG", f"""
-{banner("ninos.jpg", t("Reuniones", "Gatherings"), t("Ministerios", "Ministries"), t("Hay un lugar para cada etapa de la vida.", "There's a place for every season of life."), pos="40% 30%")}
+{banner("ninos.jpg", t("Reuniones", "Gatherings"), t("Ministerios", "Ministries"), t("Nuestros ministerios para servir. Hay un lugar para ti.", "Our ministries to serve. There's a place for you."), pos="40% 30%")}
 <section>
   <div class="wrap">
     {min_rows()}
