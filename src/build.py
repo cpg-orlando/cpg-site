@@ -613,6 +613,9 @@ page("nosotros.html", "Quiénes Somos · CPG", f"""
                         "Casa Portadores de Gloria is a Christian church in Orlando. We believe every person was created to know Jesus and reflect His glory at home, at work, and in their city.")}</p>
       <p class="lead">{t("Somos una comunidad bilingüe: los mensajes del domingo son en español, con traducción al inglés, para que toda la familia, de todas las generaciones, se sienta en casa.",
                         "We're a bilingual community: Sunday messages are in Spanish with English translation, so the whole family, across generations, feels at home.")}</p>
+      <p class="lead">{t("Somos una iglesia autónoma en compañerismo con la Asociación Bautista de Orlando, la Convención Bautista de Florida y la Convención Bautista del Sur.",
+                        "We are an autonomous church in fellowship with the Greater Orlando Baptist Association, the Florida Baptist Convention, and the Southern Baptist Convention.")}</p>
+      <a class="btn btn-outline" style="justify-self:start" href="creencias.html">{t("Lo que creemos", "What we believe")} <span class="arr">→</span></a>
     </div>
     <img class="photo" src="images/bienvenida.jpg" alt="Saludos al final del servicio" loading="lazy" style="object-position: 60% center">
   </div>
@@ -851,6 +854,82 @@ page("destacados.html", "Momentos Destacados · CPG", f"""
 </section>
 """)
 
+
+# ---------------------------------------------------------------- Statement of faith (from the church's document)
+import html as _html
+SUBHEADS = {"Dios y la revelación", "Revelación escrita – Las Sagradas Escrituras.", "(La Biblia)", "La naturaleza de Dios",
+            "a) El Dios trino", "b) La Santa Trinidad", "c) Los dones del Espíritu", "Sobre la salvación del hombre", "La iglesia local"}
+SECTION_ES = {"I": "Las Escrituras", "II": "Sobre Dios", "III": "Sobre el hombre", "IV": "La iglesia de Cristo",
+              "V": "Sobre las ordenanzas", "VI": "El propósito y la misión de la iglesia", "VII": "Sobre los últimos tiempos", "VIII": "La familia"}
+SECTION_EN = {"I": "Scripture", "II": "About God", "III": "About Humanity", "IV": "The Church of Christ",
+              "V": "The Ordinances", "VI": "The Purpose and Mission of the Church", "VII": "The Last Times", "VIII": "The Family"}
+
+
+def _clean(t):
+    t = re.sub(r"\s+", " ", t).strip()
+    return t.replace("Hch..", "Hch.").replace("Cor..", "Cor.").replace("  ", " ")
+
+
+def parse_faith():
+    lines = (ROOT / "src/declaracion-de-fe.txt").read_text().splitlines()
+    sections, cur, buf = [], None, []
+
+    def flush():
+        if cur is not None and buf:
+            cur["blocks"].append(("p", _clean(" ".join(buf))))
+        buf.clear()
+
+    for raw in lines:
+        line = raw.strip()
+        m = re.match(r"^([IVX]+)\.\s+(.*)$", line)
+        if m and m.group(1) in SECTION_EN:
+            flush(); cur = {"num": m.group(1), "title": m.group(2).strip().capitalize(), "blocks": []}; sections.append(cur); continue
+        if line.startswith("IX.") or line == "QUE CREEMOS":
+            flush()
+            if line.startswith("IX."): cur = None
+            continue
+        if cur is None:
+            continue
+        if not line:
+            # page breaks split sentences: only end the paragraph after terminal punctuation
+            if buf and re.search(r"[.:)”\"]$", buf[-1]): flush()
+            continue
+        if line in SUBHEADS:
+            flush(); cur["blocks"].append(("h", line.rstrip("."))); continue
+        if line.startswith("– ") or re.match(r"^o [A-ZÁÉÍÓÚ]", line):
+            flush(); buf.append(line[2:]); cur["blocks"].append(("li-start", "")); continue
+        buf.append(line)
+    flush()
+    return sections
+
+
+def faith_html():
+    out = []
+    for i, sec in enumerate(parse_faith()):
+        body, in_list = [], False
+        blocks = sec["blocks"]
+        k = 0
+        while k < len(blocks):
+            kind, txt = blocks[k]
+            if kind == "li-start":
+                k += 1
+                item = blocks[k][1] if k < len(blocks) else ""
+                if not in_list: body.append("<ul>"); in_list = True
+                body.append(f"<li>{_html.escape(item)}</li>")
+            else:
+                if in_list: body.append("</ul>"); in_list = False
+                if kind == "h": body.append(f"<h4>{_html.escape(txt)}</h4>")
+                else: body.append(f"<p>{_html.escape(txt)}</p>")
+            k += 1
+        if in_list: body.append("</ul>")
+        title = SECTION_ES[sec["num"]]
+        out.append(f"""
+      <details class="faith"{" open" if i == 0 else ""}>
+        <summary><span class="num">{sec["num"]}</span><span class="ttl">{t(_html.escape(title), SECTION_EN[sec["num"]])}</span><span class="chev" aria-hidden="true">+</span></summary>
+        <div class="faith-body">{"".join(body)}</div>
+      </details>""")
+    return "".join(out)
+
 # ---------------------------------------------------------------- 9. Beliefs
 VALUES = [
     ("Salvación en Cristo", "Salvation in Christ",
@@ -903,6 +982,27 @@ page("creencias.html", "Lo Que Creemos · CPG", f"""
   <div class="wrap">
     {head(t("Nuestros valores", "Our values"), t("Sobre este fundamento edificamos", "The foundation we build on"))}
     {value_cards()}
+  </div>
+</section>
+<section class="band">
+  <div class="wrap">
+    <div class="purpose">
+      <p class="eyebrow">{t("Nuestro propósito", "Our purpose")}</p>
+      <p class="purpose-text">{t("Alcanzar la mayor cantidad de hombres, mujeres, jóvenes y niños para el Reino de Cristo. Equiparlos para que puedan ser <em>portadores de la gloria de Dios</em> y de esa manera ser una iglesia en continuo crecimiento, tanto física como espiritualmente, haciendo la diferencia en el lugar donde Dios nos ha puesto.",
+                                 "To reach as many men, women, youth, and children as possible for the Kingdom of Christ. To equip them to be <em>bearers of God&#39;s glory</em>, and so be a church that keeps growing, both in number and in spirit, making a difference wherever God has placed us.")}</p>
+    </div>
+  </div>
+</section>
+<section id="declaracion">
+  <div class="wrap faith-wrap">
+    {head(t("Declaración de fe", "Statement of faith"), t("Lo que creemos", "What we believe"), t("Toca cada sección para leerla completa.", "Tap each section to read it in full. Our statement of faith is currently written in Spanish."))}
+    <div class="faith-list">{faith_html()}
+    </div>
+    <div class="affiliation">
+      <p class="eyebrow">{t("Afiliación denominacional", "Denominational affiliation")}</p>
+      <p>{t("Casa Portadores de Gloria de Orlando, Florida es un organismo autónomo de creyentes. La iglesia coopera y tiene compañerismo con la Asociación Bautista de Orlando (GOBA), la Convención Bautista de Florida y la Convención Bautista del Sur.",
+            "Casa Portadores de Gloria in Orlando, Florida is an autonomous body of believers. The church cooperates and has fellowship with the Greater Orlando Baptist Association (GOBA), the Florida Baptist Convention, and the Southern Baptist Convention.")}</p>
+    </div>
   </div>
 </section>
 <section class="band">
