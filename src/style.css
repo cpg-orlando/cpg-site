@@ -618,3 +618,7 @@ footer h2 { color: var(--gold); }
 
 .swipe-hint { display: none; align-items: center; gap: 8px; margin-top: 12px; color: var(--muted); font-size: .85rem; letter-spacing: .04em; }
 .swipe-hint b { color: var(--gold); font-weight: 600; font-variant-numeric: tabular-nums; }
+
+.sbtn.ig svg { color: #e1306c; }
+.sbtn.ig:hover { background: linear-gradient(45deg, #f58529, #dd2a7b 55%, #8134af); border-color: transparent; }
+.sbtn.ig:hover svg { color: #fff; }
