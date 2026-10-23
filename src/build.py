@@ -511,12 +511,12 @@ def service_cards():
 
 
 EVENTS = [
-    ("Oct", "28", "CPG Youth", "CPG Youth", "Glory Night",
-     "Miércoles, 7:00 PM. Una noche de adoración y Palabra para jóvenes y jóvenes adultos.",
-     "Wednesday, 7:00 PM. A night of worship and the Word for youth and young adults."),
     ("Oct", "29", "Para todos", "Everyone", "CPG Sports Day",
      "Jueves, 6:30 PM en Brush Arbor Christian School. Baloncesto, voleibol y comunión. ¡Todos son bienvenidos!",
      "Thursday, 6:30 PM at Brush Arbor Christian School. Basketball, volleyball, and fellowship. Everyone is welcome!"),
+    ("Nov", "4", "CPG Youth", "CPG Youth", "Glory Night",
+     "Miércoles, 7:00 PM. Una noche de adoración y Palabra para jóvenes y jóvenes adultos. ¡El último Glory Night del año!",
+     "Wednesday, 7:00 PM. A night of worship and the Word for youth and young adults. The last Glory Night of the year!"),
     ("Nov", "14", "CPG Youth", "CPG Youth", "Abide Conference",
      "Sábado, 12:00–7:00 PM. 26134 Leeward St., Eustis, FL.",
      "Saturday, 12:00–7:00 PM. 26134 Leeward St., Eustis, FL."),
@@ -825,8 +825,8 @@ MINS = [
      "Mujeres que se animan en la fe, oran unas por otras y sirven con amor.",
      "Women who encourage each other in faith, pray for one another, and serve with love.", None),
     ("x.jpg", "center", "Jóvenes y Jóvenes Adultos", "Youth &amp; Young Adults", "CPG Youth &amp; YA", "CPG Youth &amp; YA",
-     "Estudio bíblico los miércoles, Glory Night el último miércoles de cada mes, deportes y mucha comunión.",
-     "Wednesday Bible study, Glory Night on the last Wednesday of every month, sports, and plenty of fellowship.",
+     "Estudio bíblico los miércoles, noches de adoración Glory Night, deportes y mucha comunión.",
+     "Wednesday Bible study, Glory Night worship nights, sports, and plenty of fellowship.",
      ("https://cpgyouth.vercel.app", "Visitar CPG Youth →", "Visit CPG Youth →")),
     ("x.jpg", "center", "Niños", "Kids Ministry", "Para los más pequeños", "For the little ones",
      "Un lugar seguro y alegre donde los niños aprenden la Palabra de Dios y crecen en su fe.",
@@ -921,7 +921,7 @@ HLS = [
     ("oracion.jpg", "center", "Noches de Oración", "Prayer Nights",
      "La iglesia unida buscando a Dios.", "The church united in seeking God."),
     ("joven-cantando.jpg", "center 35%", "Glory Night", "Glory Night",
-     "Nuestra noche mensual de adoración y Palabra, el último miércoles de cada mes.", "Our monthly night of worship and the Word, the last Wednesday of every month."),
+     "Nuestras noches especiales de adoración y Palabra, un miércoles en la noche.", "Our special nights of worship and the Word, on a Wednesday evening."),
 ]
 
 
