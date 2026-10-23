@@ -1017,6 +1017,16 @@ def parse_faith():
 
 
 def faith_html():
+    import json
+    en = json.loads((ROOT / "src/statement-of-faith-en.json").read_text())
+
+    def bi(key, es_txt):
+        e = _html.escape(es_txt)
+        tr = en.get(key)
+        if tr is None:
+            raise SystemExit(f"Missing English translation for statement-of-faith block {key}")
+        return t(e, _html.escape(tr))
+
     out = []
     for i, sec in enumerate(parse_faith()):
         body, in_list = [], False
@@ -1028,11 +1038,13 @@ def faith_html():
                 k += 1
                 item = blocks[k][1] if k < len(blocks) else ""
                 if not in_list: body.append("<ul>"); in_list = True
-                body.append(f"<li>{_html.escape(item)}</li>")
+                li_key = f"{sec['num']}.{k}"
+                body.append(f"<li>{bi(li_key, item)}</li>")
             else:
                 if in_list: body.append("</ul>"); in_list = False
-                if kind == "h": body.append(f"<h4>{_html.escape(txt)}</h4>")
-                else: body.append(f"<p>{_html.escape(txt)}</p>")
+                key = f"{sec['num']}.{k}"
+                if kind == "h": body.append(f"<h4>{bi(key, txt.rstrip('.'))}</h4>")
+                else: body.append(f"<p>{bi(key, txt)}</p>")
             k += 1
         if in_list: body.append("</ul>")
         title = SECTION_ES[sec["num"]]
@@ -1108,7 +1120,7 @@ page("creencias.html", "Lo Que Creemos · CPG", f"""
 </section>
 <section id="declaracion">
   <div class="wrap faith-wrap">
-    {head(t("Declaración de fe", "Statement of faith"), t("Lo que creemos", "What we believe"), t("Toca cada sección para leerla completa.", "Tap each section to read it in full. Our statement of faith is currently written in Spanish."))}
+    {head(t("Declaración de fe", "Statement of faith"), t("Lo que creemos", "What we believe"), t("Toca cada sección para leerla completa.", "Tap each section to read it in full."))}
     <div class="faith-list">{faith_html()}
     </div>
     <div class="affiliation">
