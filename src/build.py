@@ -970,9 +970,10 @@ page("ofrendar.html", "Ofrendar · CPG", f"""
 <section>
   <div class="wrap give-grid">
     <div class="stack">
-      <blockquote class="verse" style="margin:0">
-        {t("“Traed todos los diezmos al alfolí…”", "“Bring the whole tithe into the storehouse…”")}
-        <cite>{t("Malaquías 3:10", "Malachi 3:10")}</cite>
+      <blockquote class="verse verse-long" style="margin:0">
+        {t("“Cada primer día de la semana cada uno de vosotros ponga aparte algo, según haya prosperado, guardándolo, para que cuando yo llegue no se recojan entonces ofrendas.”",
+           "“On the first day of every week, each one of you should set aside a sum of money in keeping with your income, saving it up, so that when I come no collections will have to be made.”")}
+        <cite>{t("1 Corintios 16:2 · RVR1960", "1 Corinthians 16:2 · NIV")}</cite>
       </blockquote>
       <p class="lead">{t("Diezmar es un acto de adoración y confianza en Dios. Gracias por sembrar en esta casa.", "Tithing is an act of worship and trust in God. Thank you for sowing into this house.")}</p>
     </div>
